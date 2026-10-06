@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+  <style>@keyframes vahoMsgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes vahoDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}</style>
+</helmet>
+<div onClick="{{ close }}" aria-hidden="true" style="position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.3);opacity:{{ scrimOp }};pointer-events:{{ pe }};transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1)"></div>
+<aside ref="{{ panelRef }}" role="dialog" aria-modal="true" aria-label="Asistente VAHO" aria-hidden="{{ hidden }}" onKeyDown="{{ onKey }}" style="position:fixed;top:0;right:0;z-index:81;height:{{ panelH }};width:{{ panelW }};max-width:100vw;display:flex;flex-direction:column;background:linear-gradient(180deg, #FDE7D2 0%, #FAF8F4 42%, #FFFFFF 100%);border-left:1px solid var(--line-200);color:#000000;font-family:var(--font-sans);cursor:default;transform:translateX({{ panelX }});visibility:{{ vis }};transition:transform {{ dur }} cubic-bezier(.2,.7,.2,1), visibility 0ms linear {{ visDelay }}">
+  <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:10px;padding:16px 20px 16px 24px;border-bottom:1px solid var(--line-200)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Asistente VAHO</span>
+      <button ref="{{ closeRef }}" type="button" aria-label="Cerrar" onClick="{{ close }}" style="width:40px;height:40px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;font:300 20px/1 var(--font-sans);display:grid;place-items:center" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">×</button>
+    </div>
+    <h2 style="margin:0;font-weight:600;font-size:clamp(26px,3vw,32px);line-height:1.12;letter-spacing:-0.02em">¿En qué te ayudo?</h2>
+    <p style="margin:0;font-size:13px;line-height:1.4;color:var(--ink-500)">Respuestas automáticas con la información de esta web.</p>
+  </div>
+
+  <div ref="{{ threadRef }}" aria-live="polite" style="flex:1 1 auto;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:12px">
+    <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="1">
+      <div style="display:flex;flex-direction:column;align-items:{{ m.align }};gap:8px;animation:{{ msgAnim }}">
+        <div style="max-width:80%;padding:10px 14px;border:1px solid {{ m.border }};border-radius:{{ m.radius }};background:{{ m.bg }};color:{{ m.ink }};font-size:14px;line-height:1.5;white-space:pre-line;text-wrap:pretty">{{ m.shown }}</div>
+        <sc-if value="{{ m.hasActions }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;max-width:100%">
+            <sc-for list="{{ m.actions }}" as="x" hint-placeholder-count="2">
+              <button type="button" onClick="{{ x.go }}" style="min-height:40px;padding:0 14px;border:1px solid {{ x.border }};border-radius:{{ x.radius }};background:{{ x.bg }};color:{{ x.ink }};font:600 13px/1.2 var(--font-sans);text-align:left;text-decoration:{{ x.deco }};text-underline-offset:3px" style-hover="background:#000000;color:#FFFFFF;border-color:#000000" style-active="transform:scale(.98)">{{ x.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+    <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
+      <div aria-label="Escribiendo" style="align-self:flex-start;display:flex;align-items:center;gap:4px;padding:14px 16px;border:1px solid var(--line-200);border-radius:18px 18px 18px 4px;background:#FFFFFF;animation:{{ msgAnim }}">{{ dots }}</div>
+    </sc-if>
+  </div>
+
+  <form onSubmit="{{ send }}" style="flex:0 0 auto;display:flex;gap:8px;padding:12px 20px 16px 24px;border-top:1px solid var(--line-200);background:#FFFFFF">
+    <label for="va-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Escribe tu pregunta</label>
+    <input id="va-q" type="text" autoComplete="off" placeholder="Escribe tu pregunta…" value="{{ q }}" onChange="{{ setQ }}" style="flex:1 1 auto;min-width:0;min-height:44px;padding:0 18px;border:1px solid var(--ink-300);border-radius:999px;background:#FFFFFF;color:#000000;font:400 16px var(--font-sans);outline:none" style-focus="border-color:#000000">
+    <button type="submit" aria-label="Enviar" style="flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid #000000;border-radius:50%;background:#000000;color:#FFFFFF;display:grid;place-items:center" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+  </form>
+</aside>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const MEAS = { petite: ['XS', 'S', 'M', 'L'], estandar: ['XS', 'S', 'M', 'L', 'XL'] };
+const recommend = (hcm, wkg) => {
+  const fit = hcm < 160 ? 'petite' : 'estandar', sizes = MEAS[fit];
+  const wIdx = [52, 60, 70, 80].filter(b => wkg >= b).length;
+  const hIdx = (fit === 'petite' ? [148, 152, 156] : [166, 172, 178, 184]).filter(b => hcm >= b).length;
+  return { fit, size: sizes[Math.min(Math.max(wIdx, hIdx), sizes.length - 1)] };
+};
+const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const lev = (a, b) => { if (Math.abs(a.length - b.length) > 1) return 2; const d = []; for (let i = 0; i <= a.length; i++) { d[i] = [i]; for (let j = 1; j <= b.length; j++) d[i][j] = i === 0 ? j : Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); } return d[a.length][b.length]; };
+const INTENTS = [
+  ['size', ['talla', 'tallas', 'medir', 'mido', 'altura', 'peso', 'petite', 'estandar', 'size', 'medida', 'medidas']],
+  ['returns', ['cambio', 'cambios', 'devolucion', 'devoluciones', 'devolver', 'reembolso', 'cambiar']],
+  ['ship', ['envio', 'envios', 'enviar', 'plazo', 'plazos', 'llega', 'tarda', 'entrega', 'entregas', 'gastos', 'shipping']],
+  ['care', ['material', 'materiales', 'algodon', 'lavar', 'lavado', 'cuidado', 'cuidados', 'secadora', 'planchar', 'tela', 'tejido']],
+  ['discount', ['descuento', 'codigo', 'vaho10', 'cupon', 'oferta', 'rebaja', 'promo']],
+  ['acc', ['complemento', 'complementos', 'neceser', 'panoleta', 'panuelo', 'accesorio', 'accesorios']],
+  ['wholesale', ['mayorista', 'mayoristas', 'wholesale', 'tiendas', 'reventa', 'minimo', 'distribuir']],
+  ['order', ['pedir', 'pedido', 'comprar', 'compra', 'pago', 'pagar', 'pagos', 'whatsapp', 'tarjeta', 'paypal', 'precio']],
+];
+const intentOf = (text) => {
+  const words = norm(text).split(/[^a-z0-9]+/).filter(Boolean);
+  for (const [id, keys] of INTENTS) if (words.some(w => keys.some(k => w === k || (w.length >= 5 && k.length >= 5 && lev(w, k) <= 1) || (k.length >= 6 && w.startsWith(k.slice(0, 6)))))) return id;
+  return null;
+};
+const parseHW = (text) => {
+  const t = norm(text).replace(/(\d),(\d)/g, '$1.$2'); let h = null, w = null;
+  const re = /(\d+(?:\.\d+)?)\s*(cm|m\b|metros?|kg|kilos?|k\b)?/g; let m; const loose = [];
+  while ((m = re.exec(t))) { const v = parseFloat(m[1]), u = m[2] || '';
+    if (/^(cm)$/.test(u)) h = v; else if (/^(m|metro|metros)$/.test(u) || (v >= 1.2 && v <= 2.2 && !u)) h = v < 3 ? v * 100 : v;
+    else if (/^(kg|kilo|kilos|k)$/.test(u)) w = v; else loose.push(v); }
+  loose.forEach(v => { if (h == null && v >= 120 && v <= 220) h = v; else if (w == null && v >= 30 && v <= 200) w = v; });
+  if (h != null && (h < 120 || h > 220)) h = null; if (w != null && (w < 30 || w > 200)) w = null;
+  return { h, w };
+};
+const WELCOME = 'Hola, soy el asistente de VAHO. Pregúntame por tallas, envíos, cambios, materiales o tu descuento.';
+const QUICK = [['Encuentra mi talla', 'size'], ['Envíos y plazos', 'ship'], ['Cambios y devoluciones', 'returns'], ['Mi 10% de descuento', 'discount'], ['Complementos', 'acc']];
+const A = {
+  ship: 'Coordinamos el envío contigo por WhatsApp: te confirmamos coste y plazo según tu dirección antes de que pagues.',
+  returns: 'Tienes 30 días desde que recibes tu pedido para devolver o cambiar cualquier prenda.\nPara un cambio de talla, escríbenos con tu número de pedido y la talla que necesitas. Te enviamos las instrucciones y la nueva prenda en cuanto recibimos la tuya.\nUna vez recibida y revisada la prenda, te devolvemos el importe por el mismo método de pago en un máximo de 5 días laborables.',
+  care: '100 % algodón.\nLavar en frío, 30 °. No usar secadora. Planchar del revés.',
+  discount: '10% de descuento en tu primera compra con el código VAHO10.',
+  acc: 'Neceser naranja: 25 × 15 × 8 cm, 12 €.\nPañoleta: 70 × 70 cm, 7 €.',
+  wholesale: 'Pedido mínimo de 12 unidades por modelo. Respondemos en 48 horas.',
+  order: 'Los pedidos se hacen por WhatsApp. Te confirmamos disponibilidad y pago por WhatsApp en menos de 24 h.',
+  askSize: 'Dime tu altura en cm y tu peso en kg. Por ejemplo: «mido 1,58 y peso 60 kilos».',
+  askH: 'Gracias. ¿Y cuánto mides? Por ejemplo: «158 cm».',
+  askW: 'Gracias. ¿Y cuánto pesas? Por ejemplo: «60 kilos».',
+  none: 'Eso no lo tengo a mano. Te lo resuelven por WhatsApp.',
+};
+const DOTS_N = 3;
+
+class Component extends DCLogic {
+  state = { open: false, reduced: false, narrow: false, vvH: null, q: '', typing: false, msgs: [], awaitSize: false, part: {} };
+  panelRef = React.createRef(); closeRef = React.createRef(); threadRef = React.createRef();
+  componentDidMount() {
+    this.onOpen = () => { this.lastFocus = document.activeElement; if (!this.state.msgs.length) this.setState({ msgs: [{ from: 'bot', text: WELCOME, n: WELCOME.length, actions: QUICK.map(([label, id]) => ({ label, kind: 'q', id })) }] }); this.setState({ open: true }); };
+    window.addEventListener('vaho-open-sizehelp', this.onOpen);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.onResize = () => this.setState({ reduced: mq.matches, narrow: window.innerWidth < 640, vvH: window.visualViewport ? window.visualViewport.height : null });
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('vaho-open-sizehelp', this.onOpen); window.removeEventListener('resize', this.onResize);
+    if (window.visualViewport) window.visualViewport.removeEventListener('resize', this.onResize);
+    clearTimeout(this.tT); clearInterval(this.tI); document.body.style.overflow = '';
+  }
+  componentDidUpdate() {
+    const wasOpen = !!this._wasOpen; this._wasOpen = !!this.state.open;
+    if (!!this.state.open !== wasOpen) {
+      document.body.style.overflow = this.state.open ? 'hidden' : '';
+      if (this.state.open) setTimeout(() => this.closeRef.current && this.closeRef.current.focus(), 50);
+      else if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+    }
+    const t = this.threadRef.current; if (t && t.scrollHeight - t.scrollTop - t.clientHeight > 1) t.scrollTo({ top: t.scrollHeight, behavior: this.state.reduced || !this.state.open ? 'auto' : 'smooth' });
+  }
+  close() { this.setState({ open: false }); }
+  scrollTo(id) { this.close(); setTimeout(() => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: this.state.reduced ? 'auto' : 'smooth' }); }, this.state.reduced ? 0 : 300); }
+  wa() { window.dispatchEvent(new Event('vaho-order-wa')); }
+  finishAll() { clearInterval(this.tI); this.setState(s => ({ msgs: s.msgs.map(m => m.n < m.text.length ? Object.assign({}, m, { n: m.text.length }) : m) })); }
+  say(text, actions) {
+    clearTimeout(this.tT); this.finishAll();
+    this.setState({ typing: true });
+    this.tT = setTimeout(() => {
+      const full = this.state.reduced;
+      this.setState(s => ({ typing: false, msgs: s.msgs.concat([{ from: 'bot', text, n: full ? text.length : 0, actions: actions || [] }]) }), () => {
+        if (full) return;
+        const t0 = performance.now(), idx = this.state.msgs.length - 1, cps = 0.18; this.tI = setInterval(() => this.setState(st => { const msgs = st.msgs.slice(), m = msgs[idx]; if (!m || m.n >= m.text.length) { clearInterval(this.tI); return null; } msgs[idx] = Object.assign({}, m, { n: Math.min(m.text.length, Math.ceil((performance.now() - t0) * cps)) }); return { msgs }; }), 30);
+      });
+    }, 600);
+  }
+  answer(id) {
+    const WA = { label: 'Pedir por WhatsApp', kind: 'wa' };
+    if (id === 'size') { this.setState({ awaitSize: true, part: {} }); return this.say(A.askSize); }
+    if (id === 'ship') return this.say(A.ship);
+    if (id === 'returns') return this.say(A.returns);
+    if (id === 'care') return this.say(A.care);
+    if (id === 'discount') return this.say(A.discount, [{ label: 'Ir a mi descuento', kind: 'scroll', target: 'lista', primary: true }]);
+    if (id === 'acc') return this.say(A.acc, [{ label: 'Ver complementos', kind: 'scroll', target: 'complementos' }]);
+    if (id === 'wholesale') return this.say(A.wholesale, [{ label: 'Ir a Wholesale', kind: 'scroll', target: 'wholesale', primary: true }]);
+    if (id === 'order') return this.say(A.order, [Object.assign({ primary: true }, WA)]);
+    return this.say(A.none, [Object.assign({ primary: true }, WA)]);
+  }
+  handle(text) {
+    const p = parseHW(text), intent = intentOf(text);
+    if ((this.state.awaitSize || intent === 'size') && (p.h != null || p.w != null)) {
+      const h = p.h != null ? p.h : this.state.part.h, w = p.w != null ? p.w : this.state.part.w;
+      if (h == null) { this.setState({ awaitSize: true, part: { w } }); return this.say(A.askH); }
+      if (w == null) { this.setState({ awaitSize: true, part: { h } }); return this.say(A.askW); }
+      const r = recommend(h, w), name = r.fit === 'petite' ? 'Petite' : 'Estándar';
+      this.setState({ awaitSize: false, part: {} });
+      return this.say('Con ' + (h / 100).toFixed(2).replace('.', ',') + ' m y ' + Math.round(w) + ' kg te recomendamos ' + name + ', talla ' + r.size + '.\nPetite es para personas de hasta 1,60 m y Estándar, desde 1,60 m. Si dudas entre dos tallas, elige la mayor para conseguir el look oversize.',
+        [{ label: 'Usar esta talla', kind: 'use', fit: r.fit, size: r.size, primary: true }, { label: 'Ver la guía de tallas', kind: 'guide', link: true }]);
+    }
+    if (intent) return this.answer(intent);
+    if (this.state.awaitSize) return this.say(A.askSize);
+    return this.answer(null);
+  }
+  userSays(text) { this.finishAll(); this.setState(s => ({ msgs: s.msgs.concat([{ from: 'me', text, n: text.length, actions: [] }]) })); this.handle(text); }
+  act(x) {
+    if (x.kind === 'q') { this.finishAll(); this.setState(s => ({ msgs: s.msgs.concat([{ from: 'me', text: x.label, n: x.label.length, actions: [] }]) })); return this.answer(x.id); }
+    if (x.kind === 'scroll') return this.scrollTo(x.target);
+    if (x.kind === 'wa') return this.wa();
+    if (x.kind === 'use') { this.close(); window.dispatchEvent(new CustomEvent('vaho-open-product', { detail: { fit: x.fit, size: x.size } })); return; }
+    if (x.kind === 'guide') { this.close(); window.dispatchEvent(new CustomEvent('vaho-open-product', { detail: {} })); setTimeout(() => window.dispatchEvent(new Event('vaho-open-sizeguide')), 450); }
+  }
+  renderVals() {
+    const { open, reduced, narrow, vvH, msgs, typing, q } = this.state;
+    const e = React.createElement;
+    return {
+      panelRef: this.panelRef, closeRef: this.closeRef, threadRef: this.threadRef,
+      dur: reduced ? '0ms' : '420ms', visDelay: open || reduced ? '0ms' : '420ms',
+      panelW: narrow ? '100vw' : '460px', panelH: narrow && vvH ? vvH + 'px' : '100%', panelX: open ? '0%' : '100%', vis: open ? 'visible' : 'hidden', hidden: !open,
+      scrimOp: open ? 1 : 0, pe: open ? 'auto' : 'none',
+      close: () => this.close(),
+      onKey: (ev) => {
+        if (ev.key === 'Escape') { ev.stopPropagation(); return this.close(); }
+        if (ev.key !== 'Tab') return;
+        const f = [...this.panelRef.current.querySelectorAll('button, a[href], input')].filter(x => x.offsetParent !== null);
+        if (!f.length) return;
+        if (ev.shiftKey && document.activeElement === f[0]) { ev.preventDefault(); f[f.length - 1].focus(); }
+        else if (!ev.shiftKey && document.activeElement === f[f.length - 1]) { ev.preventDefault(); f[0].focus(); }
+      },
+      msgs: msgs.map((m, i) => { const bot = m.from === 'bot', done = m.n >= m.text.length;
+        return { shown: m.text.slice(0, m.n), align: bot ? 'flex-start' : 'flex-end', bg: bot ? '#FFFFFF' : '#000000', ink: bot ? '#000000' : '#FFFFFF', border: bot ? 'var(--line-200)' : '#000000', radius: bot ? '18px 18px 18px 4px' : '18px 18px 4px 18px',
+          hasActions: bot && done && m.actions.length > 0 && (m.actions[0].kind !== 'q' || i === 0),
+          actions: m.actions.map(x => ({ label: x.label, go: () => this.act(x), bg: x.primary ? '#000000' : x.link ? 'transparent' : '#FFFFFF', ink: x.primary ? '#FFFFFF' : '#000000', border: x.link ? 'transparent' : '#000000', radius: x.kind === 'q' ? '999px' : '2px', deco: x.link ? 'underline' : 'none' })) }; }),
+      msgAnim: reduced ? 'none' : 'vahoMsgIn 200ms cubic-bezier(.2,.7,.2,1) both', typing, dots: [0, 1, 2].map(i => e('span', { key: i, style: { width: 5, height: 5, borderRadius: '50%', background: '#000000', animation: reduced ? 'none' : 'vahoDot 900ms ' + (i * 150) + 'ms infinite ease-in-out', opacity: reduced ? 0.6 : undefined } })),
+      q, setQ: (ev) => this.setState({ q: ev.target.value }),
+      send: (ev) => { ev.preventDefault(); const t = this.state.q.trim(); if (!t || this.state.typing) return; this.setState({ q: '' }); this.userSays(t); },
+    };
+  }
+}
+</script>
+</body>
+</html>

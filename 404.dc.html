@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Página no encontrada · VAHO</title>
+  <meta name="description" content="Esta página se ha perdido entre las costuras.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:#FAF8F4;color:#000000;font-family:var(--font-sans);-webkit-font-smoothing:antialiased;cursor:default}
+    a{color:#000000;text-decoration:none}
+    a:hover{color:var(--vaho-fuchsia)}
+    a[href]{cursor:pointer}
+    :focus-visible{outline:2px solid var(--vaho-fuchsia);outline-offset:3px}
+  </style>
+</helmet>
+<a href="#contenido" style="border:1px solid #000000;position:fixed;left:16px;top:16px;z-index:100;padding:12px 18px;background:#000000;color:#FFFFFF;font-size:14px;border-radius:2px;transform:translateY(-200%)" style-focus="transform:translateY(0);color:#FFFFFF">Saltar al contenido</a>
+<main id="contenido" style="min-height:100svh;padding:clamp(48px,8vw,96px) clamp(20px,4vw,56px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(28px,4vw,44px);text-align:center;background:#FAF8F4">
+  <svg viewBox="120 120 2350 1050" role="img" aria-label="VAHO" style="width:min(80vw,560px);height:auto;display:block;overflow:visible" fill="none" stroke="#000000" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path>
+    <path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path>
+    <path d="M675,870 C850,780 1050,700 1250,625"></path>
+    <path d="M1515,290 C1490,450 1440,700 1430,900"></path>
+    <path d="M1360,630 C1520,560 1700,480 1860,420"></path>
+    <path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path>
+    <path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path>
+  </svg>
+  <svg viewBox="0 0 600 90" aria-hidden="true" style="width:min(86vw,600px);height:auto;display:block;overflow:visible">
+    <path d="M6 52 C80 30 140 70 210 50 S330 26 400 48 C440 60 470 62 492 50 C510 40 512 22 498 20 C482 18 476 40 492 50 C506 58 520 54 530 46 C540 38 552 44 548 56 C545 66 560 74 590 80" pathLength="1" fill="none" stroke="var(--vaho-fuchsia)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:1;stroke-dashoffset:{{ off }};transition:stroke-dashoffset {{ dur }} cubic-bezier(.22,1,.36,1)"></path>
+  </svg>
+  <h1 style="margin:0;max-width:640px;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(30px,4.6vw,52px);line-height:1.1;text-wrap:balance">Esta página se ha perdido entre las costuras.</h1>
+  <a href="VAHO%20Landing%20v3.dc.html#tienda" style="border:1px solid #000000;min-height:48px;padding:0 30px;border-radius:2px;background:#000000;color:#FFFFFF;display:inline-flex;align-items:center;font-size:14px;font-weight:600" style-hover="background:var(--ink-700);border-color:var(--ink-700);color:#FFFFFF">Volver a la tienda</a>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { on: false, reduced: false };
+  componentDidMount() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setState({ reduced, on: reduced });
+    if (!reduced) this.t = setTimeout(() => this.setState({ on: true }), 200);
+  }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() { return { off: this.state.on ? 0 : 1, dur: this.state.reduced ? '0ms' : '2200ms' }; }
+}
+</script>
+</body>
+</html>

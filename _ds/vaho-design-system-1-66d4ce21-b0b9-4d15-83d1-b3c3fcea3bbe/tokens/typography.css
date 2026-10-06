@@ -1,0 +1,13 @@
+:root{
+--font-sans:'Inter',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+--weight-light:300;--weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+/* Scale */
+--text-display:64px;--text-h1:44px;--text-h2:32px;--text-h3:24px;--text-subtitle:20px;--text-body-lg:18px;--text-body:16px;--text-small:14px;--text-caption:12px;--text-overline:11px;
+--leading-tight:1.1;--leading-snug:1.25;--leading-normal:1.5;
+--tracking-tight:-0.02em;--tracking-normal:0;--tracking-wide:0.14em;
+/* Semantic roles */
+--type-headline:var(--weight-semibold) var(--text-h1)/var(--leading-tight) var(--font-sans);
+--type-subtitle:var(--weight-medium) var(--text-subtitle)/var(--leading-snug) var(--font-sans);
+--type-body:var(--weight-regular) var(--text-body)/var(--leading-normal) var(--font-sans);
+--type-caption:var(--weight-regular) var(--text-caption)/var(--leading-normal) var(--font-sans);
+}

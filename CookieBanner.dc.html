@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+</helmet>
+<sc-if value="{{ chip }}" hint-placeholder-val="{{ false }}">
+  <button type="button" onClick="{{ expand }}" style="position:fixed;left:12px;bottom:{{ bottom }};z-index:70;min-height:44px;padding:0 16px;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;font:600 12px/1 var(--font-sans);cursor:pointer" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">Cookies · Configurar</button>
+</sc-if>
+<sc-if value="{{ card }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-label="Preferencias de cookies" style="position:fixed;left:12px;bottom:{{ bottom }};z-index:70;width:calc(100vw - 24px);max-width:320px;max-height:calc(100svh - 24px);overflow-y:auto;box-sizing:border-box;background:#FFFFFF;border:1px solid var(--line-200);border-radius:2px;padding:16px;display:flex;flex-direction:column;gap:12px;color:#000000;font-family:var(--font-sans);cursor:default">
+    <span style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Cookies</span>
+    <p style="margin:0;font-size:12px;line-height:1.5;color:var(--ink-700)">Usamos cookies técnicas, necesarias para que la web funcione, y, solo si nos das permiso, cookies analíticas y de marketing. Puedes aceptarlas, rechazarlas o elegir cuáles. Más información en la <a href="VAHO%20Legal.dc.html#cookies" style="color:#000000;border-bottom:1px solid #000000;cursor:pointer">Política de cookies</a>.</p>
+    <sc-if value="{{ config }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--line-200)">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--line-200)">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+              <span style="font-size:14px;font-weight:500">{{ c.name }}</span>
+              <span style="font-size:12px;line-height:1.5;color:var(--ink-500)">{{ c.desc }}</span>
+            </div>
+            <sc-if value="{{ c.locked }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-500);white-space:nowrap">Siempre activas</span>
+            </sc-if>
+            <sc-if value="{{ c.toggle }}" hint-placeholder-val="{{ true }}">
+              <button role="switch" aria-checked="{{ c.on }}" aria-label="{{ c.name }}" onClick="{{ c.flip }}" style="flex:0 0 auto;width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:pointer">
+                <span style="width:36px;height:20px;box-sizing:border-box;border:1px solid #000000;border-radius:2px;padding:2px;display:flex;justify-content:{{ c.justify }};background:{{ c.track }}">
+                  <span style="width:14px;height:14px;border-radius:1px;background:{{ c.knob }}"></span>
+                </span>
+              </button>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <div style="display:flex;gap:6px;flex-wrap:nowrap">
+      <sc-for list="{{ actions }}" as="a" hint-placeholder-count="3">
+        <button onClick="{{ a.run }}" style="flex:1 1 0;min-width:0;min-height:44px;padding:0 6px;border:1px solid #000000;border-radius:2px;background:#FFFFFF;color:#000000;font:600 10px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer" style-hover="background:#000000;color:#FFFFFF">{{ a.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:520,&quot;height&quot;:420}}">
+const KEY = 'vaho-cookie-consent';
+const MAX_AGE = 1000 * 60 * 60 * 24 * 730;
+
+class Component extends DCLogic {
+  state = { open: false, config: false, analytics: false, marketing: false, expanded: false };
+
+  componentDidMount() {
+    let c = null;
+    try { c = JSON.parse(sessionStorage.getItem(KEY)); } catch (e) {}
+    if (!c || !c.date) this.setState({ open: true });
+    else this.setState({ analytics: !!c.analytics, marketing: !!c.marketing });
+    this.onOpen = () => this.setState({ open: true, config: true, expanded: true });
+    window.addEventListener('vaho-open-cookies', this.onOpen);
+  }
+  componentWillUnmount() { window.removeEventListener('vaho-open-cookies', this.onOpen); }
+
+  save(analytics, marketing) {
+    try { sessionStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, marketing, date: Date.now() })); } catch (e) {}
+    this.setState({ open: false, config: false, analytics, marketing });
+    window.dispatchEvent(new CustomEvent('vaho-consent', { detail: { analytics, marketing } }));
+  }
+
+  renderVals() {
+    const { open, config, analytics, marketing, expanded } = this.state;
+    const col = !!this.props.collapsed && !expanded;
+    const sw = (key, name, desc) => {
+      const on = this.state[key];
+      return { name, desc, locked: false, toggle: true, on, justify: on ? 'flex-end' : 'flex-start',
+        track: on ? '#000000' : '#FFFFFF', knob: on ? '#FFFFFF' : '#000000', flip: () => this.setState({ [key]: !on }) };
+    };
+    return {
+      open, config, chip: open && col, card: open && !col, bottom: this.props.bottomOffset || '12px', expand: () => this.setState({ expanded: true }),
+      cats: [
+        { name: 'Técnicas', desc: 'Necesarias para que la web funcione y para recordar tus preferencias de cookies.', locked: true, toggle: false },
+        sw('analytics', 'Analíticas', 'Nos ayudan a entender, de forma agregada, cómo se usa la web.'),
+        sw('marketing', 'Marketing', 'Permiten mostrarte publicidad relacionada con VAHO en otras plataformas.'),
+      ],
+      actions: config
+        ? [
+            { label: 'Rechazar', run: () => this.save(false, false) },
+            { label: 'Guardar', run: () => this.save(analytics, marketing) },
+            { label: 'Aceptar', run: () => this.save(true, true) },
+          ]
+        : [
+            { label: 'Rechazar', run: () => this.save(false, false) },
+            { label: 'Configurar', run: () => this.setState({ config: true }) },
+            { label: 'Aceptar', run: () => this.save(true, true) },
+          ],
+    };
+  }
+}
+</script>
+</body>
+</html>

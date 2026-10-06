@@ -1,0 +1,42 @@
+:root{
+/* Brand palette (from VAHO Logos & Color Palette board) */
+--vaho-white:#FFFFFF;
+--vaho-cream:#FAF8F4;
+--vaho-orange:#F28C28;
+--vaho-fuchsia:#E91E8F;
+--vaho-purple:#5B2A86;
+--vaho-lime:#B7FE3B;
+--vaho-black:#000000;
+/* Tints for hover/pressed & quiet fills (derived, sparing use) */
+--vaho-orange-600:#D9761A;
+--vaho-fuchsia-600:#CC1479;
+--vaho-purple-700:#46206A;
+--vaho-lime-600:#9FE22A;
+--vaho-orange-100:#FDEBD8;
+--vaho-fuchsia-100:#FCE1F0;
+--vaho-purple-100:#ECE3F3;
+--vaho-lime-100:#F0FFD6;
+/* Neutrals (ink on cream) */
+--ink-900:#000000;
+--ink-700:#2A2826;
+--ink-500:#6B6760;
+--ink-300:#B8B3AA;
+--line-200:#E6E1D8;
+--line-100:#EFEBE4;
+/* Semantic */
+--surface-page:var(--vaho-cream);
+--surface-card:var(--vaho-white);
+--surface-inverse:var(--vaho-black);
+--text-primary:var(--ink-900);
+--text-secondary:var(--ink-500);
+--text-inverse:var(--vaho-white);
+--text-accent:var(--vaho-fuchsia);
+--border-default:var(--line-200);
+--border-strong:var(--ink-900);
+--accent-primary:var(--vaho-fuchsia);
+--accent-primary-hover:var(--vaho-fuchsia-600);
+--accent-secondary:var(--vaho-orange);
+--focus-ring:var(--vaho-purple);
+--status-success:#2E7D32;
+--status-error:#C62828;
+}

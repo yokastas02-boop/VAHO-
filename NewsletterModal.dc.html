@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+</helmet>
+<sc-if value="{{ mounted }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:90;display:flex;align-items:{{ align }};justify-content:center;padding:{{ outerPad }};font-family:var(--font-sans);cursor:default">
+    <div onClick="{{ close }}" aria-hidden="true" style="position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:{{ shown }};transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1)"></div>
+    <div ref="{{ dlgRef }}" role="dialog" aria-modal="true" aria-labelledby="nl-title" onKeyDown="{{ onKey }}" style="position:relative;width:100%;max-width:{{ maxW }};max-height:calc(100svh - 24px);overflow-y:auto;background:#FFFFFF;border:1px solid var(--line-200);border-radius:{{ radius }};padding:{{ pad }};color:#000000;opacity:{{ shown }};transform:{{ dlgT }};transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1), transform {{ dur }} cubic-bezier(.2,.7,.2,1)">
+      <button ref="{{ closeRef }}" type="button" aria-label="Cerrar" onClick="{{ close }}" style="position:absolute;top:16px;right:16px;width:40px;height:40px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;font:300 20px/1 var(--font-sans);display:grid;place-items:center" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">×</button>
+      <sc-if value="{{ form }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" noValidate="{{ true }}" style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:12px;padding-right:48px">
+            <h2 id="nl-title" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(30px,4vw,38px);line-height:1.08;text-wrap:balance">Lo nuevo de VAHO, primero para ti</h2>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">Suscríbete para recibir noticias de nuevos T-shirts y ofertas exclusivas.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label for="nl-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Correo electrónico</label>
+            <input id="nl-email" type="email" autoComplete="email" placeholder="Correo electrónico *" value="{{ email }}" onChange="{{ setEmail }}" aria-invalid="{{ hasErr }}" aria-describedby="nl-err" style="min-height:52px;padding:0 16px;border:1px solid {{ inputRing }};border-radius:2px;background:#F2F0EC;color:#000000;font:400 15px var(--font-sans);outline:none">
+            <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}">
+              <p id="nl-err" role="alert" style="margin:0;font-size:13px;line-height:1.4;color:var(--vaho-fuchsia)">{{ err }}</p>
+            </sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.55;color:var(--ink-700)">
+              <input type="checkbox" checked="{{ consent }}" onChange="{{ toggleConsent }}" style="margin:2px 0 0;width:18px;height:18px;flex:0 0 auto;accent-color:#000000">
+              <span>Quiero recibir contenidos personalizados por email. <button type="button" aria-expanded="{{ more }}" onClick="{{ toggleMore }}" style="padding:0;border:0;background:transparent;color:#000000;font:inherit;text-decoration:underline;text-underline-offset:2px">Seguir leyendo</button></span>
+            </label>
+            <sc-if value="{{ more }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 0 30px;font-size:12px;line-height:1.6;color:var(--ink-500);text-wrap:pretty">Si marcas esta casilla, VAHO usará tu email y tus preferencias en la web para enviarte novedades, lanzamientos y ofertas pensadas para ti. Es opcional y puedes retirar tu consentimiento cuando quieras desde el enlace de cada email o escribiéndonos.</p>
+            </sc-if>
+          </div>
+          <button type="submit" style="width:100%;min-height:48px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans);letter-spacing:.02em" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Suscribirme</button>
+          <p style="margin:0;font-size:12px;line-height:1.6;color:var(--ink-500);text-wrap:pretty">Al continuar, aceptas nuestra <a href="VAHO%20Legal.dc.html#privacidad" style="color:var(--ink-700);text-decoration:underline;text-underline-offset:2px" style-hover="color:#000000">Política de privacidad</a>. Puedes darte de baja en cualquier momento con el enlace que aparece al final de cada email.</p>
+        </form>
+      </sc-if>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <div aria-live="polite" style="display:flex;flex-direction:column;gap:24px;padding:16px 48px 8px 0">
+          <h2 id="nl-title" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(30px,4vw,38px);line-height:1.08">Listo, te avisaremos.</h2>
+          <button type="button" onClick="{{ close }}" style="align-self:flex-start;min-height:48px;padding:0 28px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans)" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Cerrar</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;autoOpenAfter&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 0, &quot;tsType&quot;: &quot;number&quot;}}">
+const KEY = 'vaho-news-dismissed';
+const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+const dismissed = () => { try { return sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; } };
+
+class Component extends DCLogic {
+  state = { mounted: false, shown: false, email: '', consent: false, more: false, err: null, done: false, reduced: false, narrow: false };
+  dlgRef = React.createRef(); closeRef = React.createRef();
+  componentDidMount() {
+    this.onOpen = (e) => this.open(e && e.detail && e.detail.email);
+    window.addEventListener('vaho-open-news', this.onOpen);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.onResize = () => this.setState({ reduced: mq.matches, narrow: window.innerWidth < 640 });
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    const ms = Number(this.props.autoOpenAfter || 0);
+    if (ms > 0) this.autoT = setTimeout(() => { if (!dismissed() && !this.state.mounted) this.open(); }, ms);
+  }
+  componentWillUnmount() { window.removeEventListener('vaho-open-news', this.onOpen); window.removeEventListener('resize', this.onResize); clearTimeout(this.autoT); clearTimeout(this.hideT); document.body.style.overflow = ''; }
+  open(email) {
+    clearTimeout(this.hideT); this.lastFocus = document.activeElement;
+    this.setState(s => ({ mounted: true, shown: false, email: email || s.email, err: null, done: false }), () => {
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        this.setState({ shown: true });
+        const f = this.dlgRef.current && this.dlgRef.current.querySelector('input[type=email]');
+        (f || this.closeRef.current) && (f || this.closeRef.current).focus();
+      }));
+    });
+  }
+  close() {
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    this.setState({ shown: false });
+    document.body.style.overflow = '';
+    this.hideT = setTimeout(() => this.setState({ mounted: false }), this.state.reduced ? 0 : 260);
+    if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+  }
+  renderVals() {
+    const { mounted, shown, email, consent, more, err, done, reduced, narrow } = this.state;
+    return {
+      mounted, dlgRef: this.dlgRef, closeRef: this.closeRef,
+      shown: shown ? 1 : 0, dur: reduced ? '0ms' : '220ms',
+      dlgT: shown ? 'none' : (narrow ? 'translateY(24px)' : 'translateY(8px) scale(.98)'),
+      align: narrow ? 'flex-end' : 'center', outerPad: narrow ? '0' : '24px',
+      maxW: narrow ? '100%' : '520px', radius: '2px', pad: narrow ? '28px 24px 32px' : '40px',
+      close: () => this.close(),
+      onKey: (e) => {
+        if (e.key === 'Escape') { e.stopPropagation(); return this.close(); }
+        if (e.key !== 'Tab') return;
+        const f = [...this.dlgRef.current.querySelectorAll('button, a[href], input')].filter(x => x.offsetParent !== null);
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      },
+      form: !done, done,
+      email, setEmail: (e) => this.setState({ email: e.target.value, err: null }),
+      hasErr: !!err, err: err || '', inputRing: err ? 'var(--vaho-fuchsia)' : 'transparent',
+      consent, toggleConsent: () => this.setState(s => ({ consent: !s.consent })),
+      more, toggleMore: (e) => { e.preventDefault(); e.stopPropagation(); this.setState(s => ({ more: !s.more })); },
+      submit: (e) => {
+        e.preventDefault();
+        const v = email.trim();
+        if (!v) return this.setState({ err: 'Escribe tu correo electrónico para suscribirte.' });
+        if (!isEmail(v)) return this.setState({ err: 'Revisa tu correo, parece que falta algo (por ejemplo, nombre@correo.com).' });
+        this.setState({ done: true, err: null }, () => this.closeRef.current && this.closeRef.current.focus());
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

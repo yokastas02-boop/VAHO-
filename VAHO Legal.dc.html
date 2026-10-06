@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Legal · VAHO</title>
+  <meta name="description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Legal · VAHO">
+  <meta property="og:description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta property="og:image" content="assets/og-vaho.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Legal · VAHO">
+  <meta name="twitter:description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta name="twitter:image" content="assets/og-vaho.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:#FFFFFF;color:#000000;font-family:var(--font-sans);-webkit-font-smoothing:antialiased;cursor:default}
+    *{box-sizing:border-box}
+    a{color:#000000;text-decoration:none}
+    a:hover{color:var(--ink-500)}
+    a[href],button:not(:disabled){cursor:pointer}
+    main p, main ul, main ol, main h1, main h2, main h3, main table{margin:0}
+    :focus-visible{outline:2px solid var(--vaho-fuchsia);outline-offset:3px}
+  </style>
+</helmet>
+<a href="#contenido" style="border:1px solid #000000;position:fixed;left:16px;top:16px;z-index:100;padding:12px 18px;background:#000000;color:#FFFFFF;font-size:14px;border-radius:2px;transform:translateY(-200%)" style-focus="transform:translateY(0);color:#FFFFFF">Saltar al contenido</a>
+
+<header style="border-bottom:1px solid var(--line-200)">
+  <div style="padding:clamp(16px,2.4vw,28px) clamp(20px,4vw,56px);display:flex;justify-content:space-between;align-items:center;gap:16px">
+    <a href="VAHO%20Landing%20v3.dc.html" aria-label="VAHO, volver a la tienda" style="display:block;width:clamp(84px,9vw,120px)"><img src="assets/logo-black.png" alt="VAHO" style="width:100%;height:auto;display:block"></a>
+    <a href="VAHO%20Landing%20v3.dc.html" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:12px 0">Volver a la tienda</a>
+  </div>
+</header>
+
+<main id="contenido" style="padding:clamp(48px,7vw,104px) clamp(20px,4vw,56px) clamp(80px,10vw,140px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,104px);align-items:flex-start">
+  <aside style="flex:0 1 240px;min-width:0;align-self:flex-start;position:{{ asidePos }};top:32px;max-height:{{ asideMaxH }};overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:36px">
+    <nav aria-label="Páginas legales" style="display:flex;flex-direction:column">
+      <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500);padding-bottom:10px">Legal</span>
+      <sc-for list="{{ pages }}" as="p" hint-placeholder-count="5">
+        <a href="{{ p.href }}" aria-current="{{ p.current }}" style="padding:5px 0;font-size:13px;line-height:1.4;color:{{ p.color }};text-decoration:{{ p.deco }};text-underline-offset:4px;text-decoration-thickness:1px">{{ p.label }}</a>
+      </sc-for>
+      <button onClick="{{ openCookies }}" style="margin-top:4px;padding:5px 0;border:0;background:transparent;text-align:left;font:400 13px/1.4 var(--font-sans);color:var(--ink-500);cursor:default" style-hover="color:#000000">Configurar cookies</button>
+    </nav>
+    <sc-if value="{{ showSideIndex }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="En esta página" style="display:flex;flex-direction:column;padding-top:24px;border-top:1px solid var(--line-200)">
+        <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500);padding-bottom:10px">En esta página</span>
+        <sc-for list="{{ sections }}" as="s" hint-placeholder-count="8">
+          <a href="{{ s.href }}" onClick="{{ s.go }}" aria-current="{{ s.current }}" style="padding:5px 0 5px 12px;border-left:1px solid {{ s.line }};font-size:13px;line-height:1.4;color:{{ s.color }};transition:color 400ms ease, border-color 400ms ease">{{ s.label }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+  </aside>
+
+  <div ref="{{ contentRef }}" style="flex:1 1 520px;min-width:0;max-width:760px;font-size:15px;line-height:1.75;color:var(--ink-700)">
+
+    <sc-if value="{{ showMobileIndex }}" hint-placeholder-val="{{ false }}">
+      <div style="position:sticky;top:0;z-index:10;background:#FFFFFF;border-top:1px solid var(--line-200);border-bottom:1px solid var(--line-200);margin-bottom:32px">
+        <button aria-expanded="{{ indexOpen }}" onClick="{{ toggleIndex }}" style="width:100%;min-height:52px;padding:0;border:0;background:transparent;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;cursor:default;color:#000000;font:400 13px/1.3 var(--font-sans)">
+          <span style="display:flex;gap:10px;align-items:baseline;min-width:0"><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Índice</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ activeLabel }}</span></span>
+          <span aria-hidden="true" style="position:relative;flex:0 0 12px;width:12px;height:12px">
+            <span style="position:absolute;left:0;right:0;top:50%;height:1px;background:#000000"></span>
+            <span style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:#000000;opacity:{{ indexVOp }};transition:opacity 400ms ease"></span>
+          </span>
+        </button>
+        <sc-if value="{{ indexOpen }}" hint-placeholder-val="{{ false }}">
+          <nav aria-label="En esta página" style="display:flex;flex-direction:column;padding:4px 0 16px;max-height:60vh;overflow-y:auto">
+            <sc-for list="{{ sections }}" as="s" hint-placeholder-count="8">
+              <a href="{{ s.href }}" onClick="{{ s.go }}" aria-current="{{ s.current }}" style="padding:9px 0 9px 12px;border-left:1px solid {{ s.line }};font-size:14px;line-height:1.4;color:{{ s.color }};transition:color 400ms ease, border-color 400ms ease">{{ s.label }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAviso }}" hint-placeholder-val="{{ true }}">
+      <article data-screen-label="Aviso legal" style="display:flex;flex-direction:column;gap:16px">
+        <h1 style="font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em;color:#000000">Aviso legal</h1>
+        <p style="font-size:13px;color:var(--ink-500)">Última actualización: [Fecha de actualización]</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">1. Datos identificativos</h2>
+        <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:</p>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li><strong style="color:#000000;font-weight:500">Titular:</strong> [Razón social]</li>
+          <li><strong style="color:#000000;font-weight:500">Nombre comercial:</strong> VAHO</li>
+          <li><strong style="color:#000000;font-weight:500">NIF:</strong> [NIF]</li>
+          <li><strong style="color:#000000;font-weight:500">Domicilio:</strong> [Dirección]</li>
+          <li><strong style="color:#000000;font-weight:500">Email:</strong> [Email de contacto]</li>
+          <li><strong style="color:#000000;font-weight:500">Teléfono / WhatsApp:</strong> +34 617 879 057</li>
+          <li><strong style="color:#000000;font-weight:500">Datos registrales:</strong> [Datos de inscripción en el Registro Mercantil, si procede]</li>
+        </ul>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">2. Objeto</h2>
+        <p>Este aviso legal regula el acceso y el uso del sitio web [Dominio] (en adelante, «la web»), a través del cual VAHO presenta sus productos y permite solicitar pedidos. Acceder a la web te atribuye la condición de usuario e implica que aceptas este aviso legal. Si no estás de acuerdo, te pedimos que no utilices la web.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">3. Condiciones de uso</h2>
+        <p>Te comprometes a utilizar la web de acuerdo con la ley, la buena fe y el orden público, y a no usarla para fines ilícitos o que puedan dañar a VAHO o a terceros. En particular, no está permitido:</p>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li>Introducir virus, código malicioso o cualquier sistema que pueda dañar la web o los equipos de otras personas.</li>
+          <li>Intentar acceder sin autorización a áreas restringidas o a los sistemas de VAHO.</li>
+          <li>Reproducir, distribuir o modificar los contenidos de la web sin autorización.</li>
+          <li>Facilitar datos falsos o de terceros sin su consentimiento al hacer un pedido o una consulta.</li>
+        </ul>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">4. Propiedad intelectual e industrial</h2>
+        <p>Todos los contenidos de la web, incluidos el logotipo manuscrito VAHO, los textos, las fotografías, los diseños de los productos y la estructura de la web, son propiedad de [Razón social] o se utilizan con autorización de sus titulares, y están protegidos por la normativa de propiedad intelectual e industrial.</p>
+        <p>Puedes ver los contenidos y guardar una copia para tu uso personal y privado. Cualquier otro uso, en especial la reproducción, distribución, comunicación pública o transformación con fines comerciales, requiere autorización previa y por escrito.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">5. Responsabilidad</h2>
+        <p>VAHO trabaja para que la información de la web sea correcta y esté actualizada, pero puede contener errores puntuales, que corregiremos en cuanto los detectemos. VAHO no garantiza que la web funcione sin interrupciones y no se hace responsable de los daños derivados de fallos técnicos ajenos a su control, de interrupciones del servicio o del uso de la web en contra de este aviso legal.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">6. Enlaces a otros sitios</h2>
+        <p>La web incluye enlaces a servicios de terceros, como WhatsApp, Instagram o TikTok. VAHO no controla esos sitios y no es responsable de sus contenidos ni de sus políticas de privacidad. Te recomendamos revisarlas antes de usarlos.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">7. Protección de datos y cookies</h2>
+        <p>El tratamiento de tus datos personales se explica en la <a href="#privacidad" style="border-bottom:1px solid #000000">Política de privacidad</a>, y el uso de cookies en la <a href="#cookies" style="border-bottom:1px solid #000000">Política de cookies</a>.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">8. Legislación aplicable y jurisdicción</h2>
+        <p>Este aviso legal se rige por la legislación española. Si eres consumidor, cualquier controversia se someterá a los juzgados y tribunales de tu domicilio. En el resto de casos, las partes se someten a los juzgados y tribunales de [Ciudad].</p>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{ isPrivacidad }}" hint-placeholder-val="{{ false }}">
+      <article data-screen-label="Política de privacidad" style="display:flex;flex-direction:column;gap:16px">
+        <h1 style="font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em;color:#000000">Política de privacidad</h1>
+        <p style="font-size:13px;color:var(--ink-500)">Última actualización: [Fecha de actualización]</p>
+        <p>En VAHO tratamos tus datos con cuidado y solo para lo que necesitamos. Esta política explica cómo lo hacemos, de acuerdo con el Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">1. Responsable del tratamiento</h2>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li><strong style="color:#000000;font-weight:500">Responsable:</strong> [Razón social] (VAHO)</li>
+          <li><strong style="color:#000000;font-weight:500">NIF:</strong> [NIF]</li>
+          <li><strong style="color:#000000;font-weight:500">Domicilio:</strong> [Dirección]</li>
+          <li><strong style="color:#000000;font-weight:500">Email:</strong> [Email de contacto]</li>
+          <li><strong style="color:#000000;font-weight:500">Delegado de protección de datos:</strong> [Datos de contacto del DPD, si se ha designado]</li>
+        </ul>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">2. Qué datos tratamos</h2>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li><strong style="color:#000000;font-weight:500">Datos de contacto e identificación:</strong> nombre, apellidos, email, teléfono y dirección de entrega, cuando haces un pedido o una consulta por WhatsApp o email.</li>
+          <li><strong style="color:#000000;font-weight:500">Datos del pedido:</strong> productos, talla, color, importe, fecha y estado del envío o de la devolución.</li>
+          <li><strong style="color:#000000;font-weight:500">Datos de pago:</strong> los gestiona directamente [Proveedor de pago]. VAHO no almacena los datos completos de tu tarjeta.</li>
+          <li><strong style="color:#000000;font-weight:500">Email para la newsletter:</strong> si te suscribes.</li>
+          <li><strong style="color:#000000;font-weight:500">Datos profesionales:</strong> nombre de la tienda, persona de contacto y datos fiscales, si nos pides información para mayoristas.</li>
+          <li><strong style="color:#000000;font-weight:500">Datos de navegación:</strong> solo los descritos en la <a href="#cookies" style="border-bottom:1px solid #000000">Política de cookies</a> y según lo que aceptes.</li>
+        </ul>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">3. Para qué los usamos y con qué base legal</h2>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:10px">
+          <li><strong style="color:#000000;font-weight:500">Gestionar tu pedido</strong>, el pago, el envío, las devoluciones y la garantía. Base legal: ejecución del contrato (art. 6.1.b RGPD).</li>
+          <li><strong style="color:#000000;font-weight:500">Responder tus consultas</strong> por WhatsApp o email. Base legal: aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</li>
+          <li><strong style="color:#000000;font-weight:500">Enviarte la newsletter</strong> con novedades de VAHO. Base legal: tu consentimiento (art. 6.1.a RGPD), que puedes retirar en cualquier momento desde el enlace de baja de cada envío.</li>
+          <li><strong style="color:#000000;font-weight:500">Atender solicitudes de mayoristas</strong> y mantener la relación comercial. Base legal: medidas precontractuales (art. 6.1.b RGPD) e interés legítimo en gestionar la relación profesional (art. 6.1.f RGPD).</li>
+          <li><strong style="color:#000000;font-weight:500">Cumplir obligaciones legales</strong> fiscales, contables y de consumo. Base legal: obligación legal (art. 6.1.c RGPD).</li>
+          <li><strong style="color:#000000;font-weight:500">Analítica y marketing</strong> mediante cookies, solo si las aceptas. Base legal: tu consentimiento (art. 6.1.a RGPD).</li>
+        </ul>
+        <p>No tomamos decisiones automatizadas ni elaboramos perfiles con efectos jurídicos sobre ti.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">4. Cuánto tiempo los conservamos</h2>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li><strong style="color:#000000;font-weight:500">Pedidos:</strong> mientras dure la relación y, después, durante los plazos legales: 3 años de garantía, 4 años para obligaciones tributarias y 6 años para la documentación contable (art. 30 del Código de Comercio).</li>
+          <li><strong style="color:#000000;font-weight:500">Consultas:</strong> el tiempo necesario para responderte y, después, [Plazo de conservación de consultas].</li>
+          <li><strong style="color:#000000;font-weight:500">Newsletter:</strong> hasta que te des de baja.</li>
+          <li><strong style="color:#000000;font-weight:500">Cookies:</strong> según los plazos indicados en la Política de cookies.</li>
+        </ul>
+        <p>Pasados esos plazos, los datos se bloquean o se eliminan de forma segura.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">5. Con quién los compartimos</h2>
+        <p>No vendemos tus datos. Solo los comunicamos a terceros cuando es necesario para prestarte el servicio o lo exige la ley:</p>
+        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+          <li>Empresa de transporte: [Empresa de transporte], para entregar tu pedido.</li>
+          <li>Proveedor de pago: [Proveedor de pago], para procesar el cobro.</li>
+          <li>Proveedor de email y newsletter: [Proveedor de email marketing].</li>
+          <li>Alojamiento web: [Proveedor de alojamiento web].</li>
+          <li>Asesoría fiscal y contable: [Gestoría o asesoría].</li>
+          <li>Administraciones públicas, jueces y tribunales, cuando exista una obligación legal.</li>
+        </ul>
+        <p>Los proveedores que tratan datos por cuenta de VAHO lo hacen como encargados del tratamiento, con un contrato que les obliga a proteger tus datos y a usarlos solo siguiendo nuestras instrucciones.</p>
+        <p>Si nos escribes por WhatsApp, ese servicio lo presta WhatsApp Ireland Limited, que trata tus datos de acuerdo con su propia política de privacidad.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">6. Transferencias internacionales</h2>
+        <p>Algunos proveedores pueden tratar datos fuera del Espacio Económico Europeo. En ese caso, la transferencia se realiza con las garantías previstas en el RGPD, como una decisión de adecuación de la Comisión Europea (por ejemplo, el Marco de Privacidad de Datos UE-EE. UU.) o cláusulas contractuales tipo.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">7. Tus derechos</h2>
+        <p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, así como retirar el consentimiento que nos hayas dado, sin que ello afecte a los tratamientos anteriores.</p>
+        <p>Para hacerlo, escríbenos a [Email de contacto] con el asunto «Protección de datos», indicando el derecho que quieres ejercer. Si tenemos dudas sobre tu identidad, podremos pedirte información adicional para confirmarla. Te responderemos en el plazo máximo de un mes.</p>
+        <p>Si consideras que no hemos tratado tus datos correctamente, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener" style="border-bottom:1px solid #000000">www.aepd.es</a>).</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">8. Menores de edad</h2>
+        <p>La web no está dirigida a menores de 14 años. Si eres menor de 14 años, necesitas el consentimiento de tus padres o tutores para facilitarnos tus datos.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">9. Seguridad y exactitud</h2>
+        <p>Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos frente a pérdidas, accesos no autorizados o alteraciones. Por tu parte, te pedimos que los datos que nos facilites sean verdaderos y que nos avises si cambian.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">10. Cambios en esta política</h2>
+        <p>Podemos actualizar esta política para adaptarla a cambios legales o en nuestros servicios. Publicaremos siempre la versión vigente en esta página, con su fecha de actualización.</p>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{ isCookies }}" hint-placeholder-val="{{ false }}">
+      <article data-screen-label="Política de cookies" style="display:flex;flex-direction:column;gap:16px">
+        <h1 style="font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em;color:#000000">Política de cookies</h1>
+        <p style="font-size:13px;color:var(--ink-500)">Última actualización: [Fecha de actualización]</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">1. Qué son las cookies</h2>
+        <p>Las cookies son pequeños archivos que una web guarda en tu navegador cuando la visitas. Esta política también se aplica a tecnologías similares, como el almacenamiento local del navegador. Sirven, por ejemplo, para que la web funcione, para recordar tus preferencias o para medir cómo se usa.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">2. Base legal</h2>
+        <p>De acuerdo con el artículo 22.2 de la LSSI-CE y la Guía sobre el uso de las cookies de la Agencia Española de Protección de Datos, las cookies técnicas necesarias no requieren consentimiento. El resto solo se instalan si las aceptas. Puedes rechazarlas con la misma facilidad con la que las aceptas, y cambiar de opinión cuando quieras.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">3. Cookies que usamos</h2>
+        <div style="overflow-x:auto;border-top:1px solid #000000">
+          <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:13px;line-height:1.5">
+            <thead>
+              <tr>
+                <th style="text-align:left;font-weight:500;color:#000000;padding:12px 12px 12px 0;border-bottom:1px solid var(--line-200)">Nombre</th>
+                <th style="text-align:left;font-weight:500;color:#000000;padding:12px;border-bottom:1px solid var(--line-200)">Titular</th>
+                <th style="text-align:left;font-weight:500;color:#000000;padding:12px;border-bottom:1px solid var(--line-200)">Finalidad</th>
+                <th style="text-align:left;font-weight:500;color:#000000;padding:12px;border-bottom:1px solid var(--line-200)">Duración</th>
+                <th style="text-align:left;font-weight:500;color:#000000;padding:12px 0 12px 12px;border-bottom:1px solid var(--line-200)">Tipo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:12px 12px 12px 0;border-bottom:1px solid var(--line-200);vertical-align:top">vaho-cookie-consent</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">VAHO (propia)</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">Guardar tus preferencias de cookies.</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">24 meses</td>
+                <td style="padding:12px 0 12px 12px;border-bottom:1px solid var(--line-200);vertical-align:top">Técnica. Almacenamiento local.</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 12px 12px 0;border-bottom:1px solid var(--line-200);vertical-align:top">[Nombre de la cookie]</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">[Proveedor de analítica] (tercero)</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">Medir de forma agregada las visitas y el uso de la web.</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">[Duración]</td>
+                <td style="padding:12px 0 12px 12px;border-bottom:1px solid var(--line-200);vertical-align:top">Analítica. Solo con consentimiento.</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 12px 12px 0;border-bottom:1px solid var(--line-200);vertical-align:top">[Nombre de la cookie]</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">[Proveedor de marketing] (tercero)</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">Mostrar publicidad de VAHO en otras plataformas y medir su resultado.</td>
+                <td style="padding:12px;border-bottom:1px solid var(--line-200);vertical-align:top">[Duración]</td>
+                <td style="padding:12px 0 12px 12px;border-bottom:1px solid var(--line-200);vertical-align:top">Marketing. Solo con consentimiento.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Cuando abres un enlace a WhatsApp, Instagram o TikTok sales de la web de VAHO. Esos servicios pueden instalar sus propias cookies, que se rigen por sus políticas.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">4. Cómo gestionar tus preferencias</h2>
+        <p>En tu primera visita te mostramos un aviso con tres opciones: aceptar, rechazar o configurar. Puedes cambiar tu elección en cualquier momento:</p>
+        <div>
+          <button onClick="{{ openCookies }}" style="min-height:44px;padding:0 18px;border:1px solid #000000;background:#FFFFFF;color:#000000;font:400 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer" style-hover="background:#000000;color:#FFFFFF">Configurar cookies</button>
+        </div>
+        <p>También puedes bloquear o eliminar las cookies desde la configuración de tu navegador (Chrome, Firefox, Safari, Edge u otros). Si bloqueas las cookies técnicas, es posible que algunas partes de la web no funcionen bien.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">5. Validez del consentimiento</h2>
+        <p>Guardamos tu elección durante 24 meses como máximo. Pasado ese plazo, o si cambiamos las cookies que usamos, te volveremos a preguntar.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">6. Más información</h2>
+        <p>Para saber cómo tratamos tus datos y cómo ejercer tus derechos, consulta la <a href="#privacidad" style="border-bottom:1px solid #000000">Política de privacidad</a>. Si tienes dudas, escríbenos a [Email de contacto].</p>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{ isTerminos }}" hint-placeholder-val="{{ false }}">
+      <article data-screen-label="Términos y condiciones" style="display:flex;flex-direction:column;gap:16px">
+        <h1 style="font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em;color:#000000">Términos y condiciones</h1>
+        <p style="font-size:13px;color:var(--ink-500)">Última actualización: [Fecha de actualización]</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">1. Vendedor</h2>
+        <p>Los productos se venden por [Razón social], con NIF [NIF] y domicilio en [Dirección] (en adelante, «VAHO»). Puedes contactar con nosotros en [Email de contacto] o por WhatsApp en el +34 617 879 057.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">2. Ámbito</h2>
+        <p>Estas condiciones regulan la venta a consumidores de los productos VAHO que se presentan en la web y se piden a través de WhatsApp o email. Se aplican junto con el Real Decreto Legislativo 1/2007, por el que se aprueba el texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios (TRLGDCU), y la LSSI-CE. Las ventas a mayoristas se rigen por las condiciones que se acuerden por separado.</p>
+        <p>Realizamos envíos a [Zonas de envío]. Para hacer un pedido tienes que ser mayor de edad.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">3. Productos</h2>
+        <p>Describimos los productos con la mayor fidelidad posible. Los colores pueden verse ligeramente distintos según la pantalla. La disponibilidad de cada talla, color y combinación de logo se confirma en el momento del pedido.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">4. Precios</h2>
+        <p>Los precios se muestran en euros e incluyen el IVA. Los gastos de envío no están incluidos y te los indicamos siempre antes de que confirmes el pedido. Se aplica el precio vigente en el momento en que confirmas el pedido.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">5. Cómo hacer un pedido</h2>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px">
+          <li>Elige en la web el producto y, en el caso de la T-shirt, el color y el color del logo.</li>
+          <li>Pulsa «Pedir por WhatsApp». Se abrirá un mensaje con tu selección para que nos lo envíes.</li>
+          <li>Te confirmamos la disponibilidad y la talla, y te enviamos un resumen con el precio total, los gastos de envío, el plazo de entrega y las formas de pago.</li>
+          <li>Al aceptar el resumen, el pedido implica la obligación de pago. El contrato queda formalizado cuando aceptas el resumen y realizas el pago.</li>
+          <li>Te enviamos la confirmación del pedido por email o por mensaje, en un soporte duradero que puedes conservar.</li>
+        </ol>
+        <p>El contrato se formaliza en español. VAHO conserva el documento del pedido y puedes pedirnos una copia cuando quieras. Si detectas un error en los datos de tu pedido, avísanos antes de pagar o lo antes posible después.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">6. Pago</h2>
+        <p>Aceptamos los siguientes medios de pago: [Métodos de pago aceptados]. Preparamos el pedido cuando se confirma el pago. Te enviamos la factura o el ticket de compra junto con la confirmación o con el envío.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">7. Entrega</h2>
+        <p>Los plazos, costes y condiciones de entrega se detallan en <a href="#envios" style="border-bottom:1px solid #000000">Envíos y devoluciones</a>. Salvo que acordemos otra cosa, entregaremos el pedido en un plazo máximo de 30 días naturales desde su confirmación. Si no fuera posible, te avisaremos y podrás cancelar el pedido con el reembolso íntegro de lo pagado.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">8. Derecho de desistimiento</h2>
+        <p>Tienes 14 días naturales desde que recibes el pedido para desistir de la compra sin necesidad de justificarlo. El procedimiento, los costes y el modelo de formulario están en <a href="#envios" style="border-bottom:1px solid #000000">Envíos y devoluciones</a>.</p>
+        <p>De acuerdo con el artículo 103 del TRLGDCU, no se aplica el derecho de desistimiento a los productos confeccionados según las especificaciones del cliente o claramente personalizados. Elegir el color de la T-shirt y del logo entre las opciones del catálogo no se considera personalización a estos efectos.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">9. Garantía legal</h2>
+        <p>Todos los productos tienen la garantía legal de conformidad de 3 años desde la entrega, según los artículos 114 y siguientes del TRLGDCU. Si un producto tiene un defecto o no corresponde con lo que pediste, escríbenos y te ofreceremos la reparación, la sustitución o, cuando proceda, la rebaja del precio o el reembolso, sin coste para ti.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">10. Atención al cliente y reclamaciones</h2>
+        <p>Puedes enviarnos dudas, quejas o reclamaciones a [Email de contacto] o por WhatsApp al +34 617 879 057. Responderemos lo antes posible y, en todo caso, en el plazo máximo de un mes. Tienes a tu disposición hojas de reclamaciones.</p>
+        <p>[Indica si VAHO está adherida al Sistema Arbitral de Consumo y, en su caso, la Junta Arbitral correspondiente.]</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">11. Legislación aplicable y jurisdicción</h2>
+        <p>Estas condiciones se rigen por la legislación española. Si eres consumidor, podrás acudir a los juzgados y tribunales de tu domicilio. Nada de lo previsto en estas condiciones limita los derechos que te reconoce la normativa de consumo.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">12. Cambios en estas condiciones</h2>
+        <p>Podemos modificar estas condiciones. A cada pedido se le aplican las condiciones vigentes en el momento de su confirmación.</p>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{ isEnvios }}" hint-placeholder-val="{{ false }}">
+      <article data-screen-label="Envíos y devoluciones" style="display:flex;flex-direction:column;gap:16px">
+        <h1 style="font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em;color:#000000">Envíos y devoluciones</h1>
+        <p style="font-size:13px;color:var(--ink-500)">Última actualización: [Fecha de actualización]</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">1. Zonas de envío</h2>
+        <p>Enviamos a [Zonas de envío]. Para Canarias, Ceuta y Melilla: [Condiciones de envío a Canarias, Ceuta y Melilla]. En esos destinos pueden aplicarse impuestos o gastos de aduana que no dependen de VAHO; te los indicaremos antes de confirmar el pedido.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">2. Plazos</h2>
+        <p>Preparamos tu pedido en [Plazo de preparación] desde la confirmación del pago. Después, la entrega tarda [Plazo de entrega] días laborables. En ningún caso superará los 30 días naturales, salvo que lo acordemos contigo.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">3. Costes</h2>
+        <p>El envío cuesta [Coste de envío]. [Envío gratuito a partir de [Importe para envío gratuito], si se aplica.] Te confirmamos el importe exacto en el resumen del pedido.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">4. Seguimiento e incidencias</h2>
+        <p>Enviamos los pedidos con [Empresa de transporte] y te mandamos el número de seguimiento en cuanto sale el paquete. Si no estás en casa, el transportista intentará la entrega de nuevo o te dejará un aviso. Si el paquete llega dañado o falta algo, escríbenos lo antes posible con fotos del paquete y del producto, y lo solucionaremos.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">5. Devoluciones (derecho de desistimiento)</h2>
+        <p>Tienes 14 días naturales desde que recibes el pedido para devolverlo, sin necesidad de dar explicaciones.</p>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px">
+          <li>Avísanos antes de que terminen los 14 días, por email a [Email de contacto] o por WhatsApp al +34 617 879 057, indicando tu nombre y el número de pedido. También puedes usar el formulario de más abajo, aunque no es obligatorio.</li>
+          <li>Envía el producto a [Dirección de devoluciones] en un plazo máximo de 14 días naturales desde que nos comunicaste la devolución.</li>
+          <li>Cuando recibamos el producto, te devolvemos el dinero.</li>
+        </ol>
+        <p>Puedes probarte la prenda como lo harías en una tienda. Si el producto se ha usado más de lo necesario para comprobar su naturaleza y su talla, podremos descontar del reembolso la pérdida de valor.</p>
+        <p><strong style="color:#000000;font-weight:500">Coste de la devolución:</strong> los gastos directos de enviarnos el producto corren de tu cuenta, salvo que el producto sea defectuoso o no corresponda con tu pedido.</p>
+        <p><strong style="color:#000000;font-weight:500">Reembolso:</strong> te devolvemos todo lo pagado, incluidos los gastos de envío estándar de la entrega inicial, en un plazo máximo de 14 días naturales desde que nos comunicas la devolución. Usamos el mismo medio de pago que utilizaste, salvo que acuerdes otro con nosotros, sin ningún coste para ti. Podemos esperar a recibir el producto, o a que nos envíes el justificante de envío, antes de hacer el reembolso.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">6. Cambios de talla o color</h2>
+        <p>Si quieres otra talla u otro color, escríbenos. Si hay stock, te diremos cómo gestionar el cambio. Si no, puedes devolver el producto y hacer un pedido nuevo.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">7. Productos defectuosos</h2>
+        <p>Si un producto llega con un defecto o aparece durante los 3 años de garantía legal, escríbenos con una descripción y fotos. Nos hacemos cargo de los gastos de envío y te ofrecemos la reparación o la sustitución y, cuando proceda, la rebaja del precio o el reembolso.</p>
+
+        <h2 style="margin-top:28px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#000000">8. Modelo de formulario de desistimiento</h2>
+        <p>Solo debes cumplimentar y enviar este formulario si deseas desistir del contrato.</p>
+        <div style="border-top:1px solid #000000;border-bottom:1px solid var(--line-200);padding:24px 0;display:flex;flex-direction:column;gap:12px">
+          <p>A la atención de [Razón social], [Dirección], [Email de contacto]:</p>
+          <p>Por la presente le comunico/comunicamos (*) que desisto de mi/desistimos de nuestro (*) contrato de venta del siguiente bien (*):</p>
+          <p>Pedido el / recibido el (*):</p>
+          <p>Nombre del consumidor o de los consumidores:</p>
+          <p>Domicilio del consumidor o de los consumidores:</p>
+          <p>Firma del consumidor o de los consumidores (solo si el presente formulario se presenta en papel):</p>
+          <p>Fecha:</p>
+          <p style="font-size:13px;color:var(--ink-500)">(*) Táchese lo que no proceda.</p>
+        </div>
+      </article>
+    </sc-if>
+  </div>
+</main>
+
+<footer style="background:#000000;color:#FFFFFF">
+  <div style="padding:32px clamp(20px,4vw,56px);display:flex;justify-content:space-between;align-items:center;gap:16px 32px;flex-wrap:wrap">
+    <span style="font-size:12px;color:var(--ink-300)">© 2026 VAHO · [Razón social] · NIF [NIF]</span>
+    <a href="VAHO%20Landing%20v3.dc.html" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF;padding:12px 0" style-hover="color:var(--ink-300)">Volver a la tienda</a>
+  </div>
+</footer>
+<dc-import name="CookieBanner" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PAGES = [
+  { id: 'aviso-legal', label: 'Aviso legal' },
+  { id: 'privacidad', label: 'Política de privacidad' },
+  { id: 'cookies', label: 'Política de cookies' },
+  { id: 'terminos', label: 'Términos y condiciones' },
+  { id: 'envios', label: 'Envíos y devoluciones' },
+];
+
+const OFFSET = 96;
+
+class Component extends DCLogic {
+  state = { page: 'aviso-legal', sections: [], active: 0, wide: true, indexOpen: false };
+  contentRef = React.createRef();
+
+  collect() {
+    if (this.io) this.io.disconnect();
+    const root = this.contentRef.current || document;
+    const hs = [...root.querySelectorAll('main article h2')].filter(h => h.offsetParent !== null);
+    if (!hs.length) { if ((this.tries = (this.tries || 0) + 1) < 20) setTimeout(() => this.collect(), 100); return; }
+    this.tries = 0;
+    hs.forEach((h, i) => { h.id = this.state.page + '-s' + (i + 1); h.style.scrollMarginTop = OFFSET + 'px'; });
+    this.heads = hs;
+    this.setState({ sections: hs.map(h => ({ id: h.id, label: h.textContent.trim() })), active: 0 });
+    this.io = new IntersectionObserver(() => this.spy(), { rootMargin: `-${OFFSET}px 0px -55% 0px`, threshold: [0, 1] });
+    hs.forEach(h => this.io.observe(h));
+    this.spy();
+  }
+  spy() {
+    const hs = this.heads || [];
+    if (!hs.length || !hs[0].isConnected) { if (!this.tries) this.collect(); return; }
+    let a = 0;
+    hs.forEach((h, i) => { if (h.getBoundingClientRect().top <= OFFSET + 40) a = i; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) a = hs.length - 1;
+    if (a !== this.state.active) this.setState({ active: a });
+  }
+  go(e, i) {
+    e.preventDefault();
+    const h = (this.heads || [])[i]; if (!h) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: h.getBoundingClientRect().top + window.scrollY - OFFSET, behavior: reduced ? 'auto' : 'smooth' });
+    this.setState({ indexOpen: false });
+  }
+
+  read() {
+    const h = (window.location.hash || '').slice(1);
+    const id = PAGES.some(p => p.id === h) ? h : 'aviso-legal';
+    this.heads = [];
+    this.setState({ page: id, sections: [], active: 0 }, () => setTimeout(() => this.collect(), 50));
+    document.title = PAGES.find(p => p.id === id).label + ' · VAHO';
+  }
+  componentDidMount() {
+    this.read();
+    this.onHash = () => { this.read(); window.scrollTo(0, 0); };
+    window.addEventListener('hashchange', this.onHash);
+    this.mq = window.matchMedia('(min-width: 900px)');
+    this.onMq = () => this.setState({ wide: this.mq.matches, indexOpen: false });
+    this.mq.addEventListener('change', this.onMq); this.onMq();
+    this.onScroll = () => { if (!this.ticking) { this.ticking = true; requestAnimationFrame(() => { this.ticking = false; this.spy(); }); } };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.onHash); window.removeEventListener('scroll', this.onScroll);
+    if (this.mq) this.mq.removeEventListener('change', this.onMq); if (this.io) this.io.disconnect();
+  }
+
+  renderVals() {
+    const pg = this.state.page, { wide, active, sections, indexOpen } = this.state;
+    return {
+      contentRef: this.contentRef,
+      asidePos: wide ? 'sticky' : 'static', asideMaxH: wide ? 'calc(100vh - 64px)' : 'none',
+      showSideIndex: wide, showMobileIndex: !wide,
+      indexOpen, indexVOp: indexOpen ? 0 : 1,
+      toggleIndex: () => this.setState(s => ({ indexOpen: !s.indexOpen })),
+      activeLabel: (sections[active] || {}).label || '',
+      sections: sections.map((s, i) => ({ ...s, href: '#' + pg, current: i === active ? 'location' : undefined,
+        color: i === active ? '#000000' : 'var(--ink-300)', line: i === active ? '#000000' : 'var(--line-200)',
+        go: (e) => this.go(e, i) })),
+      pages: PAGES.map(p => ({ ...p, href: '#' + p.id, current: p.id === pg ? 'page' : undefined, color: p.id === pg ? '#000000' : 'var(--ink-500)', deco: p.id === pg ? 'underline' : 'none' })),
+      isAviso: pg === 'aviso-legal', isPrivacidad: pg === 'privacidad', isCookies: pg === 'cookies',
+      isTerminos: pg === 'terminos', isEnvios: pg === 'envios',
+      openCookies: () => window.dispatchEvent(new Event('vaho-open-cookies')),
+    };
+  }
+}
+</script>
+</body>
+</html>

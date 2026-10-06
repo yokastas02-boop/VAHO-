@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+</helmet>
+<sc-if value="{{ mounted }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ rootRef }}" role="dialog" aria-modal="true" aria-label="T-shirt oversize" onKeyDown="{{ onKey }}" style="position:fixed;inset:0;z-index:85;background:#FFFFFF;color:#000000;font-family:var(--font-sans);cursor:default;overflow-y:auto;overscroll-behavior:contain;opacity:{{ shown }};transform:translateY({{ rootY }});transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1), transform {{ dur }} cubic-bezier(.2,.7,.2,1)">
+    <div style="position:sticky;top:0;z-index:3;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-200)">
+      <div style="padding:12px {{ padX }};display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px">
+        <button ref="{{ backRef }}" type="button" onClick="{{ close }}" aria-label="Volver" style="justify-self:start;min-height:44px;padding:0 4px;border:0;background:transparent;color:#000000;font:400 12px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px" style-hover="color:var(--ink-500)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12 H5"></path><path d="M11 6 L5 12 L11 18"></path></svg>
+          <span>Volver</span>
+        </button>
+        <img src="assets/logo-black.png" alt="VAHO" style="width:72px;height:auto;display:block">
+        <span></span>
+      </div>
+    </div>
+
+    <sc-if value="{{ vDetail }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1320px;margin:0 auto;padding:clamp(24px,4vw,56px) {{ padX }} 96px;display:grid;grid-template-columns:{{ cols }};gap:clamp(32px,5vw,80px);align-items:start">
+        <div style="position:{{ galPos }};top:96px;display:flex;flex-direction:column;gap:12px;min-width:0">
+          <div onMouseEnter="{{ swapEnter }}" onMouseLeave="{{ swapLeave }}" onClick="{{ swapTap }}" onTouchStart="{{ swapTouchStart }}" onTouchEnd="{{ swapTouchEnd }}" style="position:relative;aspect-ratio:1/1;overflow:hidden;background:#FAF8F4;touch-action:pan-y">
+            <div style="position:absolute;inset:0;opacity:{{ img0 }};transition:opacity {{ swapDur }} ease">
+              <img src="{{ baseSrc }}" alt="{{ mainAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity {{ dur }} ease-out">
+              <img src="{{ logoSrc }}" alt="" aria-hidden="true" style="position:absolute;top:27%;left:55%;width:15%;height:auto;pointer-events:none">
+            </div>
+            <div style="position:absolute;inset:0;opacity:{{ img1 }};transition:opacity {{ swapDur }} ease">
+              <img src="{{ flatSrc }}" alt="{{ flatAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+              <img src="{{ logoSrc }}" alt="" aria-hidden="true" style="position:absolute;top:24%;left:56%;width:12%;height:auto;pointer-events:none">
+            </div>
+            <div style="position:absolute;inset:0;opacity:{{ img2 }};transition:opacity {{ swapDur }} ease">
+              <img src="{{ modelSrc }}" alt="{{ modelAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+              <img src="{{ logoSrc }}" alt="" aria-hidden="true" style="position:absolute;top:20.5%;left:57.5%;width:11%;height:auto;pointer-events:none">
+            </div>
+            <sc-if value="{{ swapTouch }}" hint-placeholder-val="{{ false }}">
+              <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:8px;pointer-events:none">
+                <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ swapDot0 }};transition:background {{ swapDur }} ease"></span>
+                <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ swapDot1 }};transition:background {{ swapDur }} ease"></span>
+              </div>
+            </sc-if>
+          </div>
+          <div role="group" aria-label="Imágenes del producto" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+            <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="3">
+              <button type="button" aria-label="{{ t.label }}" aria-pressed="{{ t.on }}" onClick="{{ t.pick }}" style="position:relative;aspect-ratio:1/1;padding:0;border:1px solid {{ t.ring }};background:#FAF8F4;overflow:hidden;transition:border-color 140ms ease">
+                <img src="{{ t.src }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:{{ t.fit }};display:block">
+                <img src="{{ logoSrc }}" alt="" style="position:absolute;top:{{ t.top }};left:{{ t.left }};width:{{ t.w }};height:auto">
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:28px;min-width:0">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Tienda</span>
+            <h1 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-0.01em">T-shirt oversize</h1>
+            <p style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:400;font-size:26px">20 €</p>
+            <p style="margin:0;font-family:'Cormorant Garamond', serif;font-style:italic;font-weight:300;font-size:22px;color:var(--ink-700)">Soft, loose, and completely yours.</p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:1px solid var(--line-200)">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Corte</span>
+            <div role="radiogroup" aria-label="Corte" style="display:flex;gap:10px;flex-wrap:wrap">
+              <sc-for list="{{ fits }}" as="f" hint-placeholder-count="2">
+                <button type="button" role="radio" aria-checked="{{ f.on }}" onClick="{{ f.pick }}" style="height:44px;padding:0 20px;border:1px solid {{ f.border }};border-radius:2px;background:{{ f.bg }};color:#000000;display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:border-color 200ms ease, background 200ms ease" style-hover="border-color:#1A1A19" style-active="transform:scale(.98)">
+                  <span style="width:8px;height:8px;border-radius:50%;background:{{ f.accent }};flex:0 0 auto"></span><span style="font-family:'Cormorant Garamond', serif;font-weight:400;font-size:20px;line-height:1">{{ f.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <p style="margin:0;font-family:var(--font-sans);font-size:13px;line-height:1.4;color:var(--ink-500)">Petite hasta 1,60 m · Estándar desde 1,60 m.</p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:1px solid var(--line-200)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Talla · <span style="color:#000000">{{ size }}</span></span>
+              <button type="button" onClick="{{ openGuide }}" aria-haspopup="dialog" style="min-height:32px;padding:2px 0;border:0;border-bottom:1px solid currentColor;background:transparent;font:400 13px/1.2 var(--font-sans);color:#000000;cursor:pointer" style-hover="color:var(--vaho-fuchsia)">¿Cuál es mi talla?</button>
+            </div>
+            <div role="radiogroup" aria-label="Talla" style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="5">
+                <button type="button" role="radio" aria-checked="{{ s.on }}" onClick="{{ s.pick }}" style="min-width:52px;min-height:44px;padding:0 14px;border:1px solid {{ s.ring }};border-radius:2px;background:{{ s.bg }};color:{{ s.ink }};font:600 14px/1 var(--font-sans);transition:background 140ms ease, color 140ms ease" style-active="transform:scale(.98)" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">{{ s.label }}</button>
+              </sc-for>
+            </div>
+            <p style="margin:0;font-size:13px;color:var(--ink-500)">Corte oversize. Te recomendamos elegir tu talla habitual.</p>
+            <p aria-live="polite" style="margin:0;font-size:13px;color:var(--ink-700);font-variant-numeric:tabular-nums"><span style="color:{{ fitAccent }};font-weight:500">{{ fitName }} {{ size }}</span> · Ancho de pecho {{ chest }} cm · Largo {{ length }} cm</p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:1px solid var(--line-200)">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Color base · <span style="color:#000000">{{ baseLabel }}</span></span>
+            <div role="radiogroup" aria-label="Color base" style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ bases }}" as="o" hint-placeholder-count="3">
+                <button type="button" role="radio" aria-checked="{{ o.on }}" aria-label="{{ o.label }}" title="{{ o.label }}" onClick="{{ o.pick }}" style="width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center">
+                  <span style="width:22px;height:22px;border-radius:50%;background:{{ o.color }};border:1px solid var(--ink-300);box-shadow:{{ o.ringShadow }};transition:box-shadow 220ms ease"></span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:1px solid var(--line-200)">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Color del logo · <span style="color:#000000">{{ logoLabel }}</span></span>
+            <div role="radiogroup" aria-label="Color del logo" style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ logos }}" as="o" hint-placeholder-count="5">
+                <span style="position:relative;display:block">
+                  <button type="button" role="radio" aria-checked="{{ o.on }}" aria-disabled="{{ o.dis }}" aria-label="{{ o.aria }}" onClick="{{ o.pick }}" onMouseEnter="{{ o.tipIn }}" onMouseLeave="{{ o.tipOut }}" onFocus="{{ o.tipIn }}" onBlur="{{ o.tipOut }}" style="width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:{{ o.cursor }}">
+                    <span style="position:relative;width:22px;height:22px;border-radius:50%;background:{{ o.color }};border:1px solid var(--ink-300);box-shadow:{{ o.ringShadow }};opacity:{{ o.op }};overflow:hidden;transition:box-shadow 220ms ease">
+                      <sc-if value="{{ o.dis }}" hint-placeholder-val="{{ false }}">
+                        <span style="position:absolute;left:50%;top:-4px;bottom:-4px;width:1.5px;background:#000000;transform:translateX(-50%) rotate(45deg)"></span>
+                      </sc-if>
+                    </span>
+                  </button>
+                  <sc-if value="{{ o.tip }}" hint-placeholder-val="{{ false }}">
+                    <span role="tooltip" style="position:absolute;left:50%;bottom:calc(100% + 4px);transform:translateX(-50%);z-index:4;padding:8px 12px;background:#000000;color:#FFFFFF;border-radius:2px;font-size:12px;line-height:1.3;white-space:nowrap;pointer-events:none">Combinación no disponible: no se lee bien</span>
+                  </sc-if>
+                </span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;padding-top:22px;border-top:1px solid var(--line-200)">
+            <button type="button" onClick="{{ openSheet }}" style="width:100%;min-height:48px;border:1px solid var(--vaho-fuchsia);border-radius:2px;background:var(--vaho-fuchsia);color:#FFFFFF;font:600 15px/1 var(--font-sans)" style-hover="background:var(--fuchsia-600, #C9177A)" style-active="transform:scale(.98)">Pedir por WhatsApp</button>
+            <button type="button" onClick="{{ save }}" aria-live="polite" style="align-self:center;min-height:44px;padding:0 4px;border:0;background:transparent;color:#000000;font:400 14px/1 var(--font-sans);text-decoration:underline;text-underline-offset:4px" style-hover="color:var(--vaho-fuchsia)">{{ saveLabel }}</button>
+          </div>
+
+          <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--line-200)">
+            <sc-for list="{{ acc }}" as="g" hint-placeholder-count="3">
+              <div style="border-top:1px solid var(--line-200)">
+                <button type="button" aria-expanded="{{ g.open }}" onClick="{{ g.toggle }}" style="width:100%;min-height:56px;padding:16px 0;border:0;background:transparent;color:#000000;font:500 15px/1.3 var(--font-sans);display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left">
+                  <span>{{ g.title }}</span>
+                  <span aria-hidden="true" style="font-size:20px;font-weight:300;transform:rotate({{ g.rot }});transition:transform 220ms ease">+</span>
+                </button>
+                <sc-if value="{{ g.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:14px;padding:0 0 20px">
+                    <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="3">
+                      <div style="display:flex;flex-direction:column;gap:4px">
+                        <span style="font-size:14px;font-weight:500">{{ q.q }}</span>
+                        <span style="font-size:14px;line-height:1.6;color:var(--ink-700)">{{ q.a }}</span>
+                        <sc-if value="{{ q.hasLink }}" hint-placeholder-val="{{ false }}"><a href="{{ q.link }}" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">{{ q.linkLabel }}</a></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ vDone }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:560px;margin:0 auto;padding:clamp(48px,8vw,96px) {{ padX }} 96px;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center">
+        <svg viewBox="0 0 120 100" width="120" height="100" fill="none" aria-hidden="true">
+          <path d="M14 54 C22 58 30 68 40 82 C46 70 60 46 78 28 C88 18 98 12 108 8" pathLength="1" stroke="var(--vaho-fuchsia)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:1;stroke-dashoffset:{{ checkOff }};transition:stroke-dashoffset {{ checkDur }} cubic-bezier(.2,.7,.2,1)"></path>
+        </svg>
+        <h2 aria-live="polite" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,6vw,64px);line-height:1">Un instante, tuyo.</h2>
+        <div style="width:100%;text-align:left;border:1px solid var(--line-200);border-radius:2px;background:#FAF8F4;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Tu pedido</span>
+          <sc-for list="{{ doneRows }}" as="r" hint-placeholder-count="6">
+            <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;line-height:1.4"><span style="color:var(--ink-700)">{{ r.k }}</span><span style="text-align:right">{{ r.v }}</span></div>
+          </sc-for>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding-top:12px;margin-top:4px;border-top:1px solid var(--line-200);font-size:16px;font-weight:600"><span>Total</span><span>{{ doneTotal }}</span></div>
+        </div>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Te confirmamos disponibilidad y pago por WhatsApp en menos de 24 h</p>
+        <button type="button" onClick="{{ explore }}" style="min-height:48px;padding:0 32px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans)" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Seguir explorando</button>
+      </div>
+    </sc-if>
+
+  </div>
+  <sc-if value="{{ sheetMounted }}" hint-placeholder-val="{{ false }}">
+    <div onKeyDown="{{ onKey }}" style="position:fixed;inset:0;z-index:86;font-family:var(--font-sans);color:#000000;cursor:default;display:flex;align-items:{{ sheetAlign }};justify-content:center;padding:{{ sheetOuter }}">
+      <div onClick="{{ closeSheet }}" aria-hidden="true" style="position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:{{ sheetShown }};transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1)"></div>
+      <div ref="{{ sheetRef }}" role="dialog" aria-modal="true" aria-labelledby="ord-title" style="position:relative;width:100%;max-width:{{ sheetW }};max-height:calc(100svh - 24px);overflow-y:auto;background:#FFFFFF;border:1px solid var(--line-200);border-radius:2px;padding:{{ sheetPad }};display:flex;flex-direction:column;gap:22px;opacity:{{ sheetShown }};transform:{{ sheetT }};transition:opacity {{ dur }} cubic-bezier(.2,.7,.2,1), transform {{ dur }} cubic-bezier(.2,.7,.2,1)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Paso {{ step }} de 3</span>
+            <h2 id="ord-title" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:32px;line-height:1.05">{{ stepTitle }}</h2>
+          </div>
+          <button type="button" aria-label="Cerrar" onClick="{{ closeSheet }}" style="flex:0 0 auto;width:40px;height:40px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;font:300 20px/1 var(--font-sans);display:grid;place-items:center" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">×</button>
+        </div>
+        <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px">
+          <sc-for list="{{ stepBars }}" as="b" hint-placeholder-count="3">
+            <span style="height:2px;background:{{ b.bg }};transition:background 220ms ease"></span>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;padding:4px 0"><span style="color:var(--ink-700)">{{ r.k }}</span><span style="text-align:right">{{ r.v }}</span></div>
+            </sc-for>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 0;border-top:1px solid var(--line-200)">
+              <span style="font-size:14px;color:var(--ink-700)">Cantidad</span>
+              <div role="group" aria-label="Cantidad" style="display:flex;align-items:center;border:1px solid var(--line-200);border-radius:2px">
+                <button type="button" aria-label="Quitar una" onClick="{{ qtyDown }}" disabled="{{ qtyMin }}" style="width:40px;height:40px;padding:0;border:0;background:transparent;color:#000000;font:300 18px/1 var(--font-sans);opacity:{{ qtyMinOp }}">−</button>
+                <span aria-live="polite" style="min-width:28px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums">{{ qty }}</span>
+                <button type="button" aria-label="Añadir una" onClick="{{ qtyUp }}" style="width:40px;height:40px;padding:0;border:0;background:transparent;color:#000000;font:300 18px/1 var(--font-sans)">+</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-700)">Nombre *
+              <input type="text" autoComplete="name" value="{{ name }}" onChange="{{ setName }}" aria-invalid="{{ nameErr }}" style="min-height:48px;padding:0 14px;border:1px solid {{ nameRing }};border-radius:2px;background:#F2F0EC;color:#000000;font:400 15px var(--font-sans);outline:none">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-700)">Ciudad / Código postal *
+              <input type="text" autoComplete="address-level2" value="{{ city }}" onChange="{{ setCity }}" aria-invalid="{{ cityErr }}" style="min-height:48px;padding:0 14px;border:1px solid {{ cityRing }};border-radius:2px;background:#F2F0EC;color:#000000;font:400 15px var(--font-sans);outline:none">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-700)">Nota (opcional)
+              <textarea rows="3" value="{{ note }}" onChange="{{ setNote }}" style="padding:12px 14px;border:1px solid transparent;border-radius:2px;background:#F2F0EC;color:#000000;font:400 15px/1.5 var(--font-sans);outline:none;resize:vertical"></textarea>
+            </label>
+            <sc-if value="{{ hasFormErr }}" hint-placeholder-val="{{ false }}">
+              <p role="alert" style="margin:0;font-size:13px;color:var(--vaho-fuchsia)">Escribe tu nombre y tu ciudad o código postal para continuar.</p>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="8">
+              <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;padding:3px 0"><span style="color:var(--ink-700)">{{ r.k }}</span><span style="text-align:right;overflow-wrap:anywhere">{{ r.v }}</span></div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--line-200)">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-700)"><span>Subtotal</span><span>{{ subtotal }}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-700)"><span>Envío</span><span>{{ shipping }}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:600;padding-top:4px"><span>Total</span><span>{{ total }}</span></div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap-reverse;justify-content:space-between;align-items:center">
+          <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ prev }}" style="min-height:48px;padding:0 4px;border:0;background:transparent;color:#000000;font:400 14px/1 var(--font-sans);text-decoration:underline;text-underline-offset:4px">Atrás</button>
+          </sc-if>
+          <button type="button" onClick="{{ next }}" style="flex:1 1 220px;min-height:48px;padding:0 24px;border:1px solid transparent;border-radius:2px;background:{{ nextBg }};color:#FFFFFF;font:600 14px/1 var(--font-sans)" style-hover="opacity:.9" style-active="transform:scale(.98)">{{ nextLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ guideMounted }}" hint-placeholder-val="{{ false }}">
+    <div onKeyDown="{{ guideKey }}" style="position:fixed;inset:0;z-index:87;font-family:var(--font-sans);color:#000000;cursor:default">
+      <div onClick="{{ closeGuide }}" aria-hidden="true" style="position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:{{ guideShown }};transition:opacity {{ guideDur }} cubic-bezier(.2,.7,.2,1)"></div>
+      <div ref="{{ guideRef }}" role="dialog" aria-modal="true" aria-labelledby="guide-title" style="position:absolute;top:0;right:0;bottom:0;width:{{ guideW }};background:#FFFFFF;border-left:1px solid var(--line-200);box-shadow:var(--shadow-lift);display:flex;flex-direction:column;transform:translateX({{ guideX }});transition:transform {{ guideDur }} cubic-bezier(.2,.7,.2,1)">
+        <div style="position:relative;flex:1 1 auto;min-height:0;overflow:hidden">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;transform:translateX({{ pnlGuideX }});visibility:{{ pnlGuideVis }};transition:transform {{ guideDur }} cubic-bezier(.2,.7,.2,1), visibility {{ guideDur }}">
+        <div style="flex:0 0 auto;background:#FFFFFF;border-bottom:1px solid var(--line-200);padding:16px {{ guidePad }};display:flex;justify-content:space-between;align-items:center;gap:16px">
+          <h2 id="guide-title" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:30px;line-height:1.05">Guía de tallas</h2>
+          <button ref="{{ guideCloseRef }}" type="button" aria-label="Cerrar guía de tallas" onClick="{{ closeGuide }}" style="flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;display:grid;place-items:center;cursor:pointer" style-hover="border-color:#000000">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"></path></svg>
+          </button>
+        </div>
+        <div data-guide-scroll="1" style="flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:28px {{ guidePad }} 48px;display:flex;flex-direction:column;gap:40px">
+          <div style="border:1px solid var(--line-200);border-radius:2px;padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#FAF8F4;display:grid;place-items:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15 L15 3 L21 9 L9 21 Z"></path><path d="M7 11 L9 13 M10 8 L12 10 M13 5 L15 7"></path></svg>
+            </span>
+            <div style="flex:1 1 160px;min-width:0;display:flex;flex-direction:column;gap:4px">
+              <span style="font-size:16px;font-weight:600">Encuentra tu talla</span>
+              <span style="font-size:13px;line-height:1.45;color:var(--ink-700)">Recibe una recomendación personalizada</span>
+            </div>
+            <button type="button" onClick="{{ guideStart }}" style="flex:0 0 auto;min-height:44px;padding:0 20px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:500 14px/1 var(--font-sans);cursor:pointer" style-hover="background:var(--ink-700)" style-active="transform:scale(.98)">Empezar →</button>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:400;font-size:26px;line-height:1.1">Guía de tallas · T-shirt oversize</h3>
+            <p style="margin:0;font-size:13px;color:var(--ink-500)">Corte oversize, unisex.</p>
+          </div>
+
+          <sc-for list="{{ gTables }}" as="t" hint-placeholder-count="2">
+            <div style="display:flex;flex-direction:column;gap:14px;padding-top:28px;border-top:1px solid var(--line-200)">
+              <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="display:flex;align-items:center;gap:10px"><sc-if value="{{ t.hasDot }}" hint-placeholder-val="{{ true }}"><span style="width:10px;height:10px;border-radius:50%;background:{{ t.accent }}"></span></sc-if><span style="font-size:18px;font-weight:600">{{ t.name }}</span></span>
+                  <sc-if value="{{ t.hasLine }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:var(--ink-700)">{{ t.line }}</span></sc-if>
+                </div>
+                <sc-if value="{{ t.hasUnits }}" hint-placeholder-val="{{ true }}">
+                <div role="radiogroup" aria-label="{{ t.unitAria }}" style="display:flex;align-items:center;gap:10px;font-size:13px">
+                  <sc-for list="{{ t.units }}" as="u" hint-placeholder-count="2">
+                    <span style="display:flex;align-items:center;gap:10px">
+                      <sc-if value="{{ u.sep }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="color:var(--ink-300)">|</span></sc-if>
+                      <button type="button" role="radio" aria-checked="{{ u.on }}" onClick="{{ u.pick }}" style="min-height:36px;padding:0 2px;border:0;background:transparent;color:{{ u.ink }};font:{{ u.weight }} 13px/1 var(--font-sans);text-decoration:{{ u.deco }};text-underline-offset:5px;cursor:pointer">{{ u.label }}</button>
+                    </span>
+                  </sc-for>
+                </div>
+                </sc-if>
+              </div>
+              <div role="region" aria-label="{{ t.tableAria }}" tabIndex="0" style="overflow-x:auto;border:1px solid var(--line-200);border-radius:2px">
+                <table style="border-collapse:collapse;min-width:{{ t.minW }};width:100%;font-size:13px;font-variant-numeric:tabular-nums">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="position:sticky;left:0;z-index:1;background:#000000;color:#FFFFFF;padding:12px;text-align:left;font-weight:500;white-space:nowrap">Etiqueta del producto</th>
+                      <sc-for list="{{ t.sizes }}" as="z" hint-placeholder-count="5">
+                        <th scope="col" style="background:#000000;color:#FFFFFF;padding:12px;text-align:center;font-weight:500">{{ z }}</th>
+                      </sc-for>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <sc-for list="{{ t.groups }}" as="g" hint-placeholder-count="2">
+                      <sc-if value="{{ g.hasTitle }}" hint-placeholder-val="{{ true }}">
+                      <tr>
+                        <td colSpan="{{ t.span }}" style="padding:14px 12px 8px;border-top:1px solid var(--line-200);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)"><span style="position:sticky;left:12px">{{ g.title }}</span></td>
+                      </tr>
+                      </sc-if>
+                      <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+                        <tr>
+                          <th scope="row" style="position:sticky;left:0;z-index:1;background:#FFFFFF;padding:12px;text-align:left;font-weight:500;white-space:nowrap;border-top:1px solid var(--line-200)">{{ r.label }}</th>
+                          <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="5">
+                            <td style="padding:12px;text-align:center;white-space:nowrap;background:{{ c.bg }};border-top:1px solid var(--line-200)">{{ c.v }}</td>
+                          </sc-for>
+                        </tr>
+                      </sc-for>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+              <span style="font-size:12px;color:var(--ink-500)">Desliza para ver toda la información.</span>
+              <sc-if value="{{ t.hasShop }}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{ t.shop }}" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#000000;font:500 14px/1 var(--font-sans);cursor:pointer;text-decoration:underline;text-underline-offset:5px" style-hover="color:var(--vaho-fuchsia)">{{ t.shopLabel }}</button>
+              </sc-if>
+            </div>
+          </sc-for>
+
+          <div style="display:flex;flex-direction:column;gap:12px;padding-top:28px;border-top:1px solid var(--line-200)">
+            <span style="font-size:18px;font-weight:600">¿Cómo elijo entre Estándar y Petite?</span>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Petite es para personas de hasta 1,60 m y Estándar, desde 1,60 m.</p>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">El corte es oversize: tu talla habitual queda holgada y una talla menos, más ajustada.</p>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Si dudas entre dos tallas, elige la mayor para conseguir el look oversize.</p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:18px;padding-top:28px;border-top:1px solid var(--line-200)">
+            <span style="font-size:18px;font-weight:600">Cómo encontrar tu talla</span>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Mídete con una cinta métrica, anota tus medidas y compáralas con la tabla.</p>
+            <div style="display:grid;grid-template-columns:{{ howCols }};gap:24px;align-items:start">
+              <div style="background:#FAF8F4;border-radius:2px;padding:16px;display:grid;place-items:center">
+                <svg viewBox="0 0 160 300" width="140" height="262" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Figura con los cuatro puntos de medida: pecho, cintura, cadera y altura">
+                  <g stroke="#000000" stroke-width="1.5">
+                    <circle cx="76" cy="34" r="16"></circle>
+                    <path d="M70 50 L70 58 M82 50 L82 58"></path>
+                    <path d="M52 64 Q76 56 100 64 L104 112 Q98 132 100 150 L104 176 L52 176 L56 150 Q58 132 52 112 Z"></path>
+                    <path d="M52 66 L40 124 L36 156 M100 66 L112 124 L116 156"></path>
+                    <path d="M56 176 L60 284 M96 176 L92 284 M76 196 L76 284"></path>
+                  </g>
+                  <g stroke="var(--vaho-fuchsia)" stroke-width="1.5">
+                    <path d="M48 96 Q76 104 106 96" stroke-dasharray="3 3"></path>
+                    <path d="M54 130 Q76 136 98 130" stroke-dasharray="3 3"></path>
+                    <path d="M50 164 Q76 172 104 164" stroke-dasharray="3 3"></path>
+                    <path d="M140 18 L140 284 M135 23 L140 18 L145 23 M135 279 L140 284 L145 279"></path>
+                  </g>
+                  <g font-family="Inter, sans-serif" font-size="10" font-weight="600" text-anchor="middle">
+                    <circle cx="26" cy="96" r="9" fill="var(--vaho-fuchsia)"></circle><text x="26" y="99.5" fill="#FFFFFF">1</text>
+                    <circle cx="26" cy="130" r="9" fill="var(--vaho-fuchsia)"></circle><text x="26" y="133.5" fill="#FFFFFF">2</text>
+                    <circle cx="26" cy="164" r="9" fill="var(--vaho-fuchsia)"></circle><text x="26" y="167.5" fill="#FFFFFF">3</text>
+                    <circle cx="140" cy="150" r="9" fill="var(--vaho-fuchsia)"></circle><text x="140" y="153.5" fill="#FFFFFF">4</text>
+                  </g>
+                </svg>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">Con la cinta en horizontal</span>
+                  <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                    <sc-for list="{{ howH }}" as="m" hint-placeholder-count="3">
+                      <li style="display:flex;gap:12px;font-size:14px;line-height:1.5;color:var(--ink-700)"><span aria-hidden="true" style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--vaho-fuchsia);color:#FFFFFF;font-size:11px;font-weight:600;display:grid;place-items:center">{{ m.n }}</span><span><span style="color:#000000;font-weight:500">{{ m.k }}</span>, {{ m.t }}</span></li>
+                    </sc-for>
+                  </ol>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">Con la cinta en vertical</span>
+                  <ol style="margin:0;padding:0;list-style:none">
+                    <li style="display:flex;gap:12px;font-size:14px;line-height:1.5;color:var(--ink-700)"><span aria-hidden="true" style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--vaho-fuchsia);color:#FFFFFF;font-size:11px;font-weight:600;display:grid;place-items:center">4</span><span><span style="color:#000000;font-weight:500">Altura</span>, de la coronilla al suelo, de pie y con la espalda recta.</span></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:16px;background:#FAF8F4;border-radius:2px">
+              <svg viewBox="0 0 40 40" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="T-shirt en plano con el ancho de pecho y el largo marcados" style="flex:0 0 auto">
+                <path d="M14 7 L7 10 L3 17 L8 20 L11 17 L11 34 L29 34 L29 17 L32 20 L37 17 L33 10 L26 7 Q20 12 14 7 Z" stroke="#000000" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+                <path d="M11.5 19 L28.5 19 M13 18 L11.5 19 L13 20 M27 18 L28.5 19 L27 20" stroke="var(--vaho-fuchsia)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+                <path d="M23 9.6 L23 33.5 M22 11.1 L23 9.6 L24 11.1 M22 32 L23 33.5 L24 32" stroke="var(--vaho-fuchsia)" stroke-width="1.5" stroke-dasharray="1.2 1" vector-effect="non-scaling-stroke"></path>
+              </svg>
+              <div style="flex:1 1 180px;min-width:0;display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.5;color:var(--ink-700)">
+                <span><span style="color:#000000;font-weight:500">Ancho de pecho</span>: con la T-shirt en plano, de costura a costura justo debajo de las mangas.</span>
+                <span><span style="color:#000000;font-weight:500">Largo</span>: desde el punto más alto del hombro hasta el bajo.</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;padding:20px;border:1px solid var(--line-200);border-radius:2px">
+            <span style="font-size:16px;font-weight:600">¿No es la talla o el color que esperabas? Cambio y devolución.</span>
+            <sc-for list="{{ policy }}" as="p" hint-placeholder-count="3">
+              <p style="margin:0;font-size:13px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ p }}</p>
+            </sc-for>
+          </div>
+
+          <button type="button" onClick="{{ guideTop }}" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#000000;font:500 14px/1 var(--font-sans);text-decoration:underline;text-underline-offset:5px;cursor:pointer" style-hover="color:var(--vaho-fuchsia)">Volver arriba ↑</button>
+
+        </div>
+        </div>
+        <div ref="{{ profRef }}" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF;transform:translateX({{ pnlProfX }});visibility:{{ pnlProfVis }};transition:transform {{ guideDur }} cubic-bezier(.2,.7,.2,1), visibility {{ guideDur }}">
+          <div style="flex:0 0 auto;border-bottom:1px solid var(--line-200);padding:16px {{ guidePad }};display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:12px">
+            <button ref="{{ profBackRef }}" type="button" aria-label="Volver a la guía de tallas" onClick="{{ toGuide }}" style="width:44px;height:44px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;display:grid;place-items:center;cursor:pointer" style-hover="border-color:#000000">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12 H5"></path><path d="M11 6 L5 12 L11 18"></path></svg>
+            </button>
+            <h2 style="margin:0;text-align:center;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:30px;line-height:1.05">Perfil de tallas</h2>
+            <button type="button" aria-label="Cerrar guía de tallas" onClick="{{ closeGuide }}" style="width:44px;height:44px;padding:0;border:1px solid var(--line-200);border-radius:2px;background:#FFFFFF;color:#000000;display:grid;place-items:center;cursor:pointer" style-hover="border-color:#000000">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"></path></svg>
+            </button>
+          </div>
+
+          <sc-if value="{{ pForm }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ pSubmit }}" noValidate="{{ true }}" style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column">
+              <div style="flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:28px {{ guidePad }} 32px;display:flex;flex-direction:column;gap:28px">
+                <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Esta información nos ayuda a recomendarte la talla adecuada.</p>
+                <sc-for list="{{ pFields }}" as="f" hint-placeholder-count="3">
+                  <div style="display:flex;flex-direction:column;gap:10px">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+                      <label for="{{ f.id }}" style="font-size:14px;font-weight:500">{{ f.label }}</label>
+                      <sc-if value="{{ f.hasUnits }}" hint-placeholder-val="{{ true }}">
+                        <div role="radiogroup" aria-label="{{ f.unitAria }}" style="display:flex;border:1px solid var(--line-200);border-radius:2px;padding:3px">
+                          <sc-for list="{{ f.units }}" as="u" hint-placeholder-count="2">
+                            <button type="button" role="radio" aria-checked="{{ u.on }}" onClick="{{ u.pick }}" style="min-height:32px;padding:0 14px;border:0;border-radius:2px;background:{{ u.bg }};color:{{ u.ink }};font:400 13px/1 var(--font-sans);cursor:pointer;transition:background 140ms ease, color 140ms ease">{{ u.label }}</button>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                    </div>
+                    <div style="position:relative">
+                      <input id="{{ f.id }}" type="text" inputMode="decimal" autoComplete="off" value="{{ f.value }}" onChange="{{ f.set }}" onBlur="{{ f.blur }}" aria-invalid="{{ f.bad }}" aria-describedby="{{ f.errId }}" style="width:100%;box-sizing:border-box;min-height:52px;padding:0 64px 0 16px;border:1px solid {{ f.ring }};border-radius:2px;background:#F2F0EC;color:#000000;font:400 16px var(--font-sans);outline:none" style-focus="border-color:#000000;box-shadow:0 0 0 3px var(--purple-100, #E9DFF2)">
+                      <span aria-hidden="true" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--ink-500);pointer-events:none">{{ f.unit }}</span>
+                    </div>
+                    <sc-if value="{{ f.bad }}" hint-placeholder-val="{{ false }}">
+                      <span id="{{ f.errId }}" role="alert" style="font-size:13px;line-height:1.4;color:#B0136C">{{ f.err }}</span>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <span id="pref-label" style="font-size:14px;font-weight:500">Preferencias de compra (opcional)</span>
+                  <div role="radiogroup" aria-labelledby="pref-label" style="display:flex;gap:8px;flex-wrap:wrap">
+                    <sc-for list="{{ pPrefs }}" as="p" hint-placeholder-count="3">
+                      <button type="button" role="radio" aria-checked="{{ p.on }}" onClick="{{ p.pick }}" style="min-height:44px;padding:0 18px;border:1px solid {{ p.ring }};border-radius:2px;background:{{ p.bg }};color:{{ p.ink }};font:400 14px/1 var(--font-sans);cursor:pointer;transition:background 140ms ease, color 140ms ease" style-active="transform:scale(.98)">{{ p.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.5;color:var(--ink-700)">
+                  <a href="VAHO%20Legal.dc.html#privacidad" target="_blank" rel="noopener" style="align-self:flex-start;color:#000000;text-decoration:underline;text-underline-offset:4px" style-hover="color:var(--vaho-fuchsia)">Política de privacidad</a>
+                  <span>Usamos estos datos solo para sugerirte una talla. No se guardan.</span>
+                </div>
+              </div>
+              <div style="flex:0 0 auto;padding:16px {{ guidePad }};border-top:1px solid var(--line-200);background:#FFFFFF">
+                <button type="submit" disabled="{{ pDisabled }}" aria-disabled="{{ pDisabled }}" style="width:100%;min-height:48px;border:1px solid #000000;border-radius:2px;background:{{ pBtnBg }};color:#FFFFFF;font:500 15px/1 var(--font-sans);cursor:{{ pBtnCursor }};transition:background 140ms ease" style-active="transform:scale(.98)">Encontrar talla →</button>
+              </div>
+            </form>
+          </sc-if>
+
+          <sc-if value="{{ pResult }}" hint-placeholder-val="{{ false }}">
+            <div aria-live="polite" style="flex:1 1 auto;overflow-y:auto;padding:40px {{ guidePad }} 40px;display:flex;flex-direction:column;gap:24px">
+              <div style="padding:28px 24px;background:#FAF8F4;border-radius:2px;display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:13px;color:var(--ink-700)">Tu talla recomendada:</span>
+                <span style="display:flex;align-items:center;gap:12px"><span style="width:12px;height:12px;border-radius:50%;background:{{ pResAccent }}"></span><span style="font-family:'Cormorant Garamond', serif;font-weight:400;font-size:44px;line-height:1">{{ pResText }}</span></span>
+                <span style="font-size:14px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">Por tu altura y peso, esta talla te dará el ajuste oversize de VAHO.</span>
+              </div>
+              <button ref="{{ pUseRef }}" type="button" onClick="{{ pUse }}" style="width:100%;min-height:48px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:500 15px/1 var(--font-sans);cursor:pointer" style-hover="background:var(--ink-700)" style-active="transform:scale(.98)">Usar esta talla</button>
+              <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+                <button type="button" onClick="{{ toGuide }}" style="min-height:44px;padding:0;border:0;background:transparent;color:#000000;font:500 14px/1 var(--font-sans);text-decoration:underline;text-underline-offset:5px;cursor:pointer" style-hover="color:var(--vaho-fuchsia)">Ver guía de tallas completa</button>
+                <button type="button" onClick="{{ pAgain }}" style="min-height:44px;padding:0;border:0;background:transparent;color:var(--ink-700);font:400 14px/1 var(--font-sans);text-decoration:underline;text-underline-offset:5px;cursor:pointer" style-hover="color:var(--vaho-fuchsia)">Volver a calcular</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PRICE = 20, WA_NUMBER = '34617879057', WA_DISPLAY = '+34 617 879 057';
+const MEAS = {
+  petite: { XS: [46, 60], S: [49, 63], M: [52, 66], L: [55, 69] },
+  estandar: { XS: [46, 66], S: [49, 69], M: [52, 72], L: [55, 75], XL: [58, 78] },
+};
+const BODY = { Pecho: [[77, 82], [82, 88], [88, 96], [96, 104], [104, 112]], Cintura: [[61, 66], [66, 72], [72, 80], [80, 88], [88, 96]], Cadera: [[85, 90], [90, 96], [96, 104], [104, 112], [112, 120]] };
+const CONV = [['EU', [44, 46, 48, 50, 52]], ['US', [34, 36, 38, 40, 42]], ['UK', [34, 36, 38, 40, 42]], ['FR', [44, 46, 48, 50, 52]], ['IT', [46, 48, 50, 52, 54]]];
+const GUIDE_FITS = [
+  { id: 'estandar', line: 'Pensada para personas desde 1,60 m' },
+  { id: 'petite', line: 'Pensada para personas de hasta 1,60 m' },
+];
+const fmtIn = (cm) => (cm / 2.54).toFixed(1).replace('.', ',');
+const FITS = [
+  { id: 'petite', name: 'Petite', sub: 'Hasta 1,60 m · XS–L', accent: 'var(--vaho-orange)' },
+  { id: 'estandar', name: 'Estándar', sub: 'Desde 1,60 m · XS–XL', accent: 'var(--vaho-purple)' },
+];
+const BASES = [
+  { id: 'blanca', label: 'Blanca', color: '#FFFFFF', src: 'assets/tshirt-white-plain.png' },
+  { id: 'negra', label: 'Negra', color: '#1A1A19', src: 'assets/tshirt-black-plain.png' },
+  { id: 'crema', label: 'Crema', color: '#EFE9DD', src: 'assets/tshirt-cream-plain.png' },
+];
+const LOGOS = [
+  { id: 'naranja', label: 'Naranja', color: 'var(--vaho-orange)', src: 'assets/logo-orange.png' },
+  { id: 'fucsia', label: 'Fucsia', color: 'var(--vaho-fuchsia)', src: 'assets/logo-fuchsia.png' },
+  { id: 'morado', label: 'Morado', color: 'var(--vaho-purple)', src: 'assets/logo-purple.png' },
+  { id: 'negro', label: 'Negro', color: '#000000', src: 'assets/logo-black.png' },
+  { id: 'blanco', label: 'Blanco', color: '#FFFFFF', src: 'assets/logo-white.png' },
+];
+const BLOCKED = { blanca: ['blanco'], crema: ['blanco'], negra: ['negro', 'morado'] };
+const FLAT = {
+  petite: { crema: 'assets/flatlay-petite.png', blanca: 'assets/flatlay-petite-blanca.png', negra: 'assets/flatlay-petite-negra.png' },
+  estandar: { crema: 'assets/flatlay-estandar.png', blanca: 'assets/flatlay-estandar-blanca.png', negra: 'assets/flatlay-estandar-negra.png' },
+};
+const ACC = [
+  { title: 'Materiales y cuidado', items: [
+    ['¿De qué están hechas las T-shirts?', 'De algodón 100 % de gramaje pesado (220 g/m²), con corte oversize unisex y tacto suave desde el primer día.'],
+    ['¿Cómo lavo mi T-shirt VAHO?', 'Lávala del revés, a 30 °C y con colores similares. No uses secadora y plánchala a baja temperatura, siempre por el revés para proteger el logo.'],
+    ['¿Se encoge o pierde color?', 'Está prelavada para minimizar el encogimiento. Siguiendo las instrucciones de lavado, mantiene el color y el logo durante mucho tiempo.'],
+  ] },
+  { title: 'Envíos', items: [
+    ['¿Cómo son los envíos?', 'Coordinamos el envío contigo por WhatsApp: te confirmamos coste y plazo según tu dirección antes de que pagues.', 'https://wa.me/34617879057?text=Hola%2C%20quiero%20consultar%20el%20env%C3%ADo%20de%20mi%20pedido', 'Preguntar por WhatsApp →'],
+  ] },
+  { title: 'Devoluciones y cambios', items: [
+    ['¿Cuánto tiempo tengo para devolver?', 'Tienes 30 días desde que recibes tu pedido para devolver o cambiar cualquier prenda.'],
+    ['¿Cómo hago un cambio de talla?', 'Escríbenos a nuestro email de contacto con tu número de pedido y la talla que necesitas. Te enviamos las instrucciones y la nueva prenda en cuanto recibimos la primera.'],
+    ['¿Cómo y cuándo recibo el reembolso?', 'Una vez recibida y revisada la prenda, te devolvemos el importe por el mismo método de pago en un máximo de 5 días laborables.'],
+  ] },
+];
+const eur = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ',')) + ' €';
+const SAVE_KEY = 'vaho-guardado';
+
+class Component extends DCLogic {
+  state = { mounted: false, shown: false, view: 'detail', img: 0, fit: 'estandar', size: 'M', base: 'blanca', logo: 'naranja', tip: null, accOpen: null, saved: false,
+    sheetMounted: false, sheetShown: false, step: 1, qty: 1, name: '', city: '', note: '', formErr: false, order: null, checkOn: false, reduced: false, narrow: false, wide: true,
+    guideMounted: false, guideShown: false, gUnit: { estandar: 'cm', petite: 'cm', nec: 'cm' },
+    gScreen: 'guide', pH: '', pHU: 'cm', pW: '', pWU: 'kg', pA: '', pPref: null, pTouch: {}, pTried: false, pRes: null };
+  profRef = React.createRef(); profBackRef = React.createRef(); pUseRef = React.createRef();
+  toScreen(sc) {
+    this.setState({ gScreen: sc }, () => setTimeout(() => {
+      const t = sc === 'guide' ? this.guideCloseRef.current : sc === 'result' ? this.pUseRef.current : this.profBackRef.current;
+      t && t.focus({ preventScroll: true });
+    }, 30));
+  }
+  pParse(v) { const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : NaN; }
+  pCheck() {
+    const s = this.state, out = {};
+    const hv = this.pParse(s.pH), wv = this.pParse(s.pW), av = this.pParse(s.pA);
+    const hcm = s.pHU === 'in' ? hv * 2.54 : hv, wkg = s.pWU === 'st' ? wv * 6.35029 : wv;
+    const rng = (a, b, f) => Math.round(a / f) + ' y ' + Math.round(b / f);
+    if (s.pH.trim() === '') out.h = 'Escribe tu altura.';
+    else if (!(hcm >= 120 && hcm <= 220)) out.h = 'Introduce una altura entre ' + (s.pHU === 'in' ? rng(120, 220, 2.54) + ' in' : '120 y 220 cm') + '.';
+    if (s.pW.trim() === '') out.w = 'Escribe tu peso.';
+    else if (!(wkg >= 30 && wkg <= 200)) out.w = 'Introduce un peso entre ' + (s.pWU === 'st' ? rng(30, 200, 6.35029) + ' st' : '30 y 200 kg') + '.';
+    if (s.pA.trim() !== '' && !(av >= 10 && av <= 100 && Number.isInteger(av))) out.a = 'Introduce una edad entre 10 y 100 años, o deja el campo vacío.';
+    return { out, hcm, wkg };
+  }
+  pRecommend(hcm, wkg) {
+    const fit = hcm < 160 ? 'petite' : 'estandar';
+    const sizes = Object.keys(MEAS[fit]);
+    const wIdx = [52, 60, 70, 80].filter(b => wkg >= b).length;
+    const hIdx = (fit === 'petite' ? [148, 152, 156] : [166, 172, 178, 184]).filter(b => hcm >= b).length;
+    return { fit, size: sizes[Math.min(Math.max(wIdx, hIdx), sizes.length - 1)] };
+  }
+  necRef = React.createRef(); guideBodyRef = React.createRef();
+  rootRef = React.createRef(); backRef = React.createRef(); sheetRef = React.createRef(); guideRef = React.createRef(); guideCloseRef = React.createRef();
+  openGuide(target) {
+    clearTimeout(this.guideT); this.guideFocus = document.activeElement;
+    this.setState({ guideMounted: true, guideShown: false, gScreen: 'guide' }, () => this.raf2(() => {
+      this.setState({ guideShown: true }); this.guideCloseRef.current && this.guideCloseRef.current.focus({ preventScroll: true });
+      const box = this.guideRef.current && this.guideRef.current.querySelector('[data-guide-scroll]');
+      if (box) box.scrollTop = 0;
+    }));
+  }
+  closeGuide() {
+    this.setState({ guideShown: false });
+    this.guideT = setTimeout(() => this.setState({ guideMounted: false }), this.state.reduced ? 0 : 420);
+    if (this.guideFocus && this.guideFocus.focus) this.guideFocus.focus();
+  }
+  componentDidMount() {
+    this.onOpen = (e) => this.open((e && e.detail) || {});
+    window.addEventListener('vaho-open-product', this.onOpen);
+    this.onGuide = (e) => this.openGuide(e && e.detail && e.detail.target);
+    window.addEventListener('vaho-open-sizeguide', this.onGuide);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.onResize = () => this.setState({ reduced: mq.matches, narrow: window.innerWidth < 640, wide: window.innerWidth >= 900 });
+    this.onResize(); window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('vaho-open-product', this.onOpen); window.removeEventListener('vaho-open-sizeguide', this.onGuide); window.removeEventListener('resize', this.onResize); clearTimeout(this.hideT); clearTimeout(this.sheetT); clearTimeout(this.guideT); document.body.style.overflow = ''; }
+  raf2(fn) { requestAnimationFrame(() => requestAnimationFrame(fn)); }
+  open(d) {
+    clearTimeout(this.hideT); this.lastFocus = document.activeElement;
+    const base = BASES.some(b => b.id === d.tee) ? d.tee : this.state.base;
+    let logo = LOGOS.some(l => l.id === d.logo) ? d.logo : this.state.logo;
+    if ((BLOCKED[base] || []).includes(logo)) logo = 'naranja';
+    const extra = {};
+    if (d.fit === 'petite' || d.fit === 'estandar') extra.fit = d.fit;
+    if (d.size && MEAS[extra.fit || this.state.fit] && MEAS[extra.fit || this.state.fit][d.size]) extra.size = d.size;
+    this.setState({ mounted: true, shown: false, view: 'detail', img: 0, pHover: false, base, logo, saved: false, ...extra }, () => {
+      document.body.style.overflow = 'hidden';
+      this.raf2(() => { this.setState({ shown: true }); this.backRef.current && this.backRef.current.focus(); if (this.rootRef.current) this.rootRef.current.scrollTop = 0; });
+    });
+  }
+  close() {
+    this.setState({ shown: false, sheetMounted: false, sheetShown: false });
+    document.body.style.overflow = '';
+    this.hideT = setTimeout(() => this.setState({ mounted: false }), this.state.reduced ? 0 : 220);
+    if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+  }
+  openSheet() {
+    clearTimeout(this.sheetT);
+    this.setState({ sheetMounted: true, sheetShown: false, step: 1, formErr: false }, () => this.raf2(() => {
+      this.setState({ sheetShown: true });
+      const b = this.sheetRef.current && this.sheetRef.current.querySelector('button'); b && b.focus();
+    }));
+  }
+  closeSheet() {
+    this.setState({ sheetShown: false });
+    this.sheetT = setTimeout(() => this.setState({ sheetMounted: false }), this.state.reduced ? 0 : 220);
+  }
+  totals(qty) {
+    const sub = PRICE * qty, ship = 0;
+    return { sub, ship, total: sub + ship };
+  }
+  send() {
+    const { fit, size, base, logo, qty, name, city, note } = this.state;
+    const F = FITS.find(f => f.id === fit), B = BASES.find(b => b.id === base), L = LOGOS.find(l => l.id === logo);
+    const t = this.totals(qty);
+    const lines = ['Hola, quiero hacer este pedido en VAHO:', '',
+      '• Producto: T-shirt oversize', '• Corte: ' + F.name, '• Talla: ' + size, '• Color base: ' + B.label, '• Color del logo: ' + L.label,
+      '• Cantidad: ' + qty, '• Subtotal: ' + eur(t.sub), '• Envío: a confirmar por WhatsApp', '• Total: ' + eur(t.total), '',
+      'Nombre: ' + name.trim(), 'Ciudad / Código postal: ' + city.trim()];
+    if (note.trim()) lines.push('Nota: ' + note.trim());
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    const order = { fit: F.name, size, base: B.label, logo: L.label, qty, total: eur(t.total), name: name.trim(), city: city.trim() };
+    this.setState({ sheetMounted: false, sheetShown: false, view: 'done', order, checkOn: this.state.reduced }, () => {
+      if (this.rootRef.current) this.rootRef.current.scrollTop = 0;
+      if (!this.state.reduced) setTimeout(() => this.setState({ checkOn: true }), 120);
+    });
+  }
+
+  renderVals() {
+    const s = this.state, { reduced, narrow, wide } = s;
+    const F = FITS.find(f => f.id === s.fit), B = BASES.find(b => b.id === s.base), L = LOGOS.find(l => l.id === s.logo);
+    const m = MEAS[s.fit][s.size] || MEAS[s.fit].M;
+    const blocked = BLOCKED[s.base] || [];
+    const ring = (on) => on ? '0 0 0 3px #FFFFFF, 0 0 0 4px #000000' : 'none';
+    const flat = FLAT[s.fit][s.base];
+    const t = this.totals(s.qty);
+    const sumRows = [['Producto', 'T-shirt oversize · 20 €'], ['Corte', F.name], ['Talla', s.size + ' · ' + m[0] + ' × ' + m[1] + ' cm'], ['Color base', B.label], ['Color del logo', L.label]].map(([k, v]) => ({ k, v }));
+    const nameBad = s.formErr && !s.name.trim(), cityBad = s.formErr && !s.city.trim();
+    return {
+      mounted: s.mounted, rootRef: this.rootRef, backRef: this.backRef, sheetRef: this.sheetRef,
+      shown: s.shown ? 1 : 0, rootY: s.shown || reduced ? '0px' : '12px', dur: reduced ? '0ms' : '220ms',
+      padX: narrow ? '24px' : 'clamp(24px,4vw,56px)', cols: wide ? 'minmax(0,7fr) minmax(320px,5fr)' : 'minmax(0,1fr)', galPos: wide ? 'sticky' : 'static',
+      close: () => this.close(),
+      onKey: (e) => {
+        if (e.key === 'Escape') { e.stopPropagation(); return s.sheetMounted ? this.closeSheet() : this.close(); }
+        if (s.sheetMounted && this.sheetRef.current && !this.sheetRef.current.contains(e.target)) return;
+        if (e.key !== 'Tab') return;
+        const scope = s.sheetMounted && this.sheetRef.current ? this.sheetRef.current : this.rootRef.current;
+        const f = [...scope.querySelectorAll('button:not([disabled]), a[href], input, textarea')].filter(x => x.offsetParent !== null);
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      },
+      vDetail: s.view === 'detail', vDone: s.view === 'done',
+      baseSrc: B.src, logoSrc: L.src, mainAlt: 'T-shirt oversize ' + B.label.toLowerCase() + ' con logo VAHO ' + L.label.toLowerCase(),
+      flatSrc: flat, flatAlt: 'T-shirt ' + B.label.toLowerCase() + ' corte ' + F.name + ' extendida en plano',
+      ...(() => { const touch = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(hover: none)').matches, hov = !!s.pHover;
+        const shownImg = hov && s.img !== 2 ? 2 : s.img;
+        return { img0: shownImg === 0 ? 1 : 0, img1: shownImg === 1 ? 1 : 0, img2: shownImg === 2 ? 1 : 0,
+          swapDur: reduced ? '0ms' : '400ms', swapTouch: touch,
+          swapDot0: shownImg === 2 ? 'transparent' : '#000000', swapDot1: shownImg === 2 ? '#000000' : 'transparent',
+          swapEnter: () => { if (!touch) this.setState({ pHover: true }); }, swapLeave: () => { if (!touch) this.setState({ pHover: false }); },
+          swapTap: () => { if (touch && Date.now() - (this.pSwiped || 0) > 400) this.setState(st => ({ pHover: !st.pHover })); },
+          swapTouchStart: (e) => { const t = e.touches && e.touches[0]; this.pTx = t ? t.clientX : null; this.pTy = t ? t.clientY : null; },
+          swapTouchEnd: (e) => { const t = e.changedTouches && e.changedTouches[0]; if (!t || this.pTx == null) return; const dx = t.clientX - this.pTx, dy = t.clientY - this.pTy; this.pTx = null;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { this.pSwiped = Date.now(); this.setState({ pHover: dx < 0 }); } } }; })(),
+      modelSrc: 'assets/model-mostrador-' + B.id + '.png', modelAlt: 'Modelo con T-shirt VAHO ' + B.label.toLowerCase() + ' y logo ' + L.label.toLowerCase() + ' en un mostrador',
+      thumbs: [[B.src, 'cover', '27%', '55%', '15%', 'Ver tu combinación'], [flat, 'contain', '24%', '56%', '12%', 'Ver la T-shirt en plano'], ['assets/model-mostrador-' + B.id + '.png', 'cover', '20.5%', '57.5%', '11%', 'Ver la T-shirt puesta']].map(([src, fit, top, left, w, label], i) => ({
+        src, fit, top, left, w, label, on: s.img === i, ring: s.img === i ? '#000000' : 'var(--line-200)', pick: () => this.setState({ img: i }) })),
+      fits: FITS.map(f => { const on = f.id === s.fit; return { name: f.name, sub: f.sub, on, accent: f.accent, border: on ? '#1A1A19' : 'var(--line-200)', bg: on ? '#FAF8F4' : '#FFFFFF',
+        pick: () => this.setState(st => ({ fit: f.id, size: MEAS[f.id][st.size] ? st.size : 'L' })) }; }),
+      fitName: F.name, fitAccent: F.accent, size: s.size, chest: m[0], length: m[1],
+      sizes: Object.keys(MEAS[s.fit]).map(z => { const on = z === s.size; return { label: z, on, bg: on ? '#000000' : 'transparent', ink: on ? '#FFFFFF' : '#000000', ring: on ? '#000000' : 'var(--line-200)', pick: () => this.setState({ size: z }) }; }),
+      baseLabel: B.label,
+      bases: BASES.map(b => ({ label: b.label, color: b.color, on: b.id === s.base, ringShadow: ring(b.id === s.base),
+        pick: () => this.setState(st => ({ base: b.id, logo: (BLOCKED[b.id] || []).includes(st.logo) ? 'naranja' : st.logo, img: st.img === 2 ? 0 : st.img })) })),
+      logoLabel: L.label,
+      logos: LOGOS.map((l, i) => { const dis = blocked.includes(l.id); return { color: l.color, on: l.id === s.logo, dis, op: dis ? 0.35 : 1, cursor: dis ? 'not-allowed' : 'pointer',
+        aria: dis ? l.label + ', combinación no disponible: no se lee bien' : l.label, ringShadow: ring(l.id === s.logo), tip: dis && s.tip === i,
+        tipIn: () => { if (dis) this.setState({ tip: i }); }, tipOut: () => this.setState({ tip: null }),
+        pick: () => { if (dis) this.setState({ tip: i }); else this.setState({ logo: l.id, img: 0 }); } }; }),
+      openSheet: () => this.openSheet(),
+      saveLabel: s.saved ? 'Guardado para después' : 'Guardar para después',
+      save: () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ fit: s.fit, size: s.size, base: s.base, logo: s.logo })); } catch (e) {} this.setState({ saved: true }); },
+      acc: ACC.map((g, i) => ({ title: g.title, open: s.accOpen === i, rot: s.accOpen === i ? '45deg' : '0deg', items: g.items.map(([q, a, link, linkLabel]) => ({ q, a, link: link || '', hasLink: !!link, linkLabel: linkLabel || '' })),
+        toggle: () => this.setState(st => ({ accOpen: st.accOpen === i ? null : i })) })),
+      sheetMounted: s.sheetMounted, sheetShown: s.sheetShown ? 1 : 0, closeSheet: () => this.closeSheet(),
+      sheetAlign: narrow ? 'flex-end' : 'center', sheetOuter: narrow ? '0' : '24px', sheetW: narrow ? '100%' : '520px', sheetR: '2px', sheetPad: narrow ? '24px' : '36px',
+      sheetT: s.sheetShown || reduced ? 'none' : (narrow ? 'translateY(32px)' : 'translateY(8px) scale(.98)'),
+      step: s.step, stepTitle: ['Tu T-shirt', 'Tus datos', 'Revisa y envía'][s.step - 1],
+      stepBars: [1, 2, 3].map(n => ({ bg: n <= s.step ? 'var(--vaho-fuchsia)' : 'var(--line-200)' })),
+      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3,
+      sumRows, qty: s.qty, qtyMin: s.qty <= 1, qtyMinOp: s.qty <= 1 ? 0.3 : 1,
+      qtyDown: () => this.setState(st => ({ qty: Math.max(1, st.qty - 1) })), qtyUp: () => this.setState(st => ({ qty: Math.min(20, st.qty + 1) })),
+      name: s.name, city: s.city, note: s.note,
+      setName: (e) => this.setState({ name: e.target.value }), setCity: (e) => this.setState({ city: e.target.value }), setNote: (e) => this.setState({ note: e.target.value }),
+      nameErr: nameBad, cityErr: cityBad, nameRing: nameBad ? 'var(--vaho-fuchsia)' : 'transparent', cityRing: cityBad ? 'var(--vaho-fuchsia)' : 'transparent',
+      hasFormErr: nameBad || cityBad,
+      reviewRows: [...sumRows, { k: 'Cantidad', v: String(s.qty) }, { k: 'Nombre', v: s.name.trim() }, { k: 'Ciudad / CP', v: s.city.trim() }, ...(s.note.trim() ? [{ k: 'Nota', v: s.note.trim() }] : []), { k: 'WhatsApp', v: WA_DISPLAY }],
+      subtotal: eur(t.sub), shipping: 'A confirmar por WhatsApp', total: eur(t.total),
+      hasPrev: s.step > 1, prev: () => this.setState(st => ({ step: st.step - 1, formErr: false })),
+      nextLabel: s.step === 3 ? 'Enviar pedido por WhatsApp' : 'Continuar', nextBg: s.step === 3 ? 'var(--vaho-fuchsia)' : '#000000',
+      next: () => {
+        if (s.step === 2 && (!s.name.trim() || !s.city.trim())) return this.setState({ formErr: true });
+        if (s.step === 3) return this.send();
+        this.setState({ step: s.step + 1, formErr: false });
+      },
+      checkOff: s.checkOn ? 0 : 1, checkDur: reduced ? '0ms' : '900ms',
+      doneRows: s.order ? [['Producto', 'T-shirt oversize'], ['Corte', s.order.fit], ['Talla', s.order.size], ['Color base', s.order.base], ['Color del logo', s.order.logo], ['Cantidad', String(s.order.qty)], ['Envío a', s.order.city]].map(([k, v]) => ({ k, v })) : [],
+      doneTotal: s.order ? s.order.total : '',
+      explore: () => this.close(),
+      ...this.guideVals(),
+    };
+  }
+  unitOpts(key) {
+    return [['in', 'Pulgadas'], ['cm', 'cm']].map(([id, label], i) => { const on = this.state.gUnit[key] === id; return { label, on, sep: i > 0, ink: on ? '#000000' : 'var(--ink-500)', weight: on ? 500 : 400, deco: on ? 'underline' : 'none',
+      pick: () => this.setState(st => ({ gUnit: { ...st.gUnit, [key]: id } })) }; });
+  }
+  profVals() {
+    const s = this.state, chk = this.pCheck(), errs = chk.out, sc = s.gScreen;
+    const show = (k) => !!errs[k] && (s.pTried || s.pTouch[k]);
+    const touch = (k) => () => this.setState(st => ({ pTouch: { ...st.pTouch, [k]: true } }));
+    const seg = (key, opts) => opts.map(([id, label]) => { const on = s[key] === id; return { label, on, bg: on ? '#000000' : 'transparent', ink: on ? '#FFFFFF' : '#000000', pick: () => this.setState({ [key]: id }) }; });
+    const field = (k, id, label, val, setKey, unit, units, unitAria) => ({ id, label, value: val, unit, hasUnits: !!units, units: units || [], unitAria: unitAria || '',
+      set: (e) => this.setState({ [setKey]: e.target.value }), blur: touch(k), bad: show(k), err: errs[k] || '', errId: id + '-err', ring: show(k) ? '#B0136C' : 'transparent' });
+    const ready = s.pH.trim() !== '' && s.pW.trim() !== '';
+    const RF = s.pRes ? FITS.find(f => f.id === s.pRes.fit) : null;
+    return {
+      profRef: this.profRef, profBackRef: this.profBackRef, pUseRef: this.pUseRef,
+      pnlGuideX: sc === 'guide' ? '0%' : '-100%', pnlGuideVis: sc === 'guide' ? 'visible' : 'hidden',
+      pnlProfX: sc === 'guide' ? '100%' : '0%', pnlProfVis: sc === 'guide' ? 'hidden' : 'visible',
+      toGuide: () => this.toScreen('guide'),
+      pForm: sc !== 'result', pResult: sc === 'result',
+      pFields: [
+        field('h', 'perfil-altura', 'Altura', s.pH, 'pH', s.pHU === 'in' ? 'inch' : 'cm', seg('pHU', [['cm', 'cm'], ['in', 'inch']]), 'Unidad de altura'),
+        field('w', 'perfil-peso', 'Peso', s.pW, 'pW', s.pWU, seg('pWU', [['kg', 'kg'], ['st', 'st']]), 'Unidad de peso'),
+        field('a', 'perfil-edad', 'Edad (opcional)', s.pA, 'pA', 'años', null),
+      ],
+      pPrefs: ['Unisex', 'Para hombre', 'Para mujer'].map(label => { const on = s.pPref === label; return { label, on, bg: on ? '#000000' : 'transparent', ink: on ? '#FFFFFF' : '#000000', ring: on ? '#000000' : 'var(--line-200)', pick: () => this.setState({ pPref: label }) }; }),
+      pDisabled: !ready, pBtnBg: ready ? '#000000' : 'var(--ink-300)', pBtnCursor: ready ? 'pointer' : 'not-allowed',
+      pSubmit: (e) => {
+        e.preventDefault();
+        if (!ready) return;
+        const c = this.pCheck();
+        if (Object.keys(c.out).length) return this.setState({ pTried: true });
+        this.setState({ pTried: false, pRes: this.pRecommend(c.hcm, c.wkg) }, () => this.toScreen('result'));
+      },
+      pResText: RF ? RF.name + ' ' + s.pRes.size : '', pResAccent: RF ? RF.accent : 'transparent',
+      pUse: () => { if (!s.pRes) return; this.setState({ fit: s.pRes.fit, size: s.pRes.size }); this.closeGuide(); },
+      pAgain: () => this.toScreen('profile'),
+    };
+  }
+  guideVals() {
+    const s = this.state;
+    const unit = (n, inch) => inch ? fmtIn(n) : String(n);
+    return {
+      openGuide: () => this.openGuide(), closeGuide: () => this.closeGuide(), guideStart: () => this.toScreen('profile'),
+      ...this.profVals(),
+      guideMounted: s.guideMounted, guideRef: this.guideRef, guideCloseRef: this.guideCloseRef,
+      guideShown: s.guideShown ? 1 : 0, guideX: s.guideShown || s.reduced ? '0%' : '100%', guideDur: s.reduced ? '0ms' : '420ms',
+      guideW: s.narrow ? '100%' : 'min(520px, 100%)', guidePad: s.narrow ? '20px' : '32px',
+      guideKey: (e) => {
+        if (e.key === 'Escape') { e.stopPropagation(); return this.closeGuide(); }
+        if (e.key !== 'Tab' || !this.guideRef.current) return;
+        const f = [...this.guideRef.current.querySelectorAll('button:not([disabled]), [tabindex="0"], input, a[href]')].filter(x => x.offsetParent !== null && getComputedStyle(x).visibility !== 'hidden');
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      },
+      necRef: this.necRef, guideTop: () => { const n = this.guideRef.current && this.guideRef.current.querySelector('[data-guide-scroll]'); if (n) n.scrollTo({ top: 0, behavior: this.state.reduced ? 'auto' : 'smooth' }); },
+      howCols: s.narrow ? 'minmax(0,1fr)' : '150px minmax(0,1fr)',
+      howH: [['1', 'Pecho', 'rodeando la parte con más volumen.'], ['2', 'Cintura', 'rodeando la parte más estrecha.'], ['3', 'Cadera', 'rodeando la parte más ancha con los pies juntos.']].map(([n, k, t]) => ({ n, k, t })),
+      policy: ACC[2].items.map(([q, a]) => a),
+      gTables: [...GUIDE_FITS.slice(0, 1), { id: 'conv' }, ...GUIDE_FITS.slice(1)].map(gf => {
+        if (gf.id === 'conv') {
+          const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+          return { name: 'Tabla de conversión internacional', hasDot: false, hasLine: false, hasUnits: false, hasShop: false, accent: 'transparent', line: '', units: [], sizes, span: 6, minW: (160 + 5 * 80) + 'px',
+            tableAria: 'Tabla de conversión internacional de tallas', unitAria: '', shopLabel: '', shop: () => {},
+            groups: [{ hasTitle: false, title: '', rows: CONV.map(([k, v]) => ({ label: k, cells: v.map((n, i) => ({ v: String(n), bg: i % 2 === 0 ? '#FAF8F4' : '#FFFFFF' })) })) }] };
+        }
+        const F = FITS.find(f => f.id === gf.id), M = MEAS[gf.id], sizes = Object.keys(M), inch = s.gUnit[gf.id] === 'in', u = inch ? ' in' : ' cm';
+        const tint = (i) => i % 2 === 0 ? '#FAF8F4' : '#FFFFFF';
+        const row = (label, vals) => ({ label, cells: vals.map((v, i) => ({ v, bg: tint(i) })) });
+        return {
+          hasDot: true, hasLine: true, hasUnits: true, hasShop: true,
+          name: F.name, line: gf.line, accent: F.accent, sizes, span: sizes.length + 1, minW: (160 + sizes.length * 104) + 'px',
+          unitAria: 'Unidad de la tabla ' + F.name, tableAria: 'Tabla de medidas ' + F.name,
+          units: this.unitOpts(gf.id),
+          groups: [
+            { hasTitle: true, title: 'Medidas del cuerpo', rows: Object.entries(BODY).map(([k, arr]) => row(k, sizes.map((z, i) => unit(arr[i][0], inch) + ' - ' + unit(arr[i][1], inch) + u))) },
+            { hasTitle: true, title: 'Medidas de la prenda', rows: [row('Ancho de pecho', sizes.map(z => unit(M[z][0], inch) + u)), row('Largo', sizes.map(z => unit(M[z][1], inch) + u))] },
+          ],
+          shopLabel: 'Comprar ' + F.name + ' →',
+          shop: () => { this.setState(st => ({ fit: gf.id, size: M[st.size] ? st.size : 'L' })); this.closeGuide(); },
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

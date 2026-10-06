@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>VAHO · Un instante, tuyo.</title>
+  <meta name="description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VAHO · Un instante, tuyo.">
+  <meta property="og:description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta property="og:image" content="assets/og-vaho.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VAHO · Un instante, tuyo.">
+  <meta name="twitter:description" content="T-shirts oversize, neceseres y pañoletas con letra hecha a mano. Dos cortes, Petite y Estándar, hechos para tu altura. Madrid.">
+  <meta name="twitter:image" content="assets/og-vaho.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap">
+  <script src="_ds/vaho-design-system-1-66d4ce21-b0b9-4d15-83d1-b3c3fcea3bbe/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap">
+  <script src="./image-slot.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    @keyframes vahoPulse{0%{transform:scale(1);opacity:.6}40%{transform:scale(2.6);opacity:0}100%{transform:scale(2.6);opacity:0}}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{margin:0;background:#FFFFFF;color:#000000;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+    a{color:#000000;text-decoration:none}
+    a:hover{color:var(--ink-500)}
+    *{box-sizing:border-box}
+    #altura{cursor:default}
+    #altura::-webkit-slider-thumb{cursor:pointer}
+    #altura::-moz-range-thumb{cursor:pointer}
+    body{cursor:default}
+    a[href],button:not(:disabled),input[type=checkbox]{cursor:pointer}
+    button:disabled{cursor:default}
+    input[type=range]{cursor:default}
+    input[type=range]::-webkit-slider-thumb{cursor:pointer}
+    input[type=range]::-moz-range-thumb{cursor:pointer}
+    input[type=email]{cursor:text}
+    :focus-visible{outline:2px solid var(--vaho-fuchsia);outline-offset:3px}
+    @keyframes vaho-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  </style>
+</helmet>
+<a href="#top" style="border:1px solid #000000;position:fixed;left:16px;top:16px;z-index:100;padding:12px 18px;background:#000000;color:#FFFFFF;font-size:14px;border-radius:2px;transform:translateY(-200%)" style-focus="transform:translateY(0);color:#FFFFFF">Saltar al contenido</a>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:40;background:{{ headerBg }};transition:background {{ dur }} ease">
+  <div style="padding:clamp(14px,2.4vw,28px) clamp(20px,4vw,56px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <a href="#top" aria-label="VAHO" style="position:relative;display:block;width:clamp(84px,9vw,120px)">
+      <img src="assets/logo-white.png" alt="VAHO" style="width:100%;height:auto;display:block;opacity:{{ logoWhiteOp }};transition:opacity {{ dur }} ease">
+      <img src="assets/logo-black.png" alt="" style="position:absolute;inset:0;width:100%;height:auto;display:block;opacity:{{ logoBlackOp }};transition:opacity {{ dur }} ease">
+    </a>
+    <div style="display:flex;align-items:center;flex-wrap:nowrap;min-width:0;gap:clamp(12px,2.2vw,36px)">
+    <nav style="display:flex;gap:clamp(12px,2.2vw,36px);flex-wrap:nowrap;white-space:nowrap">
+      <sc-for list="{{ navItems }}" as="m" hint-placeholder-count="3">
+        <a href="{{ m.href }}" onMouseEnter="{{ m.enter }}" onMouseLeave="{{ hidePreview }}" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:{{ headerInk }};transition:color {{ dur }} ease;min-height:44px;display:inline-flex;align-items:center">{{ m.label }}</a>
+      </sc-for>
+    </nav>
+    <button type="button" onClick="{{ openSizeHelp }}" aria-label="Ayuda con tu talla" title="Ayuda con tu talla" style="flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid currentColor;border-radius:2px;background:transparent;color:{{ headerInk }};display:grid;place-items:center;transition:color 500ms ease" style-hover="background:#000000;color:#FFFFFF;border-color:#000000">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L13.8 10.2 L21 12 L13.8 13.8 L12 21 L10.2 13.8 L3 12 L10.2 10.2 Z"></path><path d="M19 3 V6 M17.5 4.5 H20.5"></path></svg>
+    </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section ref="{{ heroRef }}" data-screen-label="Hero" onMouseEnter="{{ pauseAuto }}" onMouseLeave="{{ resumeAuto }}" style="position:relative;height:96svh;min-height:560px;overflow:hidden;background:#1A1A19">
+    <sc-for list="{{ slides }}" as="s" hint-placeholder-count="3">
+      <img src="{{ s.bg }}" alt="{{ s.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};display:block;opacity:{{ s.opacity }};transition:opacity {{ slowDur }} ease">
+    </sc-for>
+    <div style="position:absolute;left:0;right:0;top:0;height:28%;background:linear-gradient(to bottom, rgba(0,0,0,.32), rgba(0,0,0,0));pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,0));pointer-events:none"></div>
+    <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(to top, rgba(0,0,0,.4) 0%, rgba(0,0,0,.26) 30%, rgba(0,0,0,.1) 65%, rgba(0,0,0,0) 100%);pointer-events:none;opacity:{{ slide2Op }};transition:opacity {{ dur }} ease"></div>
+
+    <div style="position:absolute;inset:0;background:#FAF8F4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,3.5vh,44px);padding:clamp(76px,11vh,120px) 0 clamp(96px,14vh,150px);opacity:{{ slide1Op }};pointer-events:{{ slide1Pe }};transition:opacity {{ dur }} ease">
+      <div ref="{{ hwTiltRef }}" onMouseMove="{{ hwMove }}" onMouseLeave="{{ hwLeave }}" style="position:relative;width:{{ s2WmW }};flex-shrink:0;display:block;transform-origin:50% 50%;transform-style:preserve-3d;will-change:transform">
+      <div ref="{{ hwDepthRef }}" aria-hidden="true" style="position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none;transition:opacity 500ms ease"><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-19.8px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 58%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-17.6px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 52%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-15.4px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 47%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-13.2px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 41%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-11.0px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 36%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-8.8px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 30%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-6.6px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 25%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-4.4px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 19%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg><svg viewBox="120 120 2350 1050" style="position:absolute;left:0;top:0;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(-2.2px)" fill="none" stroke="color-mix(in srgb, #E91E8F, #000000 14%)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg></div>
+      <svg ref="{{ hwRef }}" viewBox="120 120 2350 1050" role="img" aria-label="VAHO" style="position:relative;width:100%;height:auto;display:block;overflow:visible;transform:translateZ(0)" fill="none" stroke="var(--vaho-fuchsia)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path>
+        <path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path>
+        <path d="M675,870 C850,780 1050,700 1250,625"></path>
+        <path d="M1515,290 C1490,450 1440,700 1430,900"></path>
+        <path d="M1360,630 C1520,560 1700,480 1860,420"></path>
+        <path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path>
+        <path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path>
+      </svg>
+      </div>
+      <p aria-label="Made to fit you, not the other way around." onMouseEnter="{{ mq2Pause }}" onMouseLeave="{{ mq2Resume }}" style="margin:0;width:100%;flex-shrink:0;overflow:hidden;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:{{ mqSize }};line-height:1.08;letter-spacing:-0.01em;color:#1A1A19;-webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)">{{ mq2Track }}</p>
+      <a href="#tienda" style="flex-shrink:0;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;border:1px solid #000000;border-radius:2px;background:transparent;color:#000000;font-size:13px;font-weight:600;letter-spacing:.04em;transition:background 140ms ease, color 140ms ease" style-hover="background:#000000;color:#FFFFFF">Ver la tienda<span aria-hidden="true" style="font-weight:300">→</span></a>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(24px,4vw,56px);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+      <div style="position:relative;flex:1 1 320px;min-height:clamp(150px,18vw,230px)">
+        <div style="position:absolute;left:0;bottom:0;display:flex;flex-direction:column;align-items:flex-start;gap:24px;opacity:{{ slide0Op }};pointer-events:{{ slide0Pe }};transition:opacity {{ dur }} ease">
+          <h1 aria-label="Un instante, tuyo." onMouseEnter="{{ mqPause }}" onMouseLeave="{{ mqResume }}" style="margin:0;width:{{ mqW }};overflow:hidden;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:{{ mqSize }};line-height:1.08;letter-spacing:-0.01em;color:#FFFFFF;text-shadow:0 1px 18px rgba(0,0,0,.18);-webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 90%, transparent 100%);mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 90%, transparent 100%)">{{ mqTrack }}</h1>
+          <a href="#tienda" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid #FFFFFF;border-radius:2px;background:rgba(0,0,0,.12);color:#FFFFFF;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;transition:background 140ms ease, color 140ms ease" style-hover="background:#FFFFFF;color:#000000">Ver T-shirts</a>
+        </div>
+        <div style="position:absolute;left:0;bottom:0;opacity:{{ slide1Op }};pointer-events:{{ slide1Pe }};transition:opacity {{ dur }} ease">
+        </div>
+        <div style="position:absolute;left:0;bottom:0;display:flex;flex-direction:column;align-items:flex-start;gap:24px;opacity:{{ slide2Op }};pointer-events:{{ slide2Pe }};transition:opacity {{ dur }} ease">
+          <p aria-label="Limited drops, made with care." onMouseEnter="{{ mq3Pause }}" onMouseLeave="{{ mq3Resume }}" style="margin:0;width:{{ mqW }};overflow:hidden;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:{{ mqSize }};line-height:1.08;letter-spacing:-0.01em;color:#FFFFFF;text-shadow:0 1px 18px rgba(0,0,0,.22);-webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 90%, transparent 100%);mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 90%, transparent 100%)">{{ mq3Track }}</p>
+          <a href="#wholesale" style="display:inline-flex;align-items:center;min-height:44px;padding:0 0 4px;border-bottom:1px solid #FFFFFF;color:#FFFFFF;font-size:11px;letter-spacing:.18em;text-transform:uppercase" style-hover="color:#FFFFFF;opacity:.7">Wholesale</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:clamp(20px,3vw,40px)">
+        <nav aria-label="Diapositivas" style="display:flex;gap:18px">
+          <sc-for list="{{ slides }}" as="s" hint-placeholder-count="3">
+            <a href="{{ s.href }}" aria-label="{{ s.label }}" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}" onClick="{{ s.click }}" style="position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 0 2px;font-size:12px;letter-spacing:.14em;color:{{ heroInk }};opacity:{{ s.numOp }};border-bottom:{{ s.numLine }};transition:opacity {{ dur }} ease" style-hover="color:{{ heroInk }}">{{ s.num }}<span aria-hidden="true" style="position:absolute;left:50%;bottom:calc(100% + 8px);width:64px;height:80px;overflow:hidden;border:1px solid var(--line-200);border-radius:2px;background:#FAF8F4;pointer-events:none;opacity:{{ s.thOp }};transform:translate(-50%,{{ s.thY }});transition:opacity {{ thumbDur }} ease, transform {{ thumbDur }} ease;display:{{ previewDisplay }}">
+                <sc-if value="{{ s.thImg }}" hint-placeholder-val="{{ true }}"><img src="{{ s.bg }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};display:block"></sc-if>
+                <sc-if value="{{ s.thWm }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;display:grid;place-items:center"><svg viewBox="120 120 2350 1050" style="width:60%;height:auto;display:block;overflow:visible" fill="none" stroke="var(--vaho-fuchsia)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"><path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path><path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path><path d="M675,870 C850,780 1050,700 1250,625"></path><path d="M1515,290 C1490,450 1440,700 1430,900"></path><path d="M1360,630 C1520,560 1700,480 1860,420"></path><path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path><path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path></svg></span></sc-if>
+              </span></a>
+          </sc-for>
+        </nav>
+        <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:{{ heroInk }};opacity:.8;transition:color {{ dur }} ease">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <section ref="{{ trustRef }}" data-screen-label="Confianza" aria-label="Por qué VAHO" style="background:#FAF8F4;border-bottom:1px solid var(--line-200)">
+    <ul style="list-style:none;margin:0;padding:clamp(40px,5vw,64px) clamp(20px,4vw,56px);display:grid;grid-template-columns:{{ trustCols }};row-gap:32px">
+      <li style="display:flex;align-items:center;gap:16px;padding:0 clamp(16px,2.4vw,32px);border-left:{{ trustDiv0 }};min-width:0">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto">
+          <path d="M3 7 H14 V16 H3 Z" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 0ms"></path>
+          <path d="M14 10 H18 L21 13 V16 H14" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 0ms"></path>
+          <path d="M7 18.5 A1.5 1.5 0 1 0 7 15.5 A1.5 1.5 0 1 0 7 18.5 M17 18.5 A1.5 1.5 0 1 0 17 15.5 A1.5 1.5 0 1 0 17 18.5" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 0ms"></path>
+        </svg>
+        <span style="font-size:14px;line-height:1.4;color:#000000;text-wrap:pretty">Envío coordinado por WhatsApp</span>
+      </li>
+      <li style="display:flex;align-items:center;gap:16px;padding:0 clamp(16px,2.4vw,32px);border-left:{{ trustDiv1 }};min-width:0">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto">
+          <path d="M4 10 C5 6 9 3.5 13 4 C16.5 4.5 19 7 19.5 10" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 150ms"></path>
+          <path d="M19.5 5.5 V10 H15" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 150ms"></path>
+          <path d="M20 14 C19 18 15 20.5 11 20 C7.5 19.5 5 17 4.5 14 M4.5 18.5 V14 H9" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 150ms"></path>
+        </svg>
+        <span style="font-size:14px;line-height:1.4;color:#000000;text-wrap:pretty">30 días para cambios y devoluciones</span>
+      </li>
+      <li style="display:flex;align-items:center;gap:16px;padding:0 clamp(16px,2.4vw,32px);border-left:{{ trustDiv2 }};min-width:0">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto">
+          <path d="M7 3 V21" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 300ms"></path>
+          <path d="M7 6 H10 M7 10 H11 M7 14 H10 M7 18 H11" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 300ms"></path>
+          <path d="M15 8 L17 5 L19 8 M17 5 V19 M15 16 L17 19 L19 16" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 300ms"></path>
+        </svg>
+        <span style="font-size:14px;line-height:1.4;color:#000000;text-wrap:pretty">Hechas para tu altura: Petite y Estándar</span>
+      </li>
+      <li style="display:flex;align-items:center;gap:16px;padding:0 clamp(16px,2.4vw,32px);border-left:{{ trustDiv3 }};min-width:0">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto">
+          <path d="M6 11 H18 V20 H6 Z" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 450ms"></path>
+          <path d="M8.5 11 V8 C8.5 5.8 10 4.5 12 4.5 C14 4.5 15.5 5.8 15.5 8 V11" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 450ms"></path>
+          <path d="M12 14.5 V16.5" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:{{ trustOff }};transition:stroke-dashoffset {{ trustDur }} cubic-bezier(.2,.7,.2,1) 450ms"></path>
+        </svg>
+        <span style="font-size:14px;line-height:1.4;color:#000000;text-wrap:pretty">Pago seguro, confirmado por WhatsApp</span>
+      </li>
+    </ul>
+  </section>
+
+  <section data-screen-label="Galería" aria-label="VAHO en el día a día" style="padding:clamp(64px,9vw,120px) 0 clamp(96px,12vw,160px);display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)">
+    <p style="margin:0 24px;text-align:center;font-family:'Cormorant Garamond', serif;font-style:italic;font-weight:300;font-size:clamp(20px,2vw,26px);color:var(--ink-700)">Soft, loose, and completely yours.</p>
+    <div ref="{{ galleryRef }}" style="display:flex;align-items:stretch;gap:8px;scroll-snap-type:{{ gSnap }};scroll-padding:0 20px;overflow-x:auto;padding:0 clamp(20px,4vw,56px);scrollbar-width:none;cursor:{{ galleryCursor }};user-select:none;-webkit-user-select:none;overscroll-behavior-x:contain">
+      <img src="assets/lifestyle-mostrador.png" alt="T-shirt blanca VAHO con logo naranja en un mostrador" draggable="false" style="flex:0 0 auto;width:{{ gItemW }};height:{{ gH }};object-fit:cover;object-position:62% 30%;display:block;scroll-snap-align:center">
+      <div style="flex:0 0 auto;width:{{ gWideW }};height:{{ gH }};scroll-snap-align:center">
+        <image-slot id="lifestyle-azotea" shape="rect" fit="cover" placeholder="lifestyle-azotea"></image-slot>
+      </div>
+      <sc-for list="{{ gallery }}" as="ph" hint-placeholder-count="2">
+        <img src="{{ ph.src }}" alt="{{ ph.alt }}" draggable="false" style="flex:0 0 auto;width:{{ gItemW }};height:{{ gH }};object-fit:cover;object-position:{{ ph.pos }};display:block;scroll-snap-align:center">
+      </sc-for>
+    </div>
+    <sc-if value="{{ isTouch }}" hint-placeholder-val="{{ false }}">
+      <span style="margin:0 clamp(20px,4vw,56px);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Swipe</span>
+    </sc-if>
+  </section>
+
+  <section id="tienda" data-screen-label="Tienda" style="border-top:1px solid var(--line-200);scroll-margin-top:60px;background:#FAF8F4">
+    <div style="padding:clamp(56px,8vw,120px) clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px);align-items:center">
+      <div style="flex:3 1 560px;min-width:0;position:relative;display:flex;flex-direction:column;gap:16px">
+      <div ref="{{ teePhotoRef }}" onMouseEnter="{{ teeEnter }}" onMouseLeave="{{ teeLeave }}" onClick="{{ teeTap }}" onTouchStart="{{ teeTouchStart }}" onTouchEnd="{{ teeTouchEnd }}" style="cursor:pointer;position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#FAF8F4;touch-action:pan-y">
+        <img src="{{ teeSrc }}" alt="{{ teeAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:multiply">
+        <img src="{{ logoSrc }}" alt="{{ logoAlt }}" style="position:absolute;top:27%;left:55%;width:15%;height:auto;pointer-events:none">
+        <div aria-hidden="true" style="position:absolute;inset:0;opacity:{{ teeLifeOpacity }};transition:opacity {{ teeSwapDur }} ease;pointer-events:none">
+          <img src="{{ teeLifeSrc }}" alt="{{ teeLifeAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+          <img src="{{ logoSrc }}" alt="" style="position:absolute;top:20.5%;left:57.5%;width:11%;height:auto">
+        </div>
+        <sc-if value="{{ teeTouch }}" hint-placeholder-val="{{ false }}">
+          <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:8px;pointer-events:none">
+            <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ teeDot0 }};transition:background {{ teeSwapDur }} ease"></span>
+            <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ teeDot1 }};transition:background {{ teeSwapDur }} ease"></span>
+          </div>
+        </sc-if>
+        <svg aria-hidden="true" viewBox="{{ careVB }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:{{ careDeskDisplay }}">
+          <path d="{{ carePath }}" fill="none" pathLength="1" stroke="var(--vaho-fuchsia)" stroke-width="1" vector-effect="non-scaling-stroke" style="stroke-dasharray:1;stroke-dashoffset:{{ careDash }};transition:stroke-dashoffset {{ careLineDur }} ease-out"></path>
+        </svg>
+        <div ref="{{ careDeskRef }}" aria-hidden="{{ careHidden }}" onMouseEnter="{{ careIn }}" onMouseLeave="{{ careOut }}" onClick="{{ careStop }}" style="position:absolute;right:1.5%;top:1.5%;z-index:2;pointer-events:{{ carePe }};display:{{ careDeskDisplay }}">
+          <div style="width:190px;box-sizing:border-box;padding:12px;background:#FFFFFF;border:1px solid var(--line-200);border-radius:2px;display:flex;flex-direction:column;gap:10px;cursor:default;opacity:{{ careOp }};transform:scale({{ careScale }});transform-origin:0 50%;transition:opacity {{ careDur }} ease-out {{ careCircleDelay }}, transform {{ careDur }} ease-out {{ careCircleDelay }}">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">Cuidado</span>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD0 }}, transform {{ careDur }} ease-out {{ careD0 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M3 8 L5.5 19 H18.5 L21 8"></path><path d="M3 8 C5 6.5 7 6.5 9 8 S13 9.5 15 8 S19 6.5 21 8"></path><text x="12" y="16.6" font-size="6.5" text-anchor="middle" fill="currentColor" stroke="none" font-family="Inter, sans-serif">30</text></svg>Lavar en frío, 30 °</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD1 }}, transform {{ careDur }} ease-out {{ careD1 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><rect x="3.5" y="3.5" width="17" height="17" rx="1"></rect><circle cx="12" cy="12" r="5.5"></circle><path d="M4 4 L20 20 M20 4 L4 20"></path></svg>No usar secadora</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD2 }}, transform {{ careDur }} ease-out {{ careD2 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M3.5 17.5 H20.5 L19 10.5 H10 C6.5 10.5 3.5 13.5 3.5 17.5 Z"></path><path d="M10 10.5 V7.5 H18.5"></path></svg>Planchar del revés</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD3 }}, transform {{ careDur }} ease-out {{ careD3 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="8.5" r="3"></circle><circle cx="8.5" cy="12.5" r="3"></circle><circle cx="15.5" cy="12.5" r="3"></circle><path d="M12 15.5 V21"></path></svg>100 % algodón</li>
+            </ul>
+          </div>
+        </div>
+        <button ref="{{ careDotRef }}" type="button" aria-label="Ver cuidados de la prenda" aria-expanded="{{ careVis }}" onMouseEnter="{{ careIn }}" onMouseLeave="{{ careOut }}" onFocus="{{ careFocus }}" onBlur="{{ careOut }}" onClick="{{ careTap }}" onKeyDown="{{ careKey }}" style="position:absolute;left:50%;top:10.5%;z-index:3;width:44px;height:44px;margin:-22px 0 0 -22px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer">
+          <span aria-hidden="true" style="grid-area:1/1;width:10px;height:10px;border-radius:50%;border:1px solid var(--vaho-fuchsia);animation:{{ pulseAnim }}"></span>
+          <span aria-hidden="true" style="grid-area:1/1;width:10px;height:10px;border-radius:50%;background:var(--vaho-fuchsia)"></span>
+        </button>
+      </div>
+      <sc-if value="{{ careMobOpen }}" hint-placeholder-val="{{ false }}">
+        <div ref="{{ careMobRef }}" style="position:absolute;left:50%;top:{{ careMobTop }};transform:translateX(-50%);max-width:calc(100vw - 32px);z-index:5;display:flex;flex-direction:column;align-items:center">
+          <div style="width:170px;box-sizing:border-box;padding:12px;background:#FFFFFF;border:1px solid var(--line-200);border-radius:2px;display:flex;flex-direction:column;gap:10px;cursor:default;opacity:{{ careOp }};transform:scale({{ careScale }});transform-origin:0 50%;transition:opacity {{ careDur }} ease-out {{ careCircleDelay }}, transform {{ careDur }} ease-out {{ careCircleDelay }}">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">Cuidado</span>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD0 }}, transform {{ careDur }} ease-out {{ careD0 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M3 8 L5.5 19 H18.5 L21 8"></path><path d="M3 8 C5 6.5 7 6.5 9 8 S13 9.5 15 8 S19 6.5 21 8"></path><text x="12" y="16.6" font-size="6.5" text-anchor="middle" fill="currentColor" stroke="none" font-family="Inter, sans-serif">30</text></svg>Lavar en frío, 30 °</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD1 }}, transform {{ careDur }} ease-out {{ careD1 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><rect x="3.5" y="3.5" width="17" height="17" rx="1"></rect><circle cx="12" cy="12" r="5.5"></circle><path d="M4 4 L20 20 M20 4 L4 20"></path></svg>No usar secadora</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD2 }}, transform {{ careDur }} ease-out {{ careD2 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M3.5 17.5 H20.5 L19 10.5 H10 C6.5 10.5 3.5 13.5 3.5 17.5 Z"></path><path d="M10 10.5 V7.5 H18.5"></path></svg>Planchar del revés</li>
+              <li style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.3;color:#000000;opacity:{{ careRowOp }};transform:translateY({{ careRowY }});transition:opacity {{ careDur }} ease-out {{ careD3 }}, transform {{ careDur }} ease-out {{ careD3 }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><circle cx="12" cy="8.5" r="3"></circle><circle cx="8.5" cy="12.5" r="3"></circle><circle cx="15.5" cy="12.5" r="3"></circle><path d="M12 15.5 V21"></path></svg>100 % algodón</li>
+            </ul>
+          </div>
+          <span aria-hidden="true" style="width:1px;height:24px;background:var(--vaho-fuchsia);transform:scaleY({{ careLineScale }});transform-origin:bottom;transition:transform {{ careLineDur }} ease-out"></span>
+        </div>
+      </sc-if>
+      <div style="display:flex;align-items:flex-end;justify-content:center;gap:6px">
+        <svg width="40" height="36" viewBox="0 0 40 36" fill="none" stroke="var(--vaho-fuchsia)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M36 30 C22 30 11 23 9 5"></path><path d="M3.5 10.5 L9 4.5 L14.5 10"></path></svg>
+        <span style="font-family:'Caveat', cursive;font-size:24px;line-height:1;color:var(--vaho-fuchsia)">cuídala y te dura años ♡</span>
+      </div>
+      </div>
+
+      <div style="flex:2 1 320px;min-width:0;display:flex;flex-direction:column;gap:28px;max-width:460px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <img src="assets/logo-black.png" alt="VAHO" style="width:56px;height:auto;display:block">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Tienda</span>
+          </div>
+          <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1;letter-spacing:-0.01em">T-shirt oversize</h2>
+          <p style="margin:0;font-family:'Cormorant Garamond', serif;font-style:italic;font-weight:300;font-size:clamp(19px,1.8vw,23px);line-height:1.3;color:var(--ink-700);text-wrap:pretty">Made to fit you, not the other way around.</p>
+          <p style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:400;font-size:26px">20 €</p>
+        </div>
+
+        <div aria-hidden="true" style="height:1px;background:var(--line-200)"></div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Corte · <span style="color:#000000">{{ shopFitLabel }}</span></span>
+          <div role="radiogroup" aria-label="Corte" style="display:flex;gap:10px;flex-wrap:wrap">
+            <sc-for list="{{ shopFits }}" as="sf" hint-placeholder-count="2">
+              <button type="button" role="radio" aria-checked="{{ sf.on }}" onClick="{{ sf.pick }}" style="height:44px;padding:0 20px;border:1px solid {{ sf.border }};border-radius:2px;background:{{ sf.bg }};color:#000000;display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:border-color 200ms ease, background 200ms ease" style-hover="border-color:#1A1A19" style-active="transform:scale(.98)">
+                <span style="width:8px;height:8px;border-radius:50%;background:{{ sf.color }};flex:0 0 auto"></span><span style="font-family:'Cormorant Garamond', serif;font-weight:400;font-size:20px;line-height:1">{{ sf.name }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <p style="margin:0;font-family:var(--font-sans);font-size:13px;line-height:1.4;color:var(--ink-500)">Petite hasta 1,60 m · Estándar desde 1,60 m.</p>
+        </div>
+
+        <div aria-hidden="true" style="height:1px;background:var(--line-200)"></div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">T-shirt · <span style="color:#000000">{{ teeLabel }}</span></span>
+          <div role="radiogroup" aria-label="Color de T-shirt" style="display:flex;gap:6px;flex-wrap:wrap">
+            <sc-for list="{{ teeOptions }}" as="o" hint-placeholder-count="3">
+              <button role="radio" aria-checked="{{ o.on }}" aria-label="{{ o.label }}" title="{{ o.label }}" onClick="{{ o.pick }}" style="width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:pointer">
+                <span style="width:18px;height:18px;border-radius:50%;background:{{ o.color }};border:1px solid var(--ink-300);box-shadow:{{ o.ring }};transition:box-shadow {{ dur }} ease"></span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Logo · <span style="color:#000000">{{ logoLabel }}</span></span>
+          <div role="radiogroup" aria-label="Color de logo" style="display:flex;gap:6px;flex-wrap:wrap">
+            <sc-for list="{{ logoOptions }}" as="o" hint-placeholder-count="5">
+              <button role="radio" aria-checked="{{ o.on }}" aria-label="{{ o.label }}" aria-disabled="{{ o.disabled }}" disabled="{{ o.disabled }}" title="{{ o.title }}" onClick="{{ o.pick }}" style="width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:{{ o.cursor }};opacity:{{ o.opacity }}">
+                <span style="width:18px;height:18px;border-radius:50%;background:{{ o.color }};border:1px solid var(--ink-300);box-shadow:{{ o.ring }};transition:box-shadow {{ dur }} ease"></span>
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size:13px;color:var(--ink-500)">Las combinaciones poco legibles no están disponibles.</span>
+        </div>
+
+        <div aria-hidden="true" style="height:1px;background:var(--line-200)"></div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <button type="button" onClick="{{ openProduct }}" style="min-height:48px;padding:0 30px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans);cursor:pointer;transition:background 180ms ease, border-color 180ms ease" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Ver detalles y pedir</button>
+          <button type="button" onClick="{{ orderTee }}" style="min-height:48px;padding:0 26px;border:1px solid #000000;border-radius:2px;background:transparent;color:#000000;font:600 14px/1 var(--font-sans);cursor:pointer;transition:background 180ms ease, border-color 180ms ease, color 180ms ease" style-hover="background:#000000;border-color:#000000;color:#FFFFFF" style-active="transform:scale(.98)">Pedir por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="complementos" data-screen-label="Complementos" style="background:#FAF8F4;scroll-margin-top:60px;padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px);display:flex;flex-direction:column;gap:clamp(36px,5vw,64px)">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">Para acompañar tu T-shirt</span>
+      <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(36px,4.5vw,60px);line-height:1;letter-spacing:-0.01em">Complementos</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(64px,9vw,140px)">
+      <article style="display:grid;grid-template-columns:{{ acc.cols0 }};gap:clamp(28px,5vw,80px);align-items:{{ acc.align0 }};padding-top:{{ acc.padTop0 }}">
+        <div onMouseEnter="{{ ex0.enter }}" onMouseLeave="{{ ex0.leave }}" onClick="{{ ex0.tap }}" onTouchStart="{{ ex0.touchStart }}" onTouchEnd="{{ ex0.touchEnd }}" style="touch-action:pan-y;order:{{ acc.imgOrder0 }};position:relative;width:100%;max-width:{{ acc.imgMax0 }};justify-self:{{ acc.imgJustify0 }};aspect-ratio:{{ acc.ratio0 }};overflow:hidden;background:#F2EEE6">
+          <img src="{{ ex0.src }}" alt="{{ ex0.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+          <img src="{{ ex0.life }}" alt="{{ ex0.lifeAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14%;box-sizing:border-box;background:#F2EEE6;display:block;opacity:{{ ex0.lifeOp }};transition:opacity {{ teeSwapDur }} ease;pointer-events:none">
+          <sc-if value="{{ teeTouch }}" hint-placeholder-val="{{ false }}">
+            <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:8px;pointer-events:none">
+              <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ ex0.dot0 }};transition:background {{ teeSwapDur }} ease"></span>
+              <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ ex0.dot1 }};transition:background {{ teeSwapDur }} ease"></span>
+            </div>
+          </sc-if>
+        </div>
+        <div style="order:{{ acc.txtOrder0 }};display:flex;flex-direction:column;gap:20px;max-width:420px;justify-self:{{ acc.txtJustify0 }}">
+          <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">{{ ex0.kicker }}</span>
+          <h3 onMouseEnter="{{ ex0.previewIn }}" onMouseLeave="{{ hidePreview }}" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,4.6vw,64px);line-height:1;letter-spacing:-0.01em">{{ ex0.name }}</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ ex0.line }}</p>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:16px 0;border-top:1px solid var(--line-200);border-bottom:1px solid var(--line-200)">
+            <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">Medidas</span>
+            <span style="font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;color:{{ ex0.dimInk }}">{{ ex0.dims }}</span>
+            <sc-if value="{{ ex0.hasInches }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ ex0.inches }}</span></sc-if>
+            <span style="font-size:13px;color:var(--ink-500)">Talla única</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="font-family:'Cormorant Garamond', serif;font-size:28px;font-weight:400;line-height:1;font-variant-numeric:lining-nums">{{ ex0.price }}</span>
+            <span role="list" aria-label="Colores disponibles" style="display:flex;align-items:center;gap:8px">
+              <sc-for list="{{ ex0.swatches }}" as="sw" hint-placeholder-count="1">
+                <span role="listitem" title="{{ sw.label }}" aria-label="{{ sw.label }}" style="width:16px;height:16px;border-radius:50%;background:{{ sw.bg }};border:1px solid var(--ink-300)"></span>
+              </sc-for>
+              <span style="font-size:12px;color:var(--ink-500)">{{ ex0.colorNote }}</span>
+            </span>
+          </div>
+          <button onClick="{{ ex0.order }}" style="align-self:flex-start;min-height:44px;padding:0 0 4px;border:0;border-bottom:1px solid #000000;background:transparent;color:#000000;font:400 11px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--ink-500);border-color:var(--ink-500)">Pedir por WhatsApp</button>
+        </div>
+      </article>
+      <div aria-hidden="true" style="height:1px;background:var(--line-200)"></div>
+      <article style="display:grid;grid-template-columns:{{ acc.cols1 }};gap:clamp(28px,5vw,80px);align-items:{{ acc.align1 }};padding-top:{{ acc.padTop1 }}">
+        <div onMouseEnter="{{ ex1.enter }}" onMouseLeave="{{ ex1.leave }}" onClick="{{ ex1.tap }}" onTouchStart="{{ ex1.touchStart }}" onTouchEnd="{{ ex1.touchEnd }}" style="touch-action:pan-y;order:{{ acc.imgOrder1 }};position:relative;width:100%;max-width:{{ acc.imgMax1 }};justify-self:{{ acc.imgJustify1 }};aspect-ratio:{{ acc.ratio1 }};overflow:hidden;background:#F2EEE6">
+          <img src="{{ ex1.src }}" alt="{{ ex1.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+          <img src="{{ ex1.life }}" alt="{{ ex1.lifeAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14%;box-sizing:border-box;background:#F2EEE6;display:block;opacity:{{ ex1.lifeOp }};transition:opacity {{ teeSwapDur }} ease;pointer-events:none">
+          <sc-if value="{{ teeTouch }}" hint-placeholder-val="{{ false }}">
+            <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:8px;pointer-events:none">
+              <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ ex1.dot0 }};transition:background {{ teeSwapDur }} ease"></span>
+              <span style="width:6px;height:6px;border-radius:50%;border:1px solid #000000;background:{{ ex1.dot1 }};transition:background {{ teeSwapDur }} ease"></span>
+            </div>
+          </sc-if>
+        </div>
+        <div style="order:{{ acc.txtOrder1 }};display:flex;flex-direction:column;gap:20px;max-width:420px;justify-self:{{ acc.txtJustify1 }}">
+          <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">{{ ex1.kicker }}</span>
+          <h3 onMouseEnter="{{ ex1.previewIn }}" onMouseLeave="{{ hidePreview }}" style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,4.6vw,64px);line-height:1;letter-spacing:-0.01em">{{ ex1.name }}</h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ ex1.line }}</p>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:16px 0;border-top:1px solid var(--line-200);border-bottom:1px solid var(--line-200)">
+            <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-500)">Medidas</span>
+            <span style="font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;color:{{ ex1.dimInk }}">{{ ex1.dims }}</span>
+            <sc-if value="{{ ex1.hasInches }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ ex1.inches }}</span></sc-if>
+            <span style="font-size:13px;color:var(--ink-500)">Talla única</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="font-family:'Cormorant Garamond', serif;font-size:28px;font-weight:400;line-height:1;font-variant-numeric:lining-nums">{{ ex1.price }}</span>
+            <span role="list" aria-label="Colores disponibles" style="display:flex;align-items:center;gap:8px">
+              <sc-for list="{{ ex1.swatches }}" as="sw" hint-placeholder-count="1">
+                <span role="listitem" title="{{ sw.label }}" aria-label="{{ sw.label }}" style="width:16px;height:16px;border-radius:50%;background:{{ sw.bg }};border:1px solid var(--ink-300)"></span>
+              </sc-for>
+              <span style="font-size:12px;color:var(--ink-500)">{{ ex1.colorNote }}</span>
+            </span>
+          </div>
+          <button onClick="{{ ex1.order }}" style="align-self:flex-start;min-height:44px;padding:0 0 4px;border:0;border-bottom:1px solid #000000;background:transparent;color:#000000;font:400 11px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer" style-hover="color:var(--ink-500);border-color:var(--ink-500)">Pedir por WhatsApp</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="wholesale" data-screen-label="Wholesale" style="border-top:1px solid var(--line-200);scroll-margin-top:60px">
+    <div style="padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,6vw,96px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Wholesale</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.04;letter-spacing:-0.01em;text-wrap:balance">¿Quieres VAHO en tu tienda?</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:28px;padding-top:32px">
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+          <li style="padding:18px 0;border-top:1px solid var(--line-200);font-size:15px;line-height:1.5">Pedido mínimo de 12 unidades por modelo.</li>
+          <li style="padding:18px 0;border-top:1px solid var(--line-200);font-size:15px;line-height:1.5">Envío coordinado contigo por WhatsApp.</li>
+          <li style="padding:18px 0;border-top:1px solid var(--line-200);border-bottom:1px solid var(--line-200);font-size:15px;line-height:1.5">Cada pieza llega en su bolsa VAHO con etiqueta.</li>
+        </ul>
+      </div>
+      <div ref="{{ wfRef }}" style="grid-column:1 / -1;display:flex;flex-direction:column;gap:28px;padding-top:clamp(16px,3vw,40px)">
+        <p style="margin:0;font-size:15px;line-height:1.5;color:#000000">Pedido mínimo de 12 unidades por modelo. Respondemos en 48 horas.</p>
+        <sc-if value="{{ wfForm }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ wfSubmit }}" noValidate="{{ true }}" aria-label="Solicitud wholesale" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px">
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Nombre de la tienda *</span>
+              <input name="store" type="text" autoComplete="organization" placeholder="Tu tienda" value="{{ wf.store.v }}" onChange="{{ wf.store.set }}" onBlur="{{ wf.store.blur }}" aria-invalid="{{ wf.store.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.store.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.store.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.store.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Nombre de contacto *</span>
+              <input name="contact" type="text" autoComplete="name" placeholder="Nombre y apellidos" value="{{ wf.contact.v }}" onChange="{{ wf.contact.set }}" onBlur="{{ wf.contact.blur }}" aria-invalid="{{ wf.contact.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.contact.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.contact.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.contact.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Email *</span>
+              <input name="email" type="email" autoComplete="email" placeholder="nombre@tienda.com" value="{{ wf.email.v }}" onChange="{{ wf.email.set }}" onBlur="{{ wf.email.blur }}" aria-invalid="{{ wf.email.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.email.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.email.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.email.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Teléfono / WhatsApp *</span>
+              <input name="phone" type="tel" autoComplete="tel" placeholder="+34 600 000 000" value="{{ wf.phone.v }}" onChange="{{ wf.phone.set }}" onBlur="{{ wf.phone.blur }}" aria-invalid="{{ wf.phone.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.phone.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.phone.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.phone.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Web o Instagram</span>
+              <input name="web" type="text" autoComplete="url" placeholder="www.tienda.com o @tienda" value="{{ wf.web.v }}" onChange="{{ wf.web.set }}" onBlur="{{ wf.web.blur }}" aria-invalid="{{ wf.web.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.web.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.web.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.web.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">País *</span>
+              <input name="country" type="text" autoComplete="country-name" placeholder="España" value="{{ wf.country.v }}" onChange="{{ wf.country.set }}" onBlur="{{ wf.country.blur }}" aria-invalid="{{ wf.country.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.country.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.country.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.country.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Ciudad *</span>
+              <input name="city" type="text" autoComplete="address-level2" placeholder="Madrid" value="{{ wf.city.v }}" onChange="{{ wf.city.set }}" onBlur="{{ wf.city.blur }}" aria-invalid="{{ wf.city.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.city.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease" style-focus="border-color:#000000">
+              <sc-if value="{{ wf.city.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.city.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Tipo de tienda *</span>
+              <span style="position:relative;display:block">
+                <select name="type" value="{{ wf.type.v }}" onChange="{{ wf.type.set }}" onBlur="{{ wf.type.blur }}" aria-invalid="{{ wf.type.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.type.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease;appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer" style-focus="border-color:#000000">
+                  <option value="">Elige un tipo de tienda</option>
+                  <option value="Boutique">Boutique</option>
+                  <option value="Concept store">Concept store</option>
+                  <option value="Tienda online">Tienda online</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:absolute;right:16px;top:20px;pointer-events:none"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+              <sc-if value="{{ wf.type.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.type.err }}</span></sc-if>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Primer pedido estimado *</span>
+              <span style="position:relative;display:block">
+                <select name="qty" value="{{ wf.qty.v }}" onChange="{{ wf.qty.set }}" onBlur="{{ wf.qty.blur }}" aria-invalid="{{ wf.qty.bad }}" style="min-height:52px;width:100%;padding:0 16px;border:1px solid {{ wf.qty.ring }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none;transition:border-color 160ms ease;appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer" style-focus="border-color:#000000">
+                  <option value="">Elige una cantidad</option>
+                  <option value="12-24 unidades">12-24 unidades</option>
+                  <option value="25-50 unidades">25-50 unidades</option>
+                  <option value="51-100 unidades">51-100 unidades</option>
+                  <option value="100+">100+</option>
+                </select>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:absolute;right:16px;top:20px;pointer-events:none"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+              <sc-if value="{{ wf.qty.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.qty.err }}</span></sc-if>
+            </label>
+            <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Mensaje</span>
+              <textarea name="msg" rows="4" placeholder="Cuéntanos cómo es tu tienda y qué piezas te interesan." value="{{ wf.msg.v }}" onChange="{{ wf.msg.set }}" style="width:100%;padding:14px 16px;border:1px solid var(--ink-300);border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px/1.5 var(--font-sans);outline:none;resize:vertical;cursor:text" style-focus="border-color:#000000"></textarea>
+            </label>
+            <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:8px">
+              <label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;min-height:44px">
+                <input name="agree" type="checkbox" checked="{{ wfAgree }}" onChange="{{ wfToggleAgree }}" aria-invalid="{{ wf.agree.bad }}" style="margin:1px 0 0;width:20px;height:20px;flex:0 0 auto;accent-color:#000000">
+                <span>Acepto que VAHO me contacte sobre venta al por mayor</span>
+              </label>
+              <sc-if value="{{ wf.agree.bad }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.4;color:#B0136C">{{ wf.agree.err }}</span></sc-if>
+            </div>
+            <div style="grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px">
+              <button type="submit" style="min-height:48px;padding:0 30px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans);transition:background 180ms ease" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Enviar solicitud</button>
+              <span style="font-size:13px;color:var(--ink-500)">* Obligatorio</span>
+            </div>
+            <p style="grid-column:1 / -1;margin:0;font-size:13px;line-height:1.5;color:var(--ink-500)">¿Prefieres escribirnos? <button type="button" onClick="{{ askWholesale }}" style="padding:0;border:0;border-bottom:1px solid currentColor;background:transparent;color:#000000;font:400 13px/1.5 var(--font-sans);cursor:pointer" style-hover="color:var(--ink-500)">WhatsApp</button></p>
+          </form>
+        </sc-if>
+        <sc-if value="{{ wfDone }}" hint-placeholder-val="{{ false }}">
+          <div role="status" aria-live="polite" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start;padding:clamp(28px,4vw,48px);background:#FAF8F4;border-radius:2px">
+            <div style="width:min(240px,100%)"><svg aria-hidden="true" viewBox="0 0 240 10" preserveAspectRatio="none" style="display:block;width:100%;height:10px;overflow:visible"><path d="M0 5 Q7.5 1 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5 T135 5 T150 5 T165 5 T180 5 T195 5 T210 5 T225 5 T240 5" fill="none" stroke="#E91E8F" stroke-width="1" stroke-linecap="round" vector-effect="non-scaling-stroke"></path></svg></div>
+            <h3 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(32px,3.6vw,48px);line-height:1.05">Gracias.</h3>
+            <p style="margin:0;font-size:15px;line-height:1.55;max-width:560px;text-wrap:pretty">Hemos preparado tu solicitud en WhatsApp: pulsa enviar y te respondemos en 48 horas.</p>
+            <button type="button" onClick="{{ wfReset }}" style="min-height:44px;padding:0 0 4px;border:0;border-bottom:1px solid #000000;background:transparent;color:#000000;font:400 12px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase" style-hover="color:#E91E8F;border-color:#E91E8F">Enviar otra solicitud</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section ref="{{ mundoRef }}" data-screen-label="Mundo VAHO" aria-label="Mundo VAHO" style="position:relative;border-top:1px solid var(--line-200);background:#FAF8F4;overflow:hidden">
+    <div style="padding:clamp(72px,9vw,128px) 0;display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)">
+      <div style="padding:0 clamp(20px,4vw,56px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1;letter-spacing:-0.01em">Mundo VAHO</h2>
+          <p style="margin:0;font-size:16px;line-height:1.5;color:var(--ink-700)">Un instante, tuyo.</p>
+        </div>
+        <a ref="{{ mBtnRef }}" onClick="{{ mEnter }}" href="El%20mundo%20VAHO.dc.html" style="border:1px solid #000000;min-height:48px;padding:0 30px;border-radius:2px;background:#000000;color:#FFFFFF;display:inline-flex;align-items:center;font-size:14px;font-weight:600" style-hover="background:var(--ink-700);border-color:var(--ink-700);color:#FFFFFF">Entrar al Mundo VAHO</a>
+      </div>
+      <div style="position:relative">
+        <div aria-hidden="true" style="position:absolute;left:4%;right:4%;bottom:34px;height:28px;border-radius:50%;background:radial-gradient(closest-side, rgba(0,0,0,.14), rgba(0,0,0,0));filter:blur(6px);pointer-events:none"></div>
+        <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:46px;border-top:1px solid rgba(0,0,0,.08);pointer-events:none"></div>
+        <nav ref="{{ mNavRef }}" onScroll="{{ mThreadUpd }}" aria-label="Pasos del Mundo VAHO" style="position:relative;display:flex;align-items:flex-end;gap:{{ mGap }};padding:0 clamp(20px,4vw,56px) 4px;overflow-x:{{ mOverflow }};scroll-snap-type:{{ mSnap }};scroll-padding:0 24px;scrollbar-width:none">
+        <a href="El%20mundo%20VAHO.dc.html#paso-1" aria-label="Paso 01, Diseño: abrir en Mundo VAHO" style="flex:{{ mItemFlex0 }};width:{{ mItemW0 }};min-width:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;color:#000000;opacity:{{ mundoOp }};transform:translateY({{ mundoX }});transition:opacity {{ mundoDur }} cubic-bezier(.22,1,.36,1) 0ms, transform {{ mundoDur }} cubic-bezier(.22,1,.36,1) 0ms" style-hover="color:var(--vaho-fuchsia)">
+          <span style="position:relative;width:100%;height:{{ mSceneH }};display:flex;align-items:flex-end;justify-content:center">
+            <img src="assets/mundo/01-diseno.png" alt="Escena 01, Diseño" style="position:relative;max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;filter:sepia(.08) contrast(1.02)">
+          </span>
+          <span style="display:flex;gap:8px;align-items:baseline;height:16px;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--vaho-fuchsia);font-weight:600">01</span><span>Diseño</span></span>
+        </a>
+        <a href="El%20mundo%20VAHO.dc.html#paso-2" aria-label="Paso 02, Costura: abrir en Mundo VAHO" style="flex:{{ mItemFlex1 }};width:{{ mItemW1 }};min-width:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;color:#000000;opacity:{{ mundoOp }};transform:translateY({{ mundoX }});transition:opacity {{ mundoDur }} cubic-bezier(.22,1,.36,1) 90ms, transform {{ mundoDur }} cubic-bezier(.22,1,.36,1) 90ms" style-hover="color:var(--vaho-fuchsia)">
+          <span style="position:relative;width:100%;height:{{ mSceneH }};display:flex;align-items:flex-end;justify-content:center">
+            <img src="assets/mundo/02-costura.png" alt="Escena 02, Costura" style="position:relative;max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;filter:sepia(.08) contrast(1.02)">
+          </span>
+          <span style="display:flex;gap:8px;align-items:baseline;height:16px;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--vaho-fuchsia);font-weight:600">02</span><span>Costura</span></span>
+        </a>
+        <a href="El%20mundo%20VAHO.dc.html#paso-3" aria-label="Paso 03, Empaque: abrir en Mundo VAHO" style="flex:{{ mItemFlex2 }};width:{{ mItemW2 }};min-width:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;color:#000000;opacity:{{ mundoOp }};transform:translateY({{ mundoX }});transition:opacity {{ mundoDur }} cubic-bezier(.22,1,.36,1) 180ms, transform {{ mundoDur }} cubic-bezier(.22,1,.36,1) 180ms" style-hover="color:var(--vaho-fuchsia)">
+          <span style="position:relative;width:100%;height:{{ mSceneH }};display:flex;align-items:flex-end;justify-content:center">
+            <img src="assets/mundo/03-empaque.png" alt="Escena 03, Empaque" style="position:relative;max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;filter:sepia(.08) contrast(1.02)">
+          </span>
+          <span style="display:flex;gap:8px;align-items:baseline;height:16px;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--vaho-fuchsia);font-weight:600">03</span><span>Empaque</span></span>
+        </a>
+        <a href="El%20mundo%20VAHO.dc.html#paso-4" aria-label="Paso 04, Reparto: abrir en Mundo VAHO" style="flex:{{ mItemFlex3 }};width:{{ mItemW3 }};min-width:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;color:#000000;opacity:{{ mundoOp }};transform:translateY({{ mundoX }});transition:opacity {{ mundoDur }} cubic-bezier(.22,1,.36,1) 270ms, transform {{ mundoDur }} cubic-bezier(.22,1,.36,1) 270ms" style-hover="color:var(--vaho-fuchsia)">
+          <span style="position:relative;width:100%;height:{{ mSceneH }};display:flex;align-items:flex-end;justify-content:center">
+            <img src="assets/mundo/04-reparto.png" alt="Escena 04, Reparto" style="position:relative;max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;filter:sepia(.08) contrast(1.02)">
+          </span>
+          <span style="display:flex;gap:8px;align-items:baseline;height:16px;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--vaho-fuchsia);font-weight:600">04</span><span>Reparto</span></span>
+        </a>
+        <a href="El%20mundo%20VAHO.dc.html#paso-5" aria-label="Paso 05, Tu puerta: abrir en Mundo VAHO" style="flex:{{ mItemFlex4 }};width:{{ mItemW4 }};min-width:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;color:#000000;opacity:{{ mundoOp }};transform:translateY({{ mundoX }});transition:opacity {{ mundoDur }} cubic-bezier(.22,1,.36,1) 360ms, transform {{ mundoDur }} cubic-bezier(.22,1,.36,1) 360ms" style-hover="color:var(--vaho-fuchsia)">
+          <span style="position:relative;width:100%;height:{{ mSceneH }};display:flex;align-items:flex-end;justify-content:center">
+            <img src="assets/mundo/05-puerta.png" alt="Escena 05, Tu puerta" style="position:relative;max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;filter:sepia(.08) contrast(1.02)">
+          </span>
+          <span style="display:flex;gap:8px;align-items:baseline;height:16px;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="color:var(--vaho-fuchsia);font-weight:600">05</span><span>Tu puerta</span></span>
+        </a>
+        </nav>
+      </div>
+    </div>
+    <svg aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2;opacity:{{ mundoOp }};transition:opacity {{ mundoDur }} ease 360ms">
+      <path ref="{{ mThreadBodyRef }}" d="" fill="var(--vaho-fuchsia)"></path>
+      <path ref="{{ mThreadCapRef }}" d="" fill="var(--vaho-fuchsia)"></path>
+    </svg>
+  </section>
+
+  <section id="faq" data-screen-label="Preguntas frecuentes" style="border-top:1px solid var(--line-200);scroll-margin-top:60px">
+    <div style="padding:clamp(80px,10vw,140px) {{ faqPadX }};display:grid;grid-template-columns:{{ faqCols }};column-gap:48px;row-gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px;position:{{ faqTitlePos }};top:120px">
+        <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">Preguntas frecuentes</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.04;letter-spacing:-0.01em;text-wrap:balance">Preguntas frecuentes</h2>
+      </div>
+      <div ref="{{ faqColRef }}" style="position:relative;min-width:0;padding-left:{{ faqPadL }};display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)">
+        <div ref="{{ faqLogoRef }}" aria-hidden="true" style="position:absolute;left:0;top:0;width:40px;height:40px;pointer-events:none;visibility:hidden;display:{{ faqLogoDisplay }}">
+          <svg viewBox="0 0 40 40" width="40" height="40" style="display:block;overflow:visible" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <g data-cat="0" stroke="var(--vaho-fuchsia)" style="opacity:0">
+              <path d="M14 7 L7 10 L3 17 L8 20 L11 17 L11 34 L29 34 L29 17 L32 20 L37 17 L33 10 L26 7 Q20 12 14 7 Z"></path>
+            </g>
+            <g data-cat="1" stroke="var(--vaho-orange)" style="opacity:0">
+              <path d="M6 15 L22 19 L22 35 L6 31 Z"></path>
+              <path d="M22 19 L34 13 L34 29 L22 35"></path>
+              <path d="M6 15 L18 9 L34 13"></path>
+              <path d="M26 11 L14 17 L14 23"></path>
+            </g>
+            <g data-cat="2" stroke="var(--vaho-purple)" style="opacity:0">
+              <path d="M31 31 C31 19 25 12 9 12"></path>
+              <path d="M14 7 L9 12 L14 17"></path>
+            </g>
+            <g data-cat="3" stroke="#000000" style="opacity:0">
+              <path d="M6 10 H34 Q36 10 36 12 V28 Q36 30 34 30 H6 Q4 30 4 28 V12 Q4 10 6 10 Z"></path>
+              <path d="M4 16 H36"></path>
+              <path d="M21 24 L24.5 27.5 L31 21"></path>
+            </g>
+          </svg>
+        </div>
+        <sc-for list="{{ faqGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-500)">{{ g.title }}</span>
+            <div style="border-bottom:1px solid var(--line-200)">
+              <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="3">
+                <div style="border-top:1px solid var(--line-200);opacity:{{ q.rowOp }};transition:opacity {{ faqDur }} ease">
+                  <button aria-expanded="{{ q.open }}" onClick="{{ q.toggle }}" onMouseEnter="{{ q.enter }}" onMouseLeave="{{ faqLeave }}" style="width:100%;min-height:56px;padding:18px 0;border:0;background:transparent;display:flex;justify-content:space-between;align-items:center;gap:24px;text-align:left;cursor:pointer;color:{{ q.color }};transition:color {{ faqDur }} ease;font:400 15px/1.4 var(--font-sans)">
+                    <span>{{ q.q }}</span>
+                    <span aria-hidden="true" style="position:relative;flex:0 0 12px;width:12px;height:12px;transform:translateX({{ q.nudge }});transition:transform {{ faqDur }} ease">
+                      <span style="position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor"></span>
+                      <span style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:currentColor;opacity:{{ q.vOp }};transition:opacity {{ dur }} ease"></span>
+                    </span>
+                  </button>
+                  <div style="display:grid;grid-template-rows:{{ q.rows }};transition:grid-template-rows {{ dur }} ease">
+                    <div style="overflow:hidden">
+                      <p data-faq-a="1" style="margin:0;padding:0 40px 22px 0;font-size:14px;line-height:1.6;color:var(--ink-700);max-width:620px;text-wrap:pretty">{{ q.a }}</p>
+                      <sc-if value="{{ q.hasMore }}" hint-placeholder-val="{{ false }}">
+                        <a href="{{ q.more }}" target="{{ q.moreTarget }}" rel="noopener" style="display:inline-flex;align-items:center;min-height:44px;margin:-14px 0 10px;font-size:14px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">{{ q.moreLabel }}</a>
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="lista" data-screen-label="Newsletter" style="background:#FAF8F4;border-top:1px solid var(--line-200);padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px)">
+    <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-0.01em;text-wrap:balance">10% de descuento en tu primera compra.</h2>
+        <sc-if value="{{ codeForm }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-family:var(--font-sans);font-size:15px;line-height:1.55;color:var(--ink-500)">Déjanos tu email y te mostramos tu código al instante.</p></sc-if>
+      </div>
+      <sc-if value="{{ codeForm }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ codeSubmit }}" noValidate="{{ true }}" style="width:100%;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <label for="lista-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Correo electrónico</label>
+            <input id="lista-email" type="email" autoComplete="email" placeholder="Tu email" value="{{ codeEmail }}" onChange="{{ setCodeEmail }}" aria-invalid="{{ codeEmailBad }}" style="flex:1 1 220px;min-width:0;min-height:52px;padding:0 16px;border:1px solid {{ codeEmailRing }};border-radius:2px;background:#FFFFFF;color:#000000;font:400 15px var(--font-sans);outline:none" style-focus="border-color:#000000">
+            <button type="submit" style="flex:0 0 auto;min-height:48px;padding:0 26px;border:1px solid #000000;border-radius:2px;background:#000000;color:#FFFFFF;font:600 14px/1 var(--font-sans);cursor:pointer;transition:background 180ms ease" style-hover="background:var(--ink-700);border-color:var(--ink-700)" style-active="transform:scale(.98)">Quiero mi código</button>
+          </div>
+          <sc-if value="{{ codeHasErr }}" hint-placeholder-val="{{ false }}">
+            <p role="alert" style="margin:0;font-size:13px;font-weight:500;line-height:1.4;color:#000000;text-align:left;padding-left:10px;border-left:2px solid var(--vaho-fuchsia)">{{ codeErr }}</p>
+          </sc-if>
+          <p style="margin:0;font-size:12px;line-height:1.6;color:var(--ink-500);text-align:left">Al suscribirte aceptas la <a href="VAHO%20Legal.dc.html#privacidad" style="color:#000000;border-bottom:1px solid #000000" style-hover="color:var(--vaho-fuchsia);border-color:var(--vaho-fuchsia)">Política de privacidad</a>.</p>
+        </form>
+      </sc-if>
+      <sc-if value="{{ codeDone }}" hint-placeholder-val="{{ false }}">
+        <div aria-live="polite" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+          <p style="margin:0;font-size:16px;line-height:1.5">Gracias. Tu código es <strong style="font-weight:600;letter-spacing:.06em">VAHO10</strong>.<sc-if value="{{ codeMailOk }}" hint-placeholder-val="{{ true }}"> Te lo hemos enviado también por email.</sc-if></p>
+          <sc-if value="{{ codeMailFail }}" hint-placeholder-val="{{ false }}"><p style="margin:0;flex-basis:100%;text-align:center;font-size:14px;line-height:1.5">No hemos podido enviar el email, pero tu código es VAHO10.</p></sc-if>
+          <button type="button" onClick="{{ copyCode }}" style="min-height:44px;padding:0 18px;border:1px solid #000000;border-radius:2px;background:transparent;color:#000000;font:600 13px/1 var(--font-sans);cursor:pointer;transition:background 140ms ease, color 140ms ease" style-hover="background:#000000;color:#FFFFFF" style-active="transform:scale(.98)">{{ copyLabel }}</button>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</main>
+
+<footer ref="{{ footerRef }}" style="background:#000000;color:#FFFFFF;display:flow-root;padding-bottom:0px">
+  <div aria-hidden="true" style="position:relative;height:{{ bandH }};min-height:320px;overflow:hidden">
+    <img src="assets/footer-interior-vaho.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:61% 10%;display:block">
+    <div style="position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0))"></div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:0 {{ footPadX }}">
+    <div ref="{{ wmRef }}" style="position:relative;z-index:2;margin-top:{{ wmOverlap }};width:{{ wmW }};pointer-events:none">
+      <svg viewBox="120 120 2350 1050" role="img" aria-label="VAHO" style="width:100%;height:auto;display:block;overflow:visible;opacity:{{ wmOp }};transform:translateY({{ wmY }});transition:opacity {{ wmDur }} ease-out, transform {{ wmDur }} ease-out" fill="none" stroke="#FFFFFF" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path>
+        <path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path>
+        <path d="M675,870 C850,780 1050,700 1250,625"></path>
+        <path d="M1515,290 C1490,450 1440,700 1430,900"></path>
+        <path d="M1360,630 C1520,560 1700,480 1860,420"></path>
+        <path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path>
+        <path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path>
+      </svg>
+    </div>
+  </div>
+  <div style="padding:0 {{ footPadX }}">
+    <div style="margin-top:48px;display:grid;grid-template-columns:{{ footGrid }};column-gap:32px;row-gap:56px;align-items:start">
+      <div style="grid-column:{{ footLeftCol }};min-width:0;display:flex;flex-direction:column;gap:32px">
+        <p style="margin:0;font-family:'Cormorant Garamond', serif;font-weight:300;font-size:clamp(24px,2.4vw,32px);line-height:1.15;color:#FFFFFF">Un instante, tuyo.</p>
+        <form onSubmit="{{ subscribe }}" noValidate="{{ true }}" style="width:100%;display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300)">Newsletter</span>
+        <p style="margin:0;font-size:15px;line-height:1.5;color:#FFFFFF">Novedades y nuevas colecciones.</p>
+        <sc-if value="{{ newsDone }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:14px;line-height:1.6">Gracias. Te hemos enviado un correo para confirmar tu suscripción.</p>
+        </sc-if>
+        <sc-if value="{{ newsForm }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:16px;align-items:center">
+            <label for="news-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tu email</label>
+            <input id="news-email" type="email" required="{{ true }}" placeholder="Tu email" value="{{ newsEmail }}" onChange="{{ setNewsEmail }}" style="flex:1 1 auto;min-width:0;min-height:44px;padding:0;background:transparent;border:0;border-bottom:1px solid #FFFFFF;outline:none;color:#FFFFFF;font:400 15px var(--font-sans)">
+            <button type="submit" style="flex:0 0 auto;min-height:44px;padding:0 22px;border:1px solid #FFFFFF;border-radius:2px;background:transparent;color:#FFFFFF;font:600 11px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;transition:background 140ms ease, color 140ms ease" style-hover="background:#FFFFFF;color:#000000" style-active="transform:scale(.98)">Suscribirme</button>
+          </div>
+          <p style="margin:0;font-size:12px;line-height:1.6;color:var(--ink-300)">Al suscribirte aceptas la <a href="VAHO%20Legal.dc.html#privacidad" style="color:#FFFFFF;border-bottom:1px solid #FFFFFF">Política de privacidad</a>.</p>
+        </sc-if>
+      </form>
+      </div>
+      <div style="grid-column:{{ footRightCol }};min-width:0;display:grid;grid-template-columns:{{ footLinkCols }};justify-content:{{ footLinkJust }};gap:40px 24px;align-items:start">
+        <nav aria-label="Tienda" style="display:flex;flex-direction:column;gap:0;align-items:flex-start;min-width:0">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300);padding-bottom:8px">Tienda</span>
+          <a href="#tienda" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">T-shirts</a>
+          <a href="#complementos" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Complementos</a>
+          <a href="#wholesale" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Wholesale</a>
+          <a href="El%20mundo%20VAHO.dc.html" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">El mundo VAHO</a>
+        </nav>
+        <nav aria-label="Ayuda" style="display:flex;flex-direction:column;gap:0;align-items:flex-start;min-width:0">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300);padding-bottom:8px">Ayuda</span>
+          <a href="#faq" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Preguntas frecuentes</a>
+          <a href="VAHO%20Legal.dc.html#envios" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Envíos y devoluciones</a>
+          <a href="VAHO%20Legal.dc.html#terminos" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Cómo hacer un pedido</a>
+        </nav>
+        <nav aria-label="Legal" style="display:flex;flex-direction:column;gap:0;align-items:flex-start;min-width:0">
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300);padding-bottom:8px">Legal</span>
+          <a href="VAHO%20Legal.dc.html#aviso-legal" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Aviso legal</a>
+          <a href="VAHO%20Legal.dc.html#privacidad" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Política de privacidad</a>
+          <a href="VAHO%20Legal.dc.html#cookies" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Política de cookies</a>
+          <a href="VAHO%20Legal.dc.html#terminos" style="font-size:15px;font-weight:300;line-height:1.4;color:#FFFFFF;min-height:44px;display:inline-flex;align-items:center" style-hover="color:var(--ink-300)">Términos y condiciones</a>
+        </nav>
+      </div>
+    </div>
+    <div style="margin-top:64px;border-top:1px solid rgba(255,255,255,.2);padding:28px 0 32px;display:flex;flex-direction:{{ footDir }};justify-content:space-between;align-items:{{ footAlign }};gap:16px 40px">
+      <span style="font-size:12px;line-height:1.5;color:var(--ink-300)">© 2026 VAHO</span>
+      <div style="display:flex;flex-direction:{{ footDir }};align-items:{{ footAlign }};gap:16px 40px;flex-wrap:wrap">
+        <button onClick="{{ openCookies }}" style="padding:0;border:0;background:transparent;color:var(--ink-300);font:400 12px/1.5 var(--font-sans);text-align:left;min-height:44px" style-hover="color:#FFFFFF">Configurar cookies</button>
+        <div style="display:flex;gap:40px">
+          <a href="https://www.instagram.com/vaho.wear" target="_blank" rel="noopener" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF;line-height:1.5;min-height:44px;display:inline-flex;align-items:center;gap:8px" style-hover="color:var(--ink-300)">Instagram<span style="text-transform:none;letter-spacing:.02em">@vaho.wear</span></a>
+          <a href="https://www.tiktok.com/@vaho.wear" target="_blank" rel="noopener" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#FFFFFF;line-height:1.5;min-height:44px;display:inline-flex;align-items:center;gap:8px" style-hover="color:var(--ink-300)">TikTok<span style="text-transform:none;letter-spacing:.02em">@vaho.wear</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<dc-import name="CookieBanner" hint-size="0px,0px"></dc-import>
+<dc-import name="SizeHelp" hint-size="0px,0px"></dc-import>
+<dc-import name="ProductDetail" hint-size="0px,0px"></dc-import>
+<dc-import name="NewsletterModal" hint-size="0px,0px"></dc-import>
+
+<div ref="{{ followRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;width:56px;max-width:56px;height:70px;overflow:hidden;border:1px solid var(--line-200);border-radius:2px;background:#FAF8F4;pointer-events:none;z-index:60;opacity:{{ previewOp }};transition:opacity {{ thumbDur }} ease;display:{{ previewDisplay }}">
+  <img src="{{ previewSrc }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ previewPos }};transform:scale({{ previewScale }});transform-origin:{{ previewOrigin }};display:block;opacity:{{ previewImgOp }}">
+  <div style="position:absolute;inset:0;background:#FAF8F4;display:grid;place-items:center;opacity:{{ previewWmOp }}">
+    <svg viewBox="120 120 2350 1050" style="width:70%;height:auto;display:block;overflow:visible" fill="none" stroke="var(--vaho-fuchsia)" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M185,570 C200,600 190,700 185,820 C182,950 220,1080 270,1120 C320,1060 420,880 540,690 C640,520 720,410 815,310"></path>
+      <path d="M700,1060 C760,880 860,640 960,480 C1040,350 1100,280 1145,280 C1195,290 1185,420 1180,560 C1170,720 1150,850 1160,950"></path>
+      <path d="M675,870 C850,780 1050,700 1250,625"></path>
+      <path d="M1515,290 C1490,450 1440,700 1430,900"></path>
+      <path d="M1360,630 C1520,560 1700,480 1860,420"></path>
+      <path d="M1810,170 C1780,330 1740,500 1720,650 C1710,750 1720,820 1740,850"></path>
+      <path d="M2105,395 C2010,440 1950,560 1945,680 C1940,780 2020,815 2110,795 C2230,770 2330,640 2380,520 C2420,420 2420,300 2330,250 C2240,215 2140,250 2110,300 C2095,330 2110,360 2105,395"></path>
+    </svg>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TEES = [
+  { id: 'blanca', label: 'Blanca', color: '#FFFFFF', src: 'assets/tshirt-white-plain.png', life: 'assets/model-mostrador-blanca.png' },
+  { id: 'negra', label: 'Negra', color: '#1A1A19', src: 'assets/tshirt-black-plain.png', life: 'assets/model-mostrador-negra.png' },
+  { id: 'crema', label: 'Crema', color: '#EFE9DD', src: 'assets/tshirt-cream-plain.png', life: 'assets/model-mostrador-crema.png' },
+];
+const LOGOS = [
+  { id: 'naranja', label: 'Naranja', color: 'var(--vaho-orange)', src: 'assets/logo-orange.png' },
+  { id: 'fucsia', label: 'Fucsia', color: 'var(--vaho-fuchsia)', src: 'assets/logo-fuchsia.png' },
+  { id: 'morado', label: 'Morado', color: 'var(--vaho-purple)', src: 'assets/logo-purple.png' },
+  { id: 'negro', label: 'Negro', color: 'var(--vaho-black)', src: 'assets/logo-black.png' },
+  { id: 'blanco', label: 'Blanco', color: 'var(--vaho-white)', src: 'assets/logo-white.png' },
+];
+const BLOCKED = { negra: ['negro'], blanca: ['blanco'], crema: ['blanco'] };
+const SLIDE_THUMBS = [{ pos: '71% 56%', scale: 1.4 }, { wordmark: true }, { pos: '78% 62%', scale: 2.4, origin: '85% 45%' }];
+const NEAREST = { negro: 'blanco', blanco: 'negro' };
+const RING = '0 0 0 3px #FFFFFF, 0 0 0 4px #000000';
+const SLIDES = [
+  { num: '01', label: 'Tienda', href: '#tienda', bg: 'assets/hero-balcon.png', pos: '72% 40%', alt: 'Chico con T-shirt blanca VAHO en un balcón de Madrid al atardecer' },
+  { num: '02', label: 'Guía de tallas', href: null, bg: 'assets/lifestyle-calle.png', pos: 'center 35%', alt: 'T-shirt negra VAHO con logo fucsia por la calle' },
+  { num: '03', label: 'Wholesale', href: '#wholesale', bg: 'assets/hero-boutique.png', pos: 'center 35%', alt: 'T-shirts VAHO negra, crudo y blanca colgadas en una boutique luminosa' },
+];
+const FAQ = [
+  { title: 'Materiales y cuidado', items: [
+    ['¿De qué están hechas las T-shirts?', 'De algodón 100 % de gramaje pesado (220 g/m²), con corte oversize unisex y tacto suave desde el primer día.', 'El%20mundo%20VAHO.dc.html#paso-2'],
+  ] },
+  { title: 'Envíos', items: [
+    ['¿Cómo son los envíos?', 'Coordinamos el envío contigo por WhatsApp: te confirmamos coste y plazo según tu dirección antes de que pagues.', 'https://wa.me/34617879057?text=Hola%2C%20quiero%20consultar%20el%20env%C3%ADo%20de%20mi%20pedido', 'Preguntar por WhatsApp →'],
+  ] },
+  { title: 'Devoluciones y cambios', items: [
+    ['¿Cuánto tiempo tengo para devolver?', 'Tienes 30 días desde que recibes tu pedido para devolver o cambiar cualquier prenda.', 'El%20mundo%20VAHO.dc.html#paso-5'],
+  ] },
+  { title: 'Pagos', items: [
+    ['¿Qué métodos de pago aceptáis?', 'Tarjeta de crédito o débito (Visa, Mastercard), PayPal, Apple Pay y Google Pay.', 'El%20mundo%20VAHO.dc.html#paso-3'],
+  ] },
+];
+const SHOP_FITS = [
+  { id: 'petite', name: 'Petite', range: 'Hasta 1,60 m', note: 'Mismo ancho, 6 cm más corta. Tallas XS–L.', color: 'var(--vaho-orange)' },
+  { id: 'estandar', name: 'Estándar', range: 'Desde 1,60 m', note: 'El largo oversize de siempre. Tallas XS–XL.', color: 'var(--vaho-purple)' },
+];
+const WF_EMPTY = { store: '', contact: '', email: '', phone: '', web: '', country: '', city: '', type: '', qty: '', msg: '', agree: false };
+const WF_ORDER = ['store', 'contact', 'email', 'phone', 'country', 'city', 'type', 'qty', 'agree'];
+const wfCheck = (v) => ({
+  store: !v.store.trim() && 'Añade el nombre de tu tienda.',
+  contact: !v.contact.trim() && 'Añade el nombre de la persona con quien hablamos.',
+  email: !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email.trim()) && (v.email.trim() ? 'Este email parece incompleto. Revísalo, por favor.' : 'Añade un email para enviarte nuestros precios.'),
+  phone: (v.phone.replace(/\D/g, '').length < 7) && (v.phone.trim() ? 'Añade un teléfono de al menos 7 dígitos.' : 'Añade un teléfono o un número de WhatsApp.'),
+  web: false,
+  country: !v.country.trim() && 'Añade tu país.',
+  city: !v.city.trim() && 'Añade tu ciudad.',
+  type: !v.type && 'Elige el tipo de tienda.',
+  qty: !v.qty && 'Elige un primer pedido estimado.',
+  msg: false,
+  agree: !v.agree && 'Confirma que podemos contactarte sobre venta al por mayor.',
+});
+const FAQ_COLORS = ['var(--vaho-fuchsia)', 'var(--vaho-orange)', 'var(--vaho-purple)', '#000000'];
+const LOGO_W = 40, LOGO_H = 40, LOGO_GAP = 32;
+const wa = (msg) => { let c = null; try { c = sessionStorage.getItem('vaho-code'); } catch (e) {} if (c && msg.indexOf('Código ' + c) < 0) msg += ' Código ' + c; window.open('https://wa.me/34617879057?text=' + encodeURIComponent(msg), '_blank', 'noopener'); };
+
+const vahoRibbon = (segs) => {
+  const B = (p, t) => { const u = 1 - t; return [u*u*u*p[0][0] + 3*u*u*t*p[1][0] + 3*u*t*t*p[2][0] + t*t*t*p[3][0], u*u*u*p[0][1] + 3*u*u*t*p[1][1] + 3*u*t*t*p[2][1] + t*t*t*p[3][1]]; };
+  const D = (p, t) => { const u = 1 - t; return [3*u*u*(p[1][0]-p[0][0]) + 6*u*t*(p[2][0]-p[1][0]) + 3*t*t*(p[3][0]-p[2][0]), 3*u*u*(p[1][1]-p[0][1]) + 6*u*t*(p[2][1]-p[1][1]) + 3*t*t*(p[3][1]-p[2][1])]; };
+  const f = (n) => n.toFixed(2);
+  let body = '', caps = '';
+  const cap = (pt, w) => { const r = Math.max(0.3, w / 2); caps += 'M' + f(pt[0] - r) + ' ' + f(pt[1]) + 'a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(2*r) + ' 0a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(-2*r) + ' 0Z'; };
+  segs.forEach(s => {
+    const N = 32, L = [], R = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, q = B(s.p, t); let d = D(s.p, t), l = Math.hypot(d[0], d[1]);
+      if (l < 1e-6) { d = D(s.p, Math.min(1, Math.max(0, t + (t < .5 ? .01 : -.01)))); l = Math.hypot(d[0], d[1]) || 1; }
+      const w = (s.w0 + (s.w1 - s.w0) * t) / 2, nx = -d[1] / l * w, ny = d[0] / l * w;
+      L.push(f(q[0] + nx) + ' ' + f(q[1] + ny)); R.push(f(q[0] - nx) + ' ' + f(q[1] - ny));
+    }
+    body += 'M' + L.join('L') + 'L' + R.reverse().join('L') + 'Z';
+    cap(s.p[0], s.w0); cap(s.p[3], s.w1);
+  });
+  return { body, caps };
+};
+const M_EDGES = [
+  { n: [495, 537], R: { x: .996, y: .5289, s: .643, t: 5.9 } },
+  { n: [709, 657], L: { x: .0014, y: .6005, s: 0, t: 6 }, R: { x: .9972, y: .7542, s: -.5, t: 5.4 } },
+  { n: [519, 423], L: { x: .0019, y: .6584, s: -1.321, t: 6 }, R: { x: .9961, y: .7979, s: 1.214, t: 5.1 } },
+  { n: [619, 439], L: { x: .0016, y: .6595, s: -.214, t: 5.9 }, R: { x: .9968, y: .885, s: -.214, t: 5.9 } },
+  { n: [479, 707], L: { x: .0021, y: .8147, s: -.536, t: 6.2 }, E: { x: .4843, y: .6464, s: -.875, t: 6 } },
+];
+class Component extends DCLogic {
+  state = { tee: 'blanca', logo: 'naranja', height: 165, slide: 0, paused: false, teeHover: false, extraHover: -1,
+    preview: null, faqOpen: null, faqHover: null, faqCat: 0, headerDark: false, lcmp: 50, trustIn: false, codeEmail: '', codeConsent: false, codeErr: null, codeDone: false, newsEmail: '', newsDone: false, isTouch: false, reduced: false, wide: true, dragging: false };
+  heroRef = React.createRef(); galleryRef = React.createRef(); footerRef = React.createRef(); followRef = React.createRef(); faqColRef = React.createRef(); fitsRef = React.createRef(); faqLogoRef = React.createRef();
+  mx = 0; my = 0; fx = 0; fy = 0;
+
+  teePhotoRef = React.createRef(); careDotRef = React.createRef(); careDeskRef = React.createRef(); careMobRef = React.createRef();
+  careOpen() {
+    clearTimeout(this.careT); if (this.state.careVis) return;
+    if (this.state.reduced) return this.setState({ careVis: true, careOn: true });
+    this.setState({ careVis: true, careOn: false }, () => requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ careOn: true }))));
+  }
+  careClose() { clearTimeout(this.careT); this.setState({ careVis: false, careOn: false }); }
+  wmRef = React.createRef();
+  wmWatch() {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !window.IntersectionObserver) return this.setState({ wmIn: true });
+    const el = this.wmRef.current, paths = el ? [...el.querySelectorAll('path')] : [];
+    if (!el || paths.length < 7) { this.wmTries = (this.wmTries || 0) + 1; if (this.wmTries > 300) return this.setState({ wmIn: true }); this.wmRetry = setTimeout(() => this.wmWatch(), 50); return; }
+    const lens = paths.map(p => p.getTotalLength()), total = lens.reduce((a, b) => a + b, 0);
+    paths.forEach((p, i) => { p.style.strokeDasharray = lens[i] + ' ' + lens[i]; p.style.strokeDashoffset = lens[i]; p.style.strokeWidth = '14'; });
+    const svg = el.querySelector('svg');
+    const draw = () => {
+      this.setState({ wmIn: true });
+      if (svg) svg.style.filter = 'drop-shadow(0 0 6px rgba(255,255,255,.55))';
+      const T = 2200, t0 = performance.now(), ease = (x) => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / T); let L = ease(p) * total;
+        paths.forEach((path, i) => { const d = Math.max(0, Math.min(lens[i], L)); path.style.strokeDashoffset = lens[i] - d; L -= lens[i]; });
+        if (p < 1) { this.wmRaf = requestAnimationFrame(step); return; }
+        paths.forEach(path => { path.style.transition = 'stroke-width 450ms cubic-bezier(.2,.7,.2,1)'; path.style.strokeWidth = '70'; });
+        if (svg) { svg.style.transition = (svg.style.transition ? svg.style.transition + ', ' : '') + 'filter 300ms ease-out'; svg.style.filter = 'drop-shadow(0 0 0 rgba(255,255,255,0))'; }
+        setTimeout(() => { paths.forEach(path => { path.style.strokeDasharray = ''; path.style.strokeDashoffset = ''; path.style.transition = ''; }); if (svg) svg.style.filter = ''; }, 500);
+      };
+      this.wmRaf = requestAnimationFrame(step);
+    };
+    this.wmIO = new IntersectionObserver(([e]) => { if (e.isIntersecting) { this.wmIO.disconnect(); draw(); } }, { threshold: 0.4 });
+    this.wmIO.observe(el);
+  }
+  hwRef = React.createRef();
+  hwPaths() { const el = this.hwRef.current; return el ? [...el.querySelectorAll('path')] : []; }
+  hwFinal() {
+    this.hwBusy = false;
+    cancelAnimationFrame(this.hwRaf); clearTimeout(this.hwT); clearTimeout(this.hwSafe);
+    try { this.hwPaths().forEach(p => { p.style.transition = ''; p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; p.style.strokeWidth = ''; }); } catch (e) {}
+    this.hwDepth(1);
+    try { if (this.hwTiltOk()) this.hwLoop(); } catch (e) {}
+  }
+  hwDraw() {
+    this.hwFlat(); this.hwHover = null;
+    this.hwFinal();
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const paths = this.hwPaths();
+      if (paths.length < 7 || !paths[0].getTotalLength) return;
+      const lens = paths.map(p => p.getTotalLength()), total = lens.reduce((a, b) => a + b, 0);
+      if (!(total > 0)) return;
+      this.hwSafe = setTimeout(() => this.hwFinal(), 3500); this.hwBusy = true; this.hwDepth(0);
+      paths.forEach((p, i) => { p.style.strokeDasharray = lens[i] + ' ' + lens[i]; p.style.strokeDashoffset = lens[i]; p.style.strokeWidth = '14'; });
+      const T = 2200, t0 = performance.now(), ease = (x) => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      const step = (now) => {
+        try {
+          const k = Math.min(1, (now - t0) / T); let L = ease(k) * total;
+          paths.forEach((p, i) => { const d = Math.max(0, Math.min(lens[i], L)); p.style.strokeDashoffset = lens[i] - d; L -= lens[i]; });
+          if (k < 1) { this.hwRaf = requestAnimationFrame(step); return; }
+          paths.forEach(p => { p.style.transition = 'stroke-width 450ms cubic-bezier(.2,.7,.2,1)'; p.style.strokeWidth = '70'; });
+          this.hwT = setTimeout(() => this.hwFinal(), 500);
+        } catch (e) { this.hwFinal(); }
+      };
+      this.hwRaf = requestAnimationFrame(step);
+    } catch (e) { this.hwFinal(); }
+  }
+  hwTiltRef = React.createRef(); hwDepthRef = React.createRef();
+  hwTiltOk() { try { return !this.hwBusy && !this.state.isTouch && this.state.slide === 1 && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { return false; } }
+  hwDepth(on) { try { const d = this.hwDepthRef.current; if (d) d.style.opacity = on ? '' : '0'; } catch (e) {} }
+  hwLoop() {
+    if (this.hwLoopRaf && performance.now() - (this.hwTick || 0) < 250) return;
+    cancelAnimationFrame(this.hwLoopRaf); this.hwTick = performance.now();
+    this.hwCur = this.hwCur || { rx: 0, ry: 0, s: 1, sx: 0, sy: 0, so: 0 };
+    let last = performance.now();
+    const step = (now) => {
+      this.hwLoopRaf = null; this.hwTick = performance.now();
+      try {
+        const el = this.hwTiltRef.current; if (!el) return;
+        const ok = this.hwTiltOk(), c = this.hwCur, dt = Math.min(64, now - last); last = now;
+        let T = { rx: 0, ry: 0, s: 1, sx: 0, sy: 0, so: 0 };
+        if (ok) {
+          const m = this.hwHover, r = el.getBoundingClientRect();
+          if (m && r.width && r.height) {
+            const nx = Math.max(-1, Math.min(1, ((m.x - r.left) / r.width) * 2 - 1)), ny = Math.max(-1, Math.min(1, ((m.y - r.top) / r.height) * 2 - 1));
+            T = { rx: -ny * 12, ry: nx * 12, s: 1.03, sx: -nx * 16, sy: 14 - ny * 10, so: .24 };
+          } else {
+            const p = (now / 7000) * Math.PI * 2;
+            T = { rx: Math.sin(p + Math.PI / 2) * 3, ry: Math.sin(p) * 5, s: 1, sx: -Math.sin(p) * 6, sy: 10, so: .14 };
+          }
+        }
+        const k = 1 - Math.exp(-dt / 90);
+        Object.keys(T).forEach(key => { c[key] += (T[key] - c[key]) * k; });
+        const settled = !ok && Math.abs(c.rx) < .02 && Math.abs(c.ry) < .02 && Math.abs(c.s - 1) < .001;
+        const d = this.hwDepthRef.current, back = d && d.firstElementChild;
+        if (settled) { el.style.transform = ''; if (back) back.style.filter = ''; this.hwCur = null; return; }
+        el.style.transition = '';
+        el.style.transform = 'perspective(900px) rotateX(' + c.rx.toFixed(2) + 'deg) rotateY(' + c.ry.toFixed(2) + 'deg) scale(' + c.s.toFixed(4) + ')';
+        if (back) back.style.filter = 'drop-shadow(' + c.sx.toFixed(1) + 'px ' + c.sy.toFixed(1) + 'px 18px rgba(233,30,143,' + c.so.toFixed(3) + '))';
+        this.hwLoopRaf = requestAnimationFrame(step);
+      } catch (e) { this.hwFlat(); }
+    };
+    this.hwLoopRaf = requestAnimationFrame(step);
+  }
+  hwMove(e) { this.hwHover = { x: e.clientX, y: e.clientY }; this.hwLoop(); }
+  hwFlat() {
+    try {
+      cancelAnimationFrame(this.hwLoopRaf); this.hwLoopRaf = null; this.hwCur = null;
+      const el = this.hwTiltRef.current; if (el) { el.style.transform = ''; el.style.transition = ''; el.style.filter = ''; }
+      const d = this.hwDepthRef.current, back = d && d.firstElementChild; if (back) back.style.filter = '';
+    } catch (e) {}
+  }
+  hwSync() {
+    const s = this.state.slide; if (s === this.hwPrev) return;
+    const prev = this.hwPrev; this.hwPrev = s;
+    clearTimeout(this.hwStart);
+    if (s === 1) this.hwStart = setTimeout(() => { if (this.state.slide === 1) this.hwDraw(); }, 60);
+    else if (prev === 1) { cancelAnimationFrame(this.hwRaf); this.hwFlat(); this.hwStart = setTimeout(() => this.hwFinal(), 900); }
+  }
+  componentDidUpdate() { try { this.hwSync(); } catch (e) { this.hwFinal(); } }
+  lcmpRef = React.createRef(); lcmpWrapRef = React.createRef();
+  lcmpSet(e) { const el = this.lcmpRef.current; if (!el) return; const r = el.getBoundingClientRect(); cancelAnimationFrame(this.lcmpRaf); this.setState({ lcmp: Math.max(0, Math.min(100, (e.clientX - r.left) / r.width * 100)) }); }
+  lcmpDemo() {
+    const pts = [50, 15, 85, 50], D = 2500, seg = D / 3, t0 = performance.now();
+    const ease = (x) => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+    const step = (now) => {
+      const t = Math.min(D, now - t0), i = Math.min(2, Math.floor(t / seg)), p = ease((t - i * seg) / seg);
+      this.setState({ lcmp: pts[i] + (pts[i + 1] - pts[i]) * p });
+      if (t < D) this.lcmpRaf = requestAnimationFrame(step);
+    };
+    this.lcmpRaf = requestAnimationFrame(step);
+  }
+  trustRef = React.createRef(); mundoRef = React.createRef();
+  mBtnRef = React.createRef(); mNavRef = React.createRef(); mThreadBodyRef = React.createRef(); mThreadCapRef = React.createRef();
+  mThreadGeom() {
+    const sec = this.mundoRef.current, nav = this.mNavRef.current, btn = this.mBtnRef.current;
+    if (!sec || !nav || !btn) return null;
+    const imgs = [...nav.querySelectorAll('img')]; if (imgs.length < 5) return null;
+    const S = sec.getBoundingClientRect(), rel = (x, y) => [x - S.left, y - S.top];
+    const rs = imgs.map(im => im.getBoundingClientRect());
+    if (rs.some(r => r.width < 2 || r.height < 2)) return null;
+    const pt = (i, e) => rel(rs[i].left + e.x * rs[i].width, rs[i].top + e.y * rs[i].height);
+    const wd = (i, e) => e.t * rs[i].height / M_EDGES[i].n[1];
+    const cl = (s) => Math.max(-1.6, Math.min(1.6, s));
+    const segs = [];
+    for (let i = 0; i < 4; i++) {
+      const a = M_EDGES[i].R, b = M_EDGES[i + 1].L, A = pt(i, a), Bp = pt(i + 1, b), dx = Bp[0] - A[0];
+      if (dx < 0.5) continue;
+      const k = dx * 0.45;
+      segs.push({ p: [A, [A[0] + k, A[1] + cl(a.s) * k], [Bp[0] - k, Bp[1] - cl(b.s) * k], Bp], w0: wd(i, a), w1: wd(i + 1, b) });
+    }
+    const w = wd(4, M_EDGES[4].L), bR = btn.getBoundingClientRect();
+    return { segs, end: [bR.left + bR.width / 2, bR.bottom], w };
+  }
+  mThreadDraw() {
+    const g = this.mThreadGeom(), b = this.mThreadBodyRef.current, c = this.mThreadCapRef.current;
+    if (!b || !c) return;
+    if (!g) { b.setAttribute('d', ''); c.setAttribute('d', ''); return; }
+    const o = vahoRibbon(g.segs); b.setAttribute('d', o.body); c.setAttribute('d', o.caps);
+  }
+  mThreadKick(ms) {
+    this.mThreadUntil = Math.max(this.mThreadUntil || 0, performance.now() + (ms || 0));
+    if (this.mThreadRaf) return;
+    const step = () => { this.mThreadRaf = null; this.mThreadDraw(); if (performance.now() < this.mThreadUntil) this.mThreadRaf = requestAnimationFrame(step); };
+    this.mThreadRaf = requestAnimationFrame(step);
+  }
+  componentDidMount() {
+    this.onOrderWa = () => { try { this.renderVals().orderTee(); } catch (e) {} }; window.addEventListener('vaho-order-wa', this.onOrderWa);
+    if (this.state.wfTried) this.setState({ wfTried: false });
+    this.hwWatch = setInterval(() => { try { if (this.hwTiltOk()) this.hwLoop(); } catch (e) {} }, 1000);
+    this.hwPrev = null; try { this.hwSync(); } catch (e) { this.hwFinal(); }
+    this.mThreadOnResize = () => this.mThreadKick(300);
+    window.addEventListener('resize', this.mThreadOnResize); window.addEventListener('load', this.mThreadOnResize);
+    if (window.ResizeObserver && this.mundoRef.current) { this.mThreadRO = new ResizeObserver(() => this.mThreadKick(0)); this.mThreadRO.observe(this.mundoRef.current); }
+    if (this.mNavRef.current) this.mNavRef.current.querySelectorAll('img').forEach(im => im.addEventListener('load', this.mThreadOnResize));
+    this.mThreadOnScroll = () => { const s = this.mundoRef.current; if (!s) return; const r = s.getBoundingClientRect(); if (r.bottom > -50 && r.top < window.innerHeight + 50) this.mThreadKick(0); };
+    window.addEventListener('scroll', this.mThreadOnScroll, { passive: true });
+    this.mThreadKick(1200);
+    if (window.IntersectionObserver && this.mundoRef.current) {
+      this.mundoIO = new IntersectionObserver(([en]) => { if (en.isIntersecting) { this.mundoIO.disconnect(); this.setState({ mundoIn: true }); this.mThreadKick(1400); } }, { threshold: 0.25 });
+      this.mundoIO.observe(this.mundoRef.current);
+    } else this.setState({ mundoIn: true });
+    if (window.IntersectionObserver && this.trustRef.current) {
+      this.trustIO = new IntersectionObserver(([en]) => { if (en.isIntersecting) { this.trustIO.disconnect(); this.setState({ trustIn: true }); } }, { threshold: 0.3 });
+      this.trustIO.observe(this.trustRef.current);
+    } else this.setState({ trustIn: true });
+    if (window.IntersectionObserver && this.lcmpWrapRef.current) {
+      this.lcmpIO = new IntersectionObserver(([en]) => { if (en.isIntersecting) { this.lcmpIO.disconnect(); if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.lcmpDemo(); } }, { threshold: 0.4 });
+      this.lcmpIO.observe(this.lcmpWrapRef.current);
+    }
+    this.wmWatch();
+    if (window.ResizeObserver && this.teePhotoRef.current) { this.teeRO = new ResizeObserver(([e]) => this.setState({ teeW: e.contentRect.width })); this.teeRO.observe(this.teePhotoRef.current); }
+    this.onCareDoc = (e) => { if (!this.state.careVis) return; const inR = (r) => r.current && r.current.contains(e.target); if (!inR(this.careDotRef) && !inR(this.careDeskRef) && !inR(this.careMobRef)) this.careClose(); };
+    document.addEventListener('pointerdown', this.onCareDoc);
+    const mq = (q) => window.matchMedia(q);
+    const sync = () => this.setState({ isTouch: !mq('(hover: hover) and (pointer: fine)').matches, reduced: mq('(prefers-reduced-motion: reduce)').matches, wide: Math.max(window.innerWidth, document.documentElement.clientWidth) >= 900, vw: Math.max(window.innerWidth, document.documentElement.clientWidth) });
+    sync(); this.onResize = sync; window.addEventListener('resize', sync); requestAnimationFrame(sync); setTimeout(sync, 300);
+    this.mqs = ['(hover: hover) and (pointer: fine)', '(prefers-reduced-motion: reduce)', '(min-width: 900px)'].map(q => { const m = mq(q); m.addEventListener('change', sync); return m; });
+    this.timer = setInterval(() => { if (!this.state.paused && !this.state.reduced) this.setState(s => ({ slide: (s.slide + 1) % SLIDES.length })); }, 6000);
+    this.onScroll = () => {
+      const hero = this.heroRef.current, foot = this.footerRef.current; if (!hero) return;
+      const overHero = hero.getBoundingClientRect().bottom > 50;
+      const overFoot = foot && foot.getBoundingClientRect().top < 50;
+      const dark = !(overHero || overFoot);
+      if (dark !== this.state.headerDark) this.setState({ headerDark: dark });
+      if (hero.offsetHeight >= 100 && overHero !== this.state.overHero) this.setState({ overHero });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll();
+    window.addEventListener('load', this.onScroll); window.addEventListener('resize', this.onScroll);
+    [300, 1000, 2500].forEach(ms => setTimeout(() => this.onScroll && this.onScroll(), ms));
+    this.onMove = (e) => { this.mx = e.clientX; this.my = e.clientY; };
+    window.addEventListener('mousemove', this.onMove, { passive: true });
+    const tick = () => {
+      const k = this.state.reduced ? 1 : 0.14;
+      this.fx += (this.mx - this.fx) * k; this.fy += (this.my - this.fy) * k;
+      const el = this.followRef.current, a = this.previewAnchor; if (el && a && this.state.preview) { const r = a.getBoundingClientRect(); let x = r.right + 10; if (x + 56 > window.innerWidth - 8) x = r.left - 10 - 56; el.style.transform = `translate(${Math.round(x)}px, ${Math.round(r.top + r.height / 2 - 35)}px)`; }
+      this.logoTick();
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    const g = this.galleryRef.current;
+    if (g) {
+      this.onWheel = (e) => {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        const max = g.scrollWidth - g.clientWidth;
+        if ((e.deltaY > 0 && g.scrollLeft < max - 1) || (e.deltaY < 0 && g.scrollLeft > 0)) { e.preventDefault(); g.scrollLeft += e.deltaY; }
+      };
+      g.addEventListener('wheel', this.onWheel, { passive: false });
+      this.onDown = (e) => { if (e.pointerType !== 'mouse') return; this.drag = { x: e.clientX, left: g.scrollLeft }; this.setState({ dragging: true }); };
+      this.onDrag = (e) => { if (this.drag) g.scrollLeft = this.drag.left - (e.clientX - this.drag.x); };
+      this.onUp = () => { if (this.drag) { this.drag = null; this.setState({ dragging: false }); } };
+      g.addEventListener('pointerdown', this.onDown);
+      window.addEventListener('pointermove', this.onDrag);
+      window.addEventListener('pointerup', this.onUp);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.hwWatch); cancelAnimationFrame(this.hwLoopRaf);
+    window.removeEventListener('resize', this.mThreadOnResize); window.removeEventListener('load', this.mThreadOnResize); window.removeEventListener('scroll', this.mThreadOnScroll); this.mThreadRO && this.mThreadRO.disconnect(); cancelAnimationFrame(this.mThreadRaf);
+    this.trustIO && this.trustIO.disconnect(); this.mundoIO && this.mundoIO.disconnect();
+    this.lcmpIO && this.lcmpIO.disconnect(); cancelAnimationFrame(this.lcmpRaf);
+    this.wmIO && this.wmIO.disconnect();
+    this.teeRO && this.teeRO.disconnect(); document.removeEventListener('pointerdown', this.onCareDoc); clearTimeout(this.careT);
+    clearInterval(this.timer); cancelAnimationFrame(this.raf); window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll); window.removeEventListener('mousemove', this.onMove);
+    window.removeEventListener('pointermove', this.onDrag); window.removeEventListener('pointerup', this.onUp);
+    const g = this.galleryRef.current; if (g) { g.removeEventListener('wheel', this.onWheel); g.removeEventListener('pointerdown', this.onDown); }
+  }
+
+  pickTee(tee) {
+    this.setState(s => {
+      let logo = s.logo;
+      if ((BLOCKED[tee] || []).includes(logo)) logo = NEAREST[logo] || 'naranja';
+      return { tee, logo };
+    });
+  }
+
+  faqEnter(e, key, gi) {
+    if (this.state.isTouch) return;
+    clearTimeout(this.faqT);
+    this.faqRow = e.currentTarget;
+    const t = this.logoTargetY();
+    if (this.state.faqHover == null || this.state.reduced || this.ly == null) this.ly = t;
+    this.setState({ faqHover: key, faqCat: gi });
+  }
+  centerFit() {
+    const c = this.fitsRef.current; if (!c || this.state.wide) return;
+    const el = c.children[this.state.height <= 160 ? 0 : 1]; if (!el) return;
+    c.scrollTo({ left: el.offsetLeft - c.offsetLeft - (c.clientWidth - el.offsetWidth) / 2, behavior: this.state.reduced ? 'auto' : 'smooth' });
+  }
+  logoTargetY() {
+    const col = this.faqColRef.current, row = this.faqRow; if (!col || !row) return 0;
+    const c = col.getBoundingClientRect(), r = row.getBoundingClientRect();
+    return r.top - c.top + r.height / 2 - LOGO_H / 2;
+  }
+  logoInit() {
+    const root = this.faqLogoRef.current; if (!root || this.layers || root.offsetParent === null) return;
+    this.layers = [...root.querySelectorAll('g[data-cat]')].map(g => {
+      const paths = [...g.querySelectorAll('path')].map(p => { const len = p.getTotalLength(); p.style.strokeDasharray = len + ' ' + len; p.style.strokeDashoffset = len; return { p, len }; });
+      let acc = 0; paths.forEach(o => { o.start = acc; acc += o.len; });
+      return { g, paths, total: acc, prog: 0, op: 0, shown: -1, shownOp: -1 };
+    });
+    root.style.visibility = 'visible';
+  }
+  logoTick() {
+    this.logoInit(); if (!this.layers) return;
+    const now = performance.now(), dt = Math.min(64, now - (this.lt || now)); this.lt = now;
+    const { faqHover, faqCat, reduced } = this.state;
+    const active = faqHover != null ? faqCat : -1;
+    this.layers.forEach((L, i) => {
+      if (i === active) { L.op = 1; L.prog = reduced ? 1 : Math.min(1, L.prog + dt / 800); }
+      else { L.op = reduced ? 0 : Math.max(0, L.op - dt / 150); if (L.op === 0) L.prog = 0; }
+      if (L.op !== L.shownOp) { L.shownOp = L.op; L.g.style.opacity = L.op; }
+      if (L.prog === L.shown) return; L.shown = L.prog;
+      const x = L.prog, ez = x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+      const reveal = ez * L.total;
+      L.paths.forEach(o => { const seg = Math.max(0, Math.min(o.len, reveal - o.start)); o.p.style.strokeDashoffset = o.len - seg; });
+    });
+    const el = this.faqLogoRef.current;
+    if (el && this.faqRow && faqHover != null) {
+      const t = this.logoTargetY();
+      this.ly = reduced || this.ly == null ? t : this.ly + (t - this.ly) * 0.14;
+      el.style.transform = 'translateY(' + this.ly + 'px)';
+    }
+  }
+  faqLeave() { clearTimeout(this.faqT); this.faqT = setTimeout(() => this.setState({ faqHover: null }), 80); }
+
+  wfRef = React.createRef();
+  wfVals() {
+    const v = this.state.wf || WF_EMPTY, touched = this.state.wfT || {}, tried = !!this.state.wfTried, er = wfCheck(v);
+    const wf = {};
+    Object.keys(WF_EMPTY).forEach(k => {
+      const bad = !!er[k] && tried;
+      wf[k] = { v: v[k], bad, err: er[k] || '', ring: bad ? 'var(--vaho-fuchsia)' : 'var(--ink-300)',
+        set: (e) => { const val = e.target.value; this.setState(s => ({ wf: Object.assign({}, s.wf || WF_EMPTY, { [k]: val }) })); },
+        blur: () => this.setState(s => ({ wfT: Object.assign({}, s.wfT, { [k]: true }) })) };
+    });
+    return {
+      wf, wfRef: this.wfRef, wfAgree: !!v.agree, wfForm: !this.state.wfDone, wfDone: !!this.state.wfDone,
+      wfName: v.contact.trim().split(/\s+/)[0] || '', wfStore: v.store.trim(), wfEmail: v.email.trim(),
+      wfToggleAgree: () => this.setState(s => { const c = s.wf || WF_EMPTY; return { wf: Object.assign({}, c, { agree: !c.agree }), wfT: Object.assign({}, s.wfT, { agree: true }) }; }),
+      wfSubmit: (e) => {
+        e.preventDefault(); const bad = WF_ORDER.find(k => wfCheck(this.state.wf || WF_EMPTY)[k]);
+        if (bad) return this.setState({ wfTried: true }, () => { const el = this.wfRef.current && this.wfRef.current.querySelector('[name="' + bad + '"]'); el && el.focus(); });
+        const f = this.state.wf || WF_EMPTY, t = (x) => String(x || '').trim();
+        const lines = ['Hola, soy ' + t(f.contact) + ' y me gustaría vender VAHO en mi tienda.', '', 'Tienda: ' + t(f.store), 'Contacto: ' + t(f.contact), 'Email: ' + t(f.email), 'Teléfono / WhatsApp: ' + t(f.phone)];
+        if (t(f.web)) lines.push('Web / Instagram: ' + t(f.web));
+        lines.push('País: ' + t(f.country), 'Ciudad: ' + t(f.city), 'Tipo de tienda: ' + t(f.type), 'Primer pedido estimado: ' + t(f.qty));
+        if (t(f.msg)) lines.push('Mensaje: ' + t(f.msg));
+        try { window.open('https://wa.me/34617879057?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener'); } catch (err) {}
+        this.setState({ wfDone: true });
+      },
+      wfReset: () => this.setState({ wf: WF_EMPTY, wfT: {}, wfTried: false, wfDone: false }),
+    };
+  }
+
+  showPreview(src, e, pos, scale, origin) {
+    if (this.state.isTouch) return;
+    if (e && e.currentTarget) this.previewAnchor = e.currentTarget;
+    this.setState({ preview: src, previewPos: pos || 'center', previewScale: scale || 1, previewOrigin: origin || pos || 'center' });
+  }
+
+  renderVals() {
+    const { tee, logo, height, slide, isTouch, reduced, headerDark, preview } = this.state;
+    const t = TEES.find(x => x.id === tee) || TEES[0];
+    const l = LOGOS.find(x => x.id === logo) || LOGOS[0];
+    const blocked = BLOCKED[t.id] || [];
+    const petite = height <= 160;
+    const shopFit = this.state.shopFit || 'estandar';
+    const hide = () => this.setState({ preview: null });
+    const sv = (i) => ({ op: slide === i ? 1 : 0, pe: slide === i ? 'auto' : 'none' });
+    const extras = [
+      { kicker: 'Neceser', line: 'Para lo que llevas contigo, del gimnasio al viaje.', dimsCm: [25, 15, 8], swatches: [{ bg: '#F28C28', label: 'Naranja' }], colorNote: 'Naranja', name: 'Neceser naranja', price: '12 €', src: 'assets/toiletry-bag-orange.png', alt: 'Neceser naranja VAHO en una maleta', life: 'assets/mundo/empaque-neceser.png', lifeAlt: 'Neceser naranja VAHO', msg: 'Hola, quiero el Neceser naranja VAHO. ¿Está disponible?' },
+      { kicker: 'Pañoleta', line: 'Para el pelo, el cuello o el asa del bolso.', dimsCm: [70, 70], swatches: [{ bg: 'conic-gradient(#F28C28 0 33%, #E91E8F 0 66%, #5B2A86 0)', label: 'Estampado VAHO' }], colorNote: 'Estampado VAHO', name: 'Pañoleta', price: '7 €', src: 'assets/scarf.png', alt: 'Pañoleta VAHO atada en el pelo', life: 'assets/mundo/empaque-panoleta.png', lifeAlt: 'Pañoleta VAHO doblada', msg: 'Hola, quiero la Pañoleta VAHO. ¿Está disponible?' },
+    ];
+    return {
+      newsEmail: this.state.newsEmail, newsDone: this.state.newsDone, newsForm: !this.state.newsDone,
+      setNewsEmail: (e) => this.setState({ newsEmail: e.target.value }),
+      subscribe: (e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('vaho-open-news', { detail: { email: this.state.newsEmail } })); },
+      ...(() => { const vw = this.state.vw || 1200, e = React.createElement;
+        const unit = (k) => e('span', { key: k, style: { display: 'inline-flex', alignItems: 'center', gap: '0.45em', paddingRight: '0.45em' } }, 'Un instante, tuyo.', e('span', { style: { width: '0.14em', height: '0.14em', borderRadius: '50%', background: 'var(--vaho-fuchsia)', flex: '0 0 auto', transform: 'translateY(0.08em)' } }));
+        const group = (g) => e('span', { key: 'g' + g, 'aria-hidden': 'true', style: { display: 'inline-flex', flex: '0 0 auto' } }, [0, 1, 2].map(i => unit(g + '-' + i)));
+        const track = reduced
+          ? e('span', { 'aria-hidden': 'true', style: { display: 'block', whiteSpace: 'nowrap' } }, 'Un instante, tuyo.')
+          : e('span', { 'aria-hidden': 'true', style: { display: 'inline-flex', whiteSpace: 'nowrap', willChange: 'transform', animation: 'vaho-marquee ' + (vw < 640 ? 42 : 50) + 's linear infinite', animationPlayState: this.state.mqPaused ? 'paused' : 'running' } }, [group(0), group(1)]);
+        const unit2 = (k) => e('span', { key: k, style: { display: 'inline-flex', alignItems: 'center', gap: '0.45em', paddingRight: '0.45em' } }, 'Made to fit you, not the other way around.', e('span', { style: { width: '0.14em', height: '0.14em', borderRadius: '50%', background: 'var(--vaho-fuchsia)', flex: '0 0 auto', transform: 'translateY(0.08em)' } }));
+        const group2 = (g) => e('span', { key: 'h' + g, 'aria-hidden': 'true', style: { display: 'inline-flex', flex: '0 0 auto' } }, [0, 1, 2].map(i => unit2(g + '-' + i)));
+        const track2 = reduced
+          ? e('span', { 'aria-hidden': 'true', style: { display: 'block', whiteSpace: 'nowrap', textAlign: 'center' } }, 'Made to fit you, not the other way around.')
+          : e('span', { 'aria-hidden': 'true', style: { display: 'inline-flex', whiteSpace: 'nowrap', willChange: 'transform', animation: 'vaho-marquee ' + (vw < 640 ? 42 : 50) + 's linear infinite', animationPlayState: this.state.mq2Paused ? 'paused' : 'running' } }, [group2(0), group2(1)]);
+        const unit3 = (k) => e('span', { key: k, style: { display: 'inline-flex', alignItems: 'center', gap: '0.45em', paddingRight: '0.45em' } }, 'Limited drops, made with care.', e('span', { style: { width: '0.14em', height: '0.14em', borderRadius: '50%', background: 'var(--vaho-fuchsia)', flex: '0 0 auto', transform: 'translateY(0.08em)' } }));
+        const group3 = (g) => e('span', { key: 'k' + g, 'aria-hidden': 'true', style: { display: 'inline-flex', flex: '0 0 auto' } }, [0, 1, 2].map(i => unit3(g + '-' + i)));
+        const track3 = reduced
+          ? e('span', { 'aria-hidden': 'true', style: { display: 'block', whiteSpace: 'nowrap' } }, 'Limited drops, made with care.')
+          : e('span', { 'aria-hidden': 'true', style: { display: 'inline-flex', whiteSpace: 'nowrap', willChange: 'transform', animation: 'vaho-marquee ' + (vw < 640 ? 42 : 50) + 's linear infinite', animationPlayState: this.state.mq3Paused ? 'paused' : 'running' } }, [group3(0), group3(1)]);
+        return { mq3Track: track3, mq3Pause: () => { if (!isTouch) this.setState({ mq3Paused: true }); }, mq3Resume: () => this.setState({ mq3Paused: false }),
+          mq2Track: track2, s2WmW: vw < 640 ? 'min(80%, calc((100svh - 330px) * 2.238))' : 'min(60%, calc((100svh - 400px) * 2.238))',
+          mq2Pause: () => { if (!isTouch) this.setState({ mq2Paused: true }); }, mq2Resume: () => this.setState({ mq2Paused: false }),
+          mqTrack: track, mqW: vw >= 900 ? 'min(calc(42vw - clamp(24px,4vw,56px)), 100%)' : '100%', mqSize: vw < 640 ? '40px' : 'clamp(44px,6.5vw,104px)',
+          mqPause: () => { if (!isTouch) this.setState({ mqPaused: true }); }, mqResume: () => this.setState({ mqPaused: false }) }; })(),
+      openSizeHelp: () => window.dispatchEvent(new Event('vaho-open-sizehelp')),
+      footDir: ((this.state.vw || 1200) < 640) ? 'column' : 'row', footAlign: ((this.state.vw || 1200) < 640) ? 'flex-start' : 'center', footPadX: ((this.state.vw || 1200) < 1024) ? '24px' : '48px', footGrid: ((this.state.vw || 1200) < 1024) ? 'minmax(0,1fr)' : 'repeat(12,minmax(0,1fr))', footLeftCol: ((this.state.vw || 1200) < 1024) ? '1 / -1' : '1 / span 5', footRightCol: ((this.state.vw || 1200) < 1024) ? '1 / -1' : '7 / span 6', footLinkCols: ((this.state.vw || 1200) < 1024) ? 'repeat(2,minmax(0,1fr))' : 'repeat(3,auto)', footLinkJust: ((this.state.vw || 1200) < 1024) ? 'stretch' : 'space-between', footCols: ((this.state.vw || 1200) < 800) ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,auto)', footColGap: ((this.state.vw || 1200) < 800) ? '24px' : '40px', footNewsW: ((this.state.vw || 1200) < 640) ? '100%' : '420px', footLinksW: ((this.state.vw || 1200) < 800) ? '100%' : 'auto',
+      wmRef: this.wmRef, bandH: ((this.state.vw || 1200) < 640) ? '40vh' : '45vh', wmW: ((this.state.vw || 1200) < 640) ? '80vw' : 'min(58vw, 100%)', wmOverlap: '0px', wmOp: this.state.wmIn || this.state.reduced ? 1 : 0, wmY: '0px', wmDur: '0ms',
+      openCookies: () => window.dispatchEvent(new Event('vaho-open-cookies')),
+      askHelp: () => wa('Hola, tengo una pregunta sobre VAHO.'),
+      heroRef: this.heroRef, galleryRef: this.galleryRef, footerRef: this.footerRef, followRef: this.followRef,
+      dur: reduced ? '0ms' : '500ms', slowDur: reduced ? '0ms' : '900ms', isTouch,
+      headerBg: headerDark ? 'rgba(255,255,255,.92)' : 'rgba(255,255,255,0)',
+      headerInk: headerDark || (slide === 1 && this.state.overHero !== false) ? '#000000' : '#FFFFFF',
+      logoWhiteOp: headerDark || (slide === 1 && this.state.overHero !== false) ? 0 : 1, logoBlackOp: headerDark || (slide === 1 && this.state.overHero !== false) ? 1 : 0,
+      heroInk: slide === 1 ? '#000000' : '#FFFFFF',
+      navItems: SLIDES.filter(s => s.href).map(s => ({ label: s.label, href: s.href, enter: (e) => this.showPreview(s.bg, e) })),
+      hidePreview: hide,
+      previewSrc: preview && preview !== 'vaho:wordmark' ? preview : SLIDES[0].bg, previewPos: this.state.previewPos || 'center', previewScale: this.state.previewScale || 1, previewOrigin: this.state.previewOrigin || this.state.previewPos || 'center', previewImgOp: preview === 'vaho:wordmark' ? 0 : 1, previewWmOp: preview === 'vaho:wordmark' ? 1 : 0, previewOp: preview ? 1 : 0, thumbDur: reduced ? '0ms' : '200ms', previewDisplay: isTouch ? 'none' : 'block',
+      pauseAuto: () => this.setState({ paused: true }), resumeAuto: () => this.setState({ paused: false }),
+      slides: SLIDES.map((s, i) => ({ ...s, href: s.href || '#', opacity: slide === i ? 1 : 0, numOp: slide === i ? 1 : 0.6,
+        numLine: slide === i ? '1px solid ' + (slide === 1 ? '#000000' : '#FFFFFF') : '1px solid transparent',
+        enter: () => { if (isTouch) return; this.setState({ slide: i, thumbHover: i }); }, leave: () => this.setState({ thumbHover: null }),
+        thOp: this.state.thumbHover === i ? 1 : 0, thY: this.state.thumbHover === i ? '0px' : '4px', thImg: i !== 1, thWm: i === 1,
+        click: (e) => { if (!s.href || (isTouch && slide !== i)) { e.preventDefault(); this.setState({ slide: i }); } } })),
+      hwRef: this.hwRef, hwMove: (e) => this.hwMove(e), hwTiltRef: this.hwTiltRef, hwLeave: () => { this.hwHover = null; this.hwLoop(); }, hwDepthRef: this.hwDepthRef, slide0Op: sv(0).op, slide0Pe: sv(0).pe, slide1Op: sv(1).op, slide1Pe: sv(1).pe, slide2Op: sv(2).op, slide2Pe: sv(2).pe,
+      gallery: [
+        { src: 'assets/lifestyle-calle-logo-blanco.png', alt: 'T-shirt negra VAHO con logo blanco por la calle', pos: '62% 24%' },
+        { src: 'assets/lifestyle-libreria.png', alt: 'T-shirt crema VAHO con logo fucsia en una librería', pos: '64% 30%' },
+      ],
+      gH: 'max(70vh, 340px)',
+      gItemW: this.state.wide ? 'calc(max(70vh, 340px) * 0.8)' : 'calc(100vw - 40px)',
+      gWideW: this.state.wide ? 'calc(max(70vh, 340px) * 1.28)' : 'calc(100vw - 40px)',
+      gSnap: this.state.wide ? 'none' : 'x mandatory',
+      galleryCursor: 'default',
+      teeSrc: t.src, teeAlt: 'T-shirt oversize ' + t.label.toLowerCase(), teeLabel: t.label,
+      logoSrc: l.src, logoAlt: 'Logo VAHO ' + l.label.toLowerCase(), logoLabel: l.label,
+      teeLifeSrc: t.life || t.src, teeLifeAlt: 'T-shirt ' + t.label.toLowerCase() + ' VAHO puesta',
+      teeLifeOpacity: this.state.teeHover && t.life && !this.state.careVis ? 1 : 0,
+      teeSwapDur: reduced ? '0ms' : '400ms',
+      teeTouch: !!isTouch, teeDot0: this.state.teeHover ? 'transparent' : '#000000', teeDot1: this.state.teeHover ? '#000000' : 'transparent',
+      teeTouchStart: (e) => { const p = e.touches && e.touches[0]; this.teeTx = p ? p.clientX : null; this.teeTy = p ? p.clientY : null; },
+      teeTouchEnd: (e) => { const p = e.changedTouches && e.changedTouches[0]; if (!p || this.teeTx == null) return;
+        const dx = p.clientX - this.teeTx, dy = p.clientY - this.teeTy; this.teeTx = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { this.teeSwiped = Date.now(); this.setState({ teeHover: dx < 0 }); } },
+      ...(() => {
+        const W = this.state.teeW || 800, compact = W < 700, vis = !!this.state.careVis, on = !!this.state.careOn;
+        const dx = W * 0.5, dy = W * 0.105, ex = W * 0.985 - 191, ey = W * 0.015 + 74;
+        const qx = (dx + ex) / 2, qy = Math.min(dy, ey) - W * 0.06;
+        const cd = reduced ? '0ms' : '300ms';
+        return {
+          teePhotoRef: this.teePhotoRef, careDotRef: this.careDotRef, careDeskRef: this.careDeskRef, careMobRef: this.careMobRef,
+          careVB: '0 0 ' + W + ' ' + W, carePath: 'M' + dx.toFixed(1) + ' ' + dy.toFixed(1) + ' Q' + qx.toFixed(1) + ' ' + qy.toFixed(1) + ' ' + ex.toFixed(1) + ' ' + ey.toFixed(1), careMobTop: Math.round(dy - 8 - 24 - 158) + 'px',
+          careDeskDisplay: compact ? 'none' : 'block', careMobOpen: compact && vis,
+          careVis: vis, careHidden: !vis, carePe: vis ? 'auto' : 'none',
+          careDash: on ? 0 : 1, careLineScale: on ? 1 : 0, careOp: on ? 1 : 0, careScale: on ? 1 : 0.95,
+          careDur: cd, careLineDur: cd, careCircleDelay: reduced ? '0ms' : '120ms',
+          careRowOp: on ? 1 : 0, careRowY: on ? '0px' : '4px',
+          careD0: reduced ? '0ms' : '180ms', careD1: reduced ? '0ms' : '240ms', careD2: reduced ? '0ms' : '300ms', careD3: reduced ? '0ms' : '360ms',
+          pulseAnim: reduced ? 'none' : 'vahoPulse 3s ease-out infinite',
+          careIn: () => { if (!isTouch) this.careOpen(); },
+          careFocus: () => { if (!isTouch) this.careOpen(); },
+          careOut: () => { if (isTouch) return; clearTimeout(this.careT); this.careT = setTimeout(() => this.careClose(), 120); },
+          careTap: (e) => { e.stopPropagation(); if (isTouch && this.state.careVis) this.careClose(); else this.careOpen(); },
+          careKey: (e) => { if (e.key === 'Escape') this.careClose(); },
+          careStop: (e) => e.stopPropagation(),
+        };
+      })(),
+      teeEnter: () => { if (!isTouch) this.setState({ teeHover: true }); },
+      teeLeave: () => { if (!isTouch) this.setState({ teeHover: false }); },
+      teeTap: () => { if (isTouch) { if (Date.now() - (this.teeSwiped || 0) > 400) this.setState(s => ({ teeHover: !s.teeHover })); return; } window.dispatchEvent(new CustomEvent('vaho-open-product', { detail: { tee: t.id, logo: l.id } })); },
+      mBtnRef: this.mBtnRef, mNavRef: this.mNavRef, mThreadBodyRef: this.mThreadBodyRef, mThreadCapRef: this.mThreadCapRef,
+      mThreadUpd: () => this.mThreadKick(0),
+      mEnter: () => { const g = this.mThreadGeom(); if (!g) return; try { sessionStorage.setItem('vaho-thread-handoff', JSON.stringify({ x: g.end[0], y: g.end[1] + window.scrollY - (this.mundoRef.current.getBoundingClientRect().top + window.scrollY) , vy: g.end[1], w: g.w, t: Date.now() })); } catch (e) {} },
+      mundoRef: this.mundoRef, mundoX: this.state.mundoIn || reduced ? '0px' : '12px', mundoOp: this.state.mundoIn || reduced ? 1 : 0, mundoDur: reduced ? '0ms' : '700ms',
+      ...(() => { const m = (this.state.vw || 1200) < 640, A = [0.922,1.079,1.227,1.41,0.678], H = 240, o = { mSceneH: m ? H + 'px' : 'clamp(160px,17vw,300px)', mGap: m ? '24px' : 'clamp(12px,2vw,32px)', mOverflow: m ? 'auto' : 'visible', mSnap: m ? 'x mandatory' : 'none' };
+        A.forEach((a, i) => { o['mItemFlex' + i] = m ? '0 0 auto' : a + ' 1 0'; o['mItemW' + i] = m ? Math.round(Math.min(H * a, (this.state.vw || 390) - 48)) + 'px' : 'auto'; }); return o; })(),
+      trustRef: this.trustRef, trustOff: this.state.trustIn || reduced ? 0 : 1, trustDur: reduced ? '0ms' : '1100ms',
+      ...(() => { const vw = this.state.vw || 1200, c = vw < 640 ? 1 : vw < 1100 ? 2 : 4, o = {}; [0, 1, 2, 3].forEach(i => { o['trustDiv' + i] = i % c === 0 ? '0' : '1px solid var(--line-200)'; }); o.trustCols = 'repeat(' + c + ',minmax(0,1fr))'; return o; })(),
+      codeForm: !this.state.codeDone, codeDone: this.state.codeDone, codeMailFail: !!this.state.codeMailFail, codeMailOk: !this.state.codeMailFail, codeEmail: this.state.codeEmail, codeConsent: this.state.codeConsent,
+      setCodeEmail: (e) => this.setState({ codeEmail: e.target.value, codeErr: null }), toggleCodeConsent: () => this.setState(s => ({ codeConsent: !s.codeConsent, codeErr: null })),
+      codeHasErr: !!this.state.codeErr, codeErr: (this.state.codeErr || {}).msg || '',
+      codeEmailBad: (this.state.codeErr || {}).f === 'email', codeConsentBad: (this.state.codeErr || {}).f === 'consent', codeEmailRing: (this.state.codeErr || {}).f === 'email' ? 'var(--vaho-fuchsia)' : 'var(--ink-300)',
+      copyLabel: this.state.codeCopied ? 'Copiado' : 'Copiar',
+      copyCode: () => { const done = () => { this.setState({ codeCopied: true }); clearTimeout(this.copyT); this.copyT = setTimeout(() => this.setState({ codeCopied: false }), 1800); };
+        try { navigator.clipboard.writeText('VAHO10').then(done, done); } catch (err) { done(); } },
+      codeSubmit: (e) => {
+        e.preventDefault(); const v = this.state.codeEmail.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return this.setState({ codeErr: { f: 'email', msg: 'Revisa tu email.' } });
+        try { sessionStorage.setItem('vaho-code', 'VAHO10'); } catch (err) {}
+        const key = v.toLowerCase(); let sent = [];
+        try { sent = JSON.parse(sessionStorage.getItem('vaho-ml-sent') || '[]'); } catch (err) {}
+        this.mlSent = this.mlSent || new Set(sent);
+        if (this.mlSent.has(key)) return this.setState({ codeDone: true, codeErr: null });
+        this.mlSent.add(key);
+        try { sessionStorage.setItem('vaho-ml-sent', JSON.stringify([...this.mlSent])); } catch (err) {}
+        this.setState({ codeDone: true, codeErr: null, codeMailFail: false });
+        const url = 'https://assets.mailerlite.com/jsonp/2492271/forms/200532499118425489/subscribe';
+        const fields = { 'fields[email]': v, 'ml-submit': '1', 'anticsrf': 'true' };
+        const fail = () => this.setState({ codeMailFail: true });
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) return fail();
+        try {
+          let frame = document.querySelector('iframe[name="ml-target"]');
+          if (!frame) { frame = document.createElement('iframe'); frame.name = 'ml-target'; frame.style.display = 'none'; frame.setAttribute('aria-hidden', 'true'); frame.tabIndex = -1; document.body.appendChild(frame); }
+          const f = document.createElement('form');
+          f.method = 'POST'; f.action = url; f.target = 'ml-target'; f.style.display = 'none';
+          Object.keys(fields).forEach(n => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = fields[n]; f.appendChild(i); });
+          document.body.appendChild(f); f.submit();
+          setTimeout(() => { try { f.remove(); } catch (err) {} }, 1000);
+        } catch (err) {
+          try { fetch(url, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(fields) }).catch(fail); } catch (err2) { fail(); }
+        }
+      },
+      openProduct: () => window.dispatchEvent(new CustomEvent('vaho-open-product', { detail: { tee: t.id, logo: l.id, fit: shopFit } })),
+      teeOptions: TEES.map(o => {
+        const on = o.id === t.id;
+        return { ...o, on, ring: on ? RING : 'none', pick: () => this.pickTee(o.id) };
+      }),
+      logoOptions: LOGOS.map(o => {
+        const dis = blocked.includes(o.id), on = o.id === l.id;
+        return { ...o, on, disabled: dis, title: dis ? 'No disponible con T-shirt ' + t.label.toLowerCase() : o.label,
+          ring: on ? RING : 'none', cursor: dis ? 'default' : 'pointer', opacity: dis ? 0.25 : 1,
+          pick: () => { if (!dis) this.setState({ logo: o.id }); } };
+      }),
+      orderTee: () => wa(`Hola, quiero una T-shirt VAHO ${t.label.toLowerCase()}, corte ${shopFit === 'petite' ? 'Petite' : 'Estándar'}, con logo ${l.label.toLowerCase()}. ¿Está disponible?`),
+      shopFitLabel: shopFit === 'petite' ? 'Petite' : 'Estándar',
+      shopFits: SHOP_FITS.map(sf => { const on = sf.id === shopFit; return { ...sf, on, border: on ? '#1A1A19' : 'var(--line-200)', bg: on ? '#FAF8F4' : '#FFFFFF', pick: () => this.setState({ shopFit: sf.id }) }; }),
+      ...this.wfVals(),
+      ...(() => { const one = (this.state.vw || 1200) < 900, o = {};
+        [['7fr 5fr', 'end', '0', 0, 1, '100%', 'start', 'start', '4/5'], ['5fr 7fr', 'start', 'clamp(0px,6vw,96px)', 1, 0, '440px', 'end', 'end', '1/1']].forEach(([cols, align, pad, io, to, mx, ij, tj, ratio], k) => {
+          o['cols' + k] = one ? 'minmax(0,1fr)' : cols.replace(/(\d)fr/g, 'minmax(0,$1fr)'); o['align' + k] = one ? 'start' : align; o['padTop' + k] = one ? '0' : pad;
+          o['imgOrder' + k] = one ? 0 : io; o['txtOrder' + k] = one ? 1 : to; o['imgMax' + k] = one ? '100%' : mx; o['imgJustify' + k] = one ? 'stretch' : ij; o['txtJustify' + k] = one ? 'stretch' : tj; o['ratio' + k] = ratio; });
+        return { acc: o }; })(),
+      ...(() => { const fmt = (n) => (Math.round(n * 10) / 10).toString().replace('.', ','), o = {};
+        extras.forEach((x, i) => { const d = x.dimsCm;
+          o['ex' + i] = { ...x, dims: d ? d.map(fmt).join(' × ') + ' cm' : 'Medidas próximamente', inches: d ? d.map(v => fmt(v / 2.54)).join(' × ') + ' in' : '', hasInches: !!d, dimInk: d ? '#000000' : 'var(--ink-500)',
+            lifeOp: this.state.extraHover === i ? 1 : 0, enter: () => { if (!isTouch) this.setState({ extraHover: i }); }, leave: () => { if (!isTouch) this.setState({ extraHover: -1 }); },
+            tap: () => { if (isTouch && Date.now() - (this.exSwiped || 0) > 400) this.setState(s => ({ extraHover: s.extraHover === i ? -1 : i })); },
+            touchStart: (e) => { const p = e.touches && e.touches[0]; this.exTx = p ? p.clientX : null; this.exTy = p ? p.clientY : null; },
+            touchEnd: (e) => { const p = e.changedTouches && e.changedTouches[0]; if (!p || this.exTx == null) return; const dx = p.clientX - this.exTx, dy = p.clientY - this.exTy; this.exTx = null;
+              if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { this.exSwiped = Date.now(); this.setState({ extraHover: dx < 0 ? i : -1 }); } },
+            verOp: this.state.extraHover === i ? 1 : 0, verY: this.state.extraHover === i ? '0px' : '14px', verPe: this.state.extraHover === i ? 'auto' : 'none',
+            dot0: this.state.extraHover === i ? 'transparent' : '#000000', dot1: this.state.extraHover === i ? '#000000' : 'transparent',
+            verAria: 'Ver ' + x.name, ver: (e) => { e.stopPropagation(); wa(x.msg); }, previewIn: (e) => this.showPreview(x.src, e), order: () => wa(x.msg) }; });
+        return o; })(),
+      extras: extras.map((x, i) => ({ ...x, lifeOp: this.state.extraHover === i ? 1 : 0,
+        enter: () => { if (!isTouch) this.setState({ extraHover: i }); },
+        leave: () => { if (!isTouch) this.setState({ extraHover: -1 }); },
+        tap: () => { if (isTouch) this.setState(s => ({ extraHover: s.extraHover === i ? -1 : i })); },
+        previewIn: (e) => this.showPreview(x.src, e), order: () => wa(x.msg) })),
+      askWholesale: () => wa('Hola, me gustaría recibir información para mayoristas de VAHO.'),
+      goWholesaleForm: () => { const el = this.wfRef.current; if (!el) return;
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: reduced ? 'auto' : 'smooth' }); },
+      faqGroups: FAQ.map((g, gi) => ({ title: g.title, items: g.items.map(([q, a, more, moreLabel], qi) => {
+        const key = gi + '-' + qi, open = this.state.faqOpen === key;
+        const fh = isTouch ? null : this.state.faqHover, hov = fh === key;
+        return { q, a, open, vOp: open ? 0 : 1, rows: open ? '1fr' : '0fr',
+          color: hov || open ? FAQ_COLORS[gi] : '#000000',
+          rowOp: fh && !hov ? 0.45 : 1, nudge: hov ? '4px' : '0px',
+          more: more || '', hasMore: !!more, moreLabel: moreLabel || 'Ver en El mundo VAHO →', moreTarget: /^https?:/.test(more || '') ? '_blank' : '_self',
+          enter: (e) => this.faqEnter(e, key, gi),
+          toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === key ? null : key })) };
+      }) })),
+      faqColRef: this.faqColRef, faqLogoRef: this.faqLogoRef, faqLeave: () => this.faqLeave(),
+      faqDur: reduced ? '0ms' : '250ms',
+      faqCols: (this.state.vw || 0) >= 1200 ? 'minmax(240px,1fr) minmax(0,' + (LOGO_W + LOGO_GAP + 760) + 'px)' : 'minmax(0,1fr)',
+      faqPadX: (this.state.vw || 0) >= 1200 ? 'clamp(20px,4vw,56px)' : '24px',
+      faqTitlePos: (this.state.vw || 0) >= 1200 ? 'sticky' : 'static',
+      faqPadL: (this.state.vw || 0) >= 1200 && !isTouch ? (LOGO_W + LOGO_GAP) + 'px' : '0px', faqLogoDisplay: (this.state.vw || 0) >= 1200 && !isTouch ? 'block' : 'none',
+      stickyPos: this.state.wide ? 'sticky' : 'static',
+      height, heightLabel: height + ' cm',
+      setHeight: (e) => this.setState({ height: Number(e.target.value) }, () => this.centerFit()),
+      fitName: petite ? 'Petite' : 'Estándar', fitSizes: petite ? 'XS–L' : 'XS–XL',
+      fitColor: petite ? 'var(--vaho-orange)' : 'var(--vaho-purple)',
+      lcmpRef: this.lcmpRef, lcmpWrapRef: this.lcmpWrapRef, lcmpPos: this.state.lcmp.toFixed(2) + '%', lcmpNow: Math.round(this.state.lcmp),
+      lcmpText: 'Petite a la izquierda, Estándar a la derecha, ' + Math.round(this.state.lcmp) + ' %', lcmpHandle: isTouch ? '52px' : '44px',
+      lcmpDown: (e) => { this.lcmpDrag = true; e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); this.lcmpSet(e); },
+      lcmpMove: (e) => { if (this.lcmpDrag) this.lcmpSet(e); },
+      lcmpUp: () => { this.lcmpDrag = false; },
+      lcmpKey: (e) => { const st = e.shiftKey ? 10 : 2; let v = this.state.lcmp;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') v -= st; else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') v += st; else if (e.key === 'Home') v = 0; else if (e.key === 'End') v = 100; else return;
+        e.preventDefault(); cancelAnimationFrame(this.lcmpRaf); this.setState({ lcmp: Math.max(0, Math.min(100, v)) }); },
+      fitsRef: this.fitsRef,
+      fitsDisplay: this.state.wide ? 'grid' : 'flex', fitsOverflow: this.state.wide ? 'visible' : 'auto',
+      fitsSnap: this.state.wide ? 'none' : 'x mandatory', fitsItemW: this.state.wide ? 'auto' : '72%',
+      fits: [
+        { name: 'Petite', range: 'hasta 1,60 m', sizes: 'XS–L', color: 'var(--vaho-orange)', photo: 'assets/lifestyle-mostrador.png', alt: 'T-shirt VAHO, corte Petite', flat: 'assets/tshirt-white-plain.png', flatLogo: 'assets/logo-orange.png', flatAlt: 'T-shirt corte Petite extendida', note: 'Corte más corto y ancho',
+          opacity: petite ? 1 : 0.35, outline: petite ? 'var(--vaho-orange)' : 'transparent', dot: petite ? 'var(--vaho-orange)' : 'transparent', tagOp: petite ? 1 : 0 },
+        { name: 'Estándar', range: 'desde 1,60 m', sizes: 'XS–XL', color: 'var(--vaho-purple)', photo: 'assets/lifestyle-calle.png', alt: 'T-shirt VAHO, corte Estándar', flat: 'assets/tshirt-black-plain.png', flatLogo: 'assets/logo-fuchsia.png', flatAlt: 'T-shirt corte Estándar extendida', note: 'Corte más largo',
+          opacity: petite ? 0.35 : 1, outline: petite ? 'transparent' : 'var(--vaho-purple)', dot: petite ? 'transparent' : 'var(--vaho-purple)', tagOp: petite ? 0 : 1 },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
