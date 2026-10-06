@@ -120,7 +120,7 @@
                   <sc-for list="{{ c.lines }}" as="ln" hint-placeholder-count="2">
                     <p style="margin:0;font-size:13px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">{{ ln.t }}</p>
                   </sc-for>
-                  <sc-if value="{{ c.hasWa }}" hint-placeholder-val="{{ false }}"><a href="{{ c.wa }}" target="_blank" rel="noopener" tabindex="{{ c.tab }}" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">Preguntar por WhatsApp →</a></sc-if>
+                  <sc-if value="{{ c.hasWa }}" hint-placeholder-val="{{ false }}"><a href="{{ c.wa }}" target="_blank" rel="noopener" tabindex="{{ c.tab }}" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">{{ c.waLabel }}</a></sc-if>
                 </div>
               </sc-if>
             </div>
@@ -182,7 +182,7 @@
                   <sc-for list="{{ c.lines }}" as="ln" hint-placeholder-count="2">
                     <p style="margin:0;font-size:13px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">{{ ln.t }}</p>
                   </sc-for>
-                  <sc-if value="{{ c.hasWa }}" hint-placeholder-val="{{ false }}"><a href="{{ c.wa }}" target="_blank" rel="noopener" tabindex="{{ c.tab }}" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">Preguntar por WhatsApp →</a></sc-if>
+                  <sc-if value="{{ c.hasWa }}" hint-placeholder-val="{{ false }}"><a href="{{ c.wa }}" target="_blank" rel="noopener" tabindex="{{ c.tab }}" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#000000;border-bottom:1px solid currentColor" style-hover="color:var(--vaho-fuchsia)">{{ c.waLabel }}</a></sc-if>
                 </div>
               </sc-if>
             </div>
@@ -341,8 +341,8 @@ const CARDS = [
     lines: ['Petite: hasta 1,60 m, tallas XS–L.', 'Estándar: desde 1,60 m, tallas XS–XL.', 'Mismo ancho de pecho, 6 cm menos de largo en Petite.'] },
   { num: '02', title: 'Costura', text: 'Cortes sueltos y suaves, hechos para quedarte bien a ti, no al revés.', moreTitle: 'Materiales y cuidado',
     lines: ['De algodón 100 % de gramaje pesado (220 g/m²), con corte oversize unisex y tacto suave desde el primer día.', 'Lávala del revés, a 30 °C y con colores similares. No uses secadora y plánchala a baja temperatura, siempre por el revés para proteger el logo.'] },
-  { num: '03', title: 'Empaque', text: 'Tu T-shirt, tu neceser y tu pañoleta, doblados con cuidado.', moreTitle: 'Pagos',
-    lines: ['Tarjeta de crédito o débito (Visa, Mastercard), PayPal, Apple Pay y Google Pay.', 'Todos los pagos se procesan con conexión cifrada (SSL) y nunca almacenamos los datos de tu tarjeta.', 'Te confirmamos disponibilidad y pago por WhatsApp en menos de 24 h'] },
+  { num: '03', title: 'Empaque', text: 'Tu T-shirt, tu neceser y tu pañoleta, doblados con cuidado.', moreTitle: 'Pagos', wa: 'https://wa.me/34617879057?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20VAHO', waLabel: 'Pedir por WhatsApp →',
+    lines: ['Confirmamos tu pedido por WhatsApp y pagas por Bizum o transferencia bancaria. Te enviamos los datos y, cuando recibimos el pago, preparamos tu envío.'] },
   { num: '04', title: 'Reparto', text: 'En camino a tu casa.', moreTitle: 'Envíos', wa: 'https://wa.me/34617879057?text=Hola%2C%20quiero%20consultar%20el%20env%C3%ADo%20de%20mi%20pedido',
     lines: ['Coordinamos el envío contigo por WhatsApp: te confirmamos coste y plazo según tu dirección antes de que pagues.'] },
   { num: '05', title: 'Tu puerta', text: 'Un instante, tuyo.', moreTitle: 'Devoluciones y cambios',
@@ -696,7 +696,7 @@ class Component extends DCLogic {
   cardVals(i, stacked) {
     const c = CARDS[i], key = (stacked ? 's' : 'p') + i, open = this.state.more === key;
     return { num: c.num, title: c.title, text: c.text, moreTitle: c.moreTitle, moreId: 'mas-' + key, open, rot: open ? '45deg' : '0deg',
-      lines: c.lines.map(t => ({ t })), hasLink: !!c.link, hasWa: !!c.wa, wa: c.wa || '', tab: stacked || i === this.state.card ? 0 : -1,
+      lines: c.lines.map(t => ({ t })), hasLink: !!c.link, hasWa: !!c.wa, wa: c.wa || '', waLabel: c.waLabel || 'Preguntar por WhatsApp →', tab: stacked || i === this.state.card ? 0 : -1,
       toggle: () => this.setState(s => ({ more: s.more === key ? null : key })) };
   }
 }

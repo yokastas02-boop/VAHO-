@@ -67,7 +67,8 @@ const INTENTS = [
   ['discount', ['descuento', 'codigo', 'vaho10', 'cupon', 'oferta', 'rebaja', 'promo']],
   ['acc', ['complemento', 'complementos', 'neceser', 'panoleta', 'panuelo', 'accesorio', 'accesorios']],
   ['wholesale', ['mayorista', 'mayoristas', 'wholesale', 'tiendas', 'reventa', 'minimo', 'distribuir']],
-  ['order', ['pedir', 'pedido', 'comprar', 'compra', 'pago', 'pagar', 'pagos', 'whatsapp', 'tarjeta', 'paypal', 'precio']],
+  ['pay', ['pago', 'pagar', 'pagos', 'bizum', 'transferencia', 'transferencias', 'tarjeta', 'paypal']],
+  ['order', ['pedir', 'pedido', 'comprar', 'compra', 'whatsapp', 'precio']],
 ];
 const intentOf = (text) => {
   const words = norm(text).split(/[^a-z0-9]+/).filter(Boolean);
@@ -93,6 +94,7 @@ const A = {
   discount: '10% de descuento en tu primera compra con el código VAHO10.',
   acc: 'Neceser naranja: 25 × 15 × 8 cm, 12 €.\nPañoleta: 70 × 70 cm, 7 €.',
   wholesale: 'Pedido mínimo de 12 unidades por modelo. Respondemos en 48 horas.',
+  pay: 'Pagas por Bizum o transferencia. Confirmamos tu pedido por WhatsApp y te enviamos los datos.',
   order: 'Los pedidos se hacen por WhatsApp. Te confirmamos disponibilidad y pago por WhatsApp en menos de 24 h.',
   askSize: 'Dime tu altura en cm y tu peso en kg. Por ejemplo: «mido 1,58 y peso 60 kilos».',
   askH: 'Gracias. ¿Y cuánto mides? Por ejemplo: «158 cm».',
@@ -150,6 +152,7 @@ class Component extends DCLogic {
     if (id === 'discount') return this.say(A.discount, [{ label: 'Ir a mi descuento', kind: 'scroll', target: 'lista', primary: true }]);
     if (id === 'acc') return this.say(A.acc, [{ label: 'Ver complementos', kind: 'scroll', target: 'complementos' }]);
     if (id === 'wholesale') return this.say(A.wholesale, [{ label: 'Ir a Wholesale', kind: 'scroll', target: 'wholesale', primary: true }]);
+    if (id === 'pay') return this.say(A.pay, [Object.assign({ primary: true }, WA)]);
     if (id === 'order') return this.say(A.order, [Object.assign({ primary: true }, WA)]);
     return this.say(A.none, [Object.assign({ primary: true }, WA)]);
   }
